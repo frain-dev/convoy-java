@@ -1,0 +1,25 @@
+# Gradle
+.gradle/
+build/
+# keep the wrapper jar tracked so ./gradlew works on a clean clone
+!gradle/wrapper/gradle-wrapper.jar
+
+# IntelliJ / IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+.vscode/
+
+# OS
+.DS_Store
+
+# Java build output
+*.class
+bin/
+
+# Local config / secrets
+local.properties
+*.gpg
+*.asc
