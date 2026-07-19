@@ -5,8 +5,8 @@ plugins {
 }
 
 group = "com.getconvoy"
-version = "0.1.0"
-description = "Convoy SDK for Java. Currently provides webhook signature verification."
+version = "0.2.0"
+description = "Convoy SDK for Java: webhook signature verification and an OpenAPI-generated API client."
 
 repositories {
     mavenCentral()
@@ -21,6 +21,16 @@ java {
 }
 
 dependencies {
+    // Generated API client (com.getconvoy.{api,client,models}); versions must
+    // match what OpenAPI Generator (pinned in scripts/generate.sh) targets.
+    implementation("com.google.code.findbugs:jsr305:3.0.2")
+    implementation("com.fasterxml.jackson.core:jackson-core:2.21.1")
+    implementation("com.fasterxml.jackson.core:jackson-annotations:2.21")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.21.1")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.21.1")
+    implementation("org.openapitools:jackson-databind-nullable:0.2.10")
+    implementation("jakarta.annotation:jakarta.annotation-api:2.1.1")
+
     testImplementation(platform("org.junit:junit-bom:5.11.3"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("com.google.code.gson:gson:2.11.0")
