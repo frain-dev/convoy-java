@@ -23,3 +23,4 @@ bin/
 local.properties
 *.gpg
 *.asc
+.cache/
