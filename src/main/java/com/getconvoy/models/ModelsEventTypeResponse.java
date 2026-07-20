@@ -159,7 +159,7 @@ public class ModelsEventTypeResponse {
   }
 
   public ModelsEventTypeResponse putJsonSchemaItem(String key, Object jsonSchemaItem) {
-    if (this.jsonSchema == null || !this.jsonSchema.isPresent()) {
+    if (this.jsonSchema == null || !this.jsonSchema.isPresent() || this.jsonSchema.get() == null) {
       this.jsonSchema = JsonNullable.<Map<String, Object>>of(new HashMap<>());
     }
     try {

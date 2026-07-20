@@ -98,7 +98,7 @@ public class ModelsBroadcastEvent {
   }
 
   public ModelsBroadcastEvent putCustomHeadersItem(String key, String customHeadersItem) {
-    if (this.customHeaders == null || !this.customHeaders.isPresent()) {
+    if (this.customHeaders == null || !this.customHeaders.isPresent() || this.customHeaders.get() == null) {
       this.customHeaders = JsonNullable.<Map<String, String>>of(new HashMap<>());
     }
     try {
@@ -142,7 +142,7 @@ public class ModelsBroadcastEvent {
   }
 
   public ModelsBroadcastEvent putDataItem(String key, Object dataItem) {
-    if (this.data == null || !this.data.isPresent()) {
+    if (this.data == null || !this.data.isPresent() || this.data.get() == null) {
       this.data = JsonNullable.<Map<String, Object>>of(new HashMap<>());
     }
     try {

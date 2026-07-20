@@ -89,7 +89,7 @@ public class ModelsFunctionRequest {
   }
 
   public ModelsFunctionRequest putPayloadItem(String key, Object payloadItem) {
-    if (this.payload == null || !this.payload.isPresent()) {
+    if (this.payload == null || !this.payload.isPresent() || this.payload.get() == null) {
       this.payload = JsonNullable.<Map<String, Object>>of(new HashMap<>());
     }
     try {

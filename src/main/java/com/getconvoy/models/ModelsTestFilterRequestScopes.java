@@ -103,7 +103,7 @@ public class ModelsTestFilterRequestScopes {
   }
 
   public ModelsTestFilterRequestScopes putHeaderItem(String key, Object headerItem) {
-    if (this.header == null || !this.header.isPresent()) {
+    if (this.header == null || !this.header.isPresent() || this.header.get() == null) {
       this.header = JsonNullable.<Map<String, Object>>of(new HashMap<>());
     }
     try {
@@ -147,7 +147,7 @@ public class ModelsTestFilterRequestScopes {
   }
 
   public ModelsTestFilterRequestScopes putHeadersItem(String key, Object headersItem) {
-    if (this.headers == null || !this.headers.isPresent()) {
+    if (this.headers == null || !this.headers.isPresent() || this.headers.get() == null) {
       this.headers = JsonNullable.<Map<String, Object>>of(new HashMap<>());
     }
     try {
@@ -191,7 +191,7 @@ public class ModelsTestFilterRequestScopes {
   }
 
   public ModelsTestFilterRequestScopes putPathItem(String key, Object pathItem) {
-    if (this.path == null || !this.path.isPresent()) {
+    if (this.path == null || !this.path.isPresent() || this.path.get() == null) {
       this.path = JsonNullable.<Map<String, Object>>of(new HashMap<>());
     }
     try {
@@ -235,7 +235,7 @@ public class ModelsTestFilterRequestScopes {
   }
 
   public ModelsTestFilterRequestScopes putQueryItem(String key, Object queryItem) {
-    if (this.query == null || !this.query.isPresent()) {
+    if (this.query == null || !this.query.isPresent() || this.query.get() == null) {
       this.query = JsonNullable.<Map<String, Object>>of(new HashMap<>());
     }
     try {

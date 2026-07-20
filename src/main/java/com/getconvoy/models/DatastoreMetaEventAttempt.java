@@ -64,7 +64,7 @@ public class DatastoreMetaEventAttempt {
   }
 
   public DatastoreMetaEventAttempt putRequestHttpHeaderItem(String key, String requestHttpHeaderItem) {
-    if (this.requestHttpHeader == null || !this.requestHttpHeader.isPresent()) {
+    if (this.requestHttpHeader == null || !this.requestHttpHeader.isPresent() || this.requestHttpHeader.get() == null) {
       this.requestHttpHeader = JsonNullable.<Map<String, String>>of(new HashMap<>());
     }
     try {
@@ -132,7 +132,7 @@ public class DatastoreMetaEventAttempt {
   }
 
   public DatastoreMetaEventAttempt putResponseHttpHeaderItem(String key, String responseHttpHeaderItem) {
-    if (this.responseHttpHeader == null || !this.responseHttpHeader.isPresent()) {
+    if (this.responseHttpHeader == null || !this.responseHttpHeader.isPresent() || this.responseHttpHeader.get() == null) {
       this.responseHttpHeader = JsonNullable.<Map<String, String>>of(new HashMap<>());
     }
     try {

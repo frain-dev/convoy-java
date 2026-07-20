@@ -542,7 +542,7 @@ public class ModelsEventDeliveryResponse {
   }
 
   public ModelsEventDeliveryResponse putHeadersItem(String key, List<String> headersItem) {
-    if (this.headers == null || !this.headers.isPresent()) {
+    if (this.headers == null || !this.headers.isPresent() || this.headers.get() == null) {
       this.headers = JsonNullable.<Map<String, List<String>>>of(new HashMap<>());
     }
     try {

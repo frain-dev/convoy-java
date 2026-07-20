@@ -72,7 +72,7 @@ public class DatastoreFilterSchema {
   }
 
   public DatastoreFilterSchema putBodyItem(String key, Object bodyItem) {
-    if (this.body == null || !this.body.isPresent()) {
+    if (this.body == null || !this.body.isPresent() || this.body.get() == null) {
       this.body = JsonNullable.<Map<String, Object>>of(new HashMap<>());
     }
     try {
@@ -116,7 +116,7 @@ public class DatastoreFilterSchema {
   }
 
   public DatastoreFilterSchema putHeadersItem(String key, Object headersItem) {
-    if (this.headers == null || !this.headers.isPresent()) {
+    if (this.headers == null || !this.headers.isPresent() || this.headers.get() == null) {
       this.headers = JsonNullable.<Map<String, Object>>of(new HashMap<>());
     }
     try {
@@ -184,7 +184,7 @@ public class DatastoreFilterSchema {
   }
 
   public DatastoreFilterSchema putPathItem(String key, Object pathItem) {
-    if (this.path == null || !this.path.isPresent()) {
+    if (this.path == null || !this.path.isPresent() || this.path.get() == null) {
       this.path = JsonNullable.<Map<String, Object>>of(new HashMap<>());
     }
     try {
@@ -228,7 +228,7 @@ public class DatastoreFilterSchema {
   }
 
   public DatastoreFilterSchema putQueryItem(String key, Object queryItem) {
-    if (this.query == null || !this.query.isPresent()) {
+    if (this.query == null || !this.query.isPresent() || this.query.get() == null) {
       this.query = JsonNullable.<Map<String, Object>>of(new HashMap<>());
     }
     try {

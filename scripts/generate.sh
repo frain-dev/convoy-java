@@ -50,4 +50,11 @@ for pkg in api client models; do
     "src/main/java/com/getconvoy/$pkg/"
 done
 
+# Post-process: the stock generator template only reinitializes a JsonNullable
+# map when the wrapper is undefined. After setX(null) or deserializing JSON
+# null the wrapper is present with a null map and put*Item NPEs on get().put().
+# Extend the guard to also recreate the map when the present value is null.
+perl -pi -e 's/if \(this\.(\w+) == null \|\| !this\.\1\.isPresent\(\)\) \{/if (this.$1 == null || !this.$1.isPresent() || this.$1.get() == null) {/' \
+  src/main/java/com/getconvoy/models/*.java
+
 echo "Generated client synced into src/main/java/com/getconvoy/{api,client,models}"

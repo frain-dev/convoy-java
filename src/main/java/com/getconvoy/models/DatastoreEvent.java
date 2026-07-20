@@ -236,7 +236,7 @@ public class DatastoreEvent {
   }
 
   public DatastoreEvent putDataItem(String key, Object dataItem) {
-    if (this.data == null || !this.data.isPresent()) {
+    if (this.data == null || !this.data.isPresent() || this.data.get() == null) {
       this.data = JsonNullable.<Map<String, Object>>of(new HashMap<>());
     }
     try {
@@ -400,7 +400,7 @@ public class DatastoreEvent {
   }
 
   public DatastoreEvent putHeadersItem(String key, List<String> headersItem) {
-    if (this.headers == null || !this.headers.isPresent()) {
+    if (this.headers == null || !this.headers.isPresent() || this.headers.get() == null) {
       this.headers = JsonNullable.<Map<String, List<String>>>of(new HashMap<>());
     }
     try {

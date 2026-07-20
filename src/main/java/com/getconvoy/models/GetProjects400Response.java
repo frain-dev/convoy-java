@@ -113,7 +113,7 @@ public class GetProjects400Response {
   }
 
   public GetProjects400Response putDataItem(String key, Object dataItem) {
-    if (this.data == null || !this.data.isPresent()) {
+    if (this.data == null || !this.data.isPresent() || this.data.get() == null) {
       this.data = JsonNullable.<Map<String, Object>>of(new HashMap<>());
     }
     try {
