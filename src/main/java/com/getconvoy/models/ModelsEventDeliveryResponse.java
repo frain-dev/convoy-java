@@ -37,6 +37,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.openapitools.jackson.nullable.JsonNullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
@@ -75,20 +79,17 @@ import com.getconvoy.client.ApiClient;
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.23.0")
 public class ModelsEventDeliveryResponse {
   public static final String JSON_PROPERTY_ACKNOWLEDGED_AT = "acknowledged_at";
-  @jakarta.annotation.Nullable
-  private String acknowledgedAt;
+  private JsonNullable<String> acknowledgedAt = JsonNullable.<String>undefined();
 
   public static final String JSON_PROPERTY_CLI_METADATA = "cli_metadata";
-  @jakarta.annotation.Nullable
-  private DatastoreCLIMetadata cliMetadata;
+  private JsonNullable<DatastoreCLIMetadata> cliMetadata = JsonNullable.<DatastoreCLIMetadata>undefined();
 
   public static final String JSON_PROPERTY_CREATED_AT = "created_at";
   @jakarta.annotation.Nullable
   private String createdAt;
 
   public static final String JSON_PROPERTY_DELETED_AT = "deleted_at";
-  @jakarta.annotation.Nullable
-  private String deletedAt;
+  private JsonNullable<String> deletedAt = JsonNullable.<String>undefined();
 
   public static final String JSON_PROPERTY_DELIVERY_MODE = "delivery_mode";
   @jakarta.annotation.Nullable
@@ -103,32 +104,28 @@ public class ModelsEventDeliveryResponse {
   private String deviceId;
 
   public static final String JSON_PROPERTY_DEVICE_METADATA = "device_metadata";
-  @jakarta.annotation.Nullable
-  private DatastoreDevice deviceMetadata;
+  private JsonNullable<DatastoreDevice> deviceMetadata = JsonNullable.<DatastoreDevice>undefined();
 
   public static final String JSON_PROPERTY_ENDPOINT_ID = "endpoint_id";
   @jakarta.annotation.Nullable
   private String endpointId;
 
   public static final String JSON_PROPERTY_ENDPOINT_METADATA = "endpoint_metadata";
-  @jakarta.annotation.Nullable
-  private DatastoreEndpoint endpointMetadata;
+  private JsonNullable<DatastoreEndpoint> endpointMetadata = JsonNullable.<DatastoreEndpoint>undefined();
 
   public static final String JSON_PROPERTY_EVENT_ID = "event_id";
   @jakarta.annotation.Nullable
   private String eventId;
 
   public static final String JSON_PROPERTY_EVENT_METADATA = "event_metadata";
-  @jakarta.annotation.Nullable
-  private DatastoreEvent eventMetadata;
+  private JsonNullable<DatastoreEvent> eventMetadata = JsonNullable.<DatastoreEvent>undefined();
 
   public static final String JSON_PROPERTY_EVENT_TYPE = "event_type";
   @jakarta.annotation.Nullable
   private String eventType;
 
   public static final String JSON_PROPERTY_HEADERS = "headers";
-  @jakarta.annotation.Nullable
-  private Map<String, List<String>> headers = new HashMap<>();
+  private JsonNullable<Map<String, List<String>>> headers = JsonNullable.<Map<String, List<String>>>undefined();
 
   public static final String JSON_PROPERTY_IDEMPOTENCY_KEY = "idempotency_key";
   @jakarta.annotation.Nullable
@@ -143,16 +140,14 @@ public class ModelsEventDeliveryResponse {
   private BigDecimal latencySeconds;
 
   public static final String JSON_PROPERTY_METADATA = "metadata";
-  @jakarta.annotation.Nullable
-  private DatastoreMetadata metadata;
+  private JsonNullable<DatastoreMetadata> metadata = JsonNullable.<DatastoreMetadata>undefined();
 
   public static final String JSON_PROPERTY_PROJECT_ID = "project_id";
   @jakarta.annotation.Nullable
   private String projectId;
 
   public static final String JSON_PROPERTY_SOURCE_METADATA = "source_metadata";
-  @jakarta.annotation.Nullable
-  private DatastoreSource sourceMetadata;
+  private JsonNullable<DatastoreSource> sourceMetadata = JsonNullable.<DatastoreSource>undefined();
 
   public static final String JSON_PROPERTY_STATUS = "status";
   @jakarta.annotation.Nullable
@@ -182,7 +177,7 @@ public class ModelsEventDeliveryResponse {
   }
 
   public ModelsEventDeliveryResponse acknowledgedAt(@jakarta.annotation.Nullable String acknowledgedAt) {
-    this.acknowledgedAt = acknowledgedAt;
+    this.acknowledgedAt = JsonNullable.<String>of(acknowledgedAt);
     return this;
   }
 
@@ -191,22 +186,30 @@ public class ModelsEventDeliveryResponse {
    * @return acknowledgedAt
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_ACKNOWLEDGED_AT, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public String getAcknowledgedAt() {
-    return acknowledgedAt;
+        return acknowledgedAt.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_ACKNOWLEDGED_AT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setAcknowledgedAt(@jakarta.annotation.Nullable String acknowledgedAt) {
+
+  public JsonNullable<String> getAcknowledgedAt_JsonNullable() {
+    return acknowledgedAt;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_ACKNOWLEDGED_AT)
+  public void setAcknowledgedAt_JsonNullable(JsonNullable<String> acknowledgedAt) {
     this.acknowledgedAt = acknowledgedAt;
+  }
+
+  public void setAcknowledgedAt(@jakarta.annotation.Nullable String acknowledgedAt) {
+    this.acknowledgedAt = JsonNullable.<String>of(acknowledgedAt);
   }
 
 
   public ModelsEventDeliveryResponse cliMetadata(@jakarta.annotation.Nullable DatastoreCLIMetadata cliMetadata) {
-    this.cliMetadata = cliMetadata;
+    this.cliMetadata = JsonNullable.<DatastoreCLIMetadata>of(cliMetadata);
     return this;
   }
 
@@ -215,17 +218,25 @@ public class ModelsEventDeliveryResponse {
    * @return cliMetadata
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_CLI_METADATA, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreCLIMetadata getCliMetadata() {
-    return cliMetadata;
+        return cliMetadata.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_CLI_METADATA, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setCliMetadata(@jakarta.annotation.Nullable DatastoreCLIMetadata cliMetadata) {
+
+  public JsonNullable<DatastoreCLIMetadata> getCliMetadata_JsonNullable() {
+    return cliMetadata;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_CLI_METADATA)
+  public void setCliMetadata_JsonNullable(JsonNullable<DatastoreCLIMetadata> cliMetadata) {
     this.cliMetadata = cliMetadata;
+  }
+
+  public void setCliMetadata(@jakarta.annotation.Nullable DatastoreCLIMetadata cliMetadata) {
+    this.cliMetadata = JsonNullable.<DatastoreCLIMetadata>of(cliMetadata);
   }
 
 
@@ -254,7 +265,7 @@ public class ModelsEventDeliveryResponse {
 
 
   public ModelsEventDeliveryResponse deletedAt(@jakarta.annotation.Nullable String deletedAt) {
-    this.deletedAt = deletedAt;
+    this.deletedAt = JsonNullable.<String>of(deletedAt);
     return this;
   }
 
@@ -263,17 +274,25 @@ public class ModelsEventDeliveryResponse {
    * @return deletedAt
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_DELETED_AT, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public String getDeletedAt() {
-    return deletedAt;
+        return deletedAt.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_DELETED_AT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setDeletedAt(@jakarta.annotation.Nullable String deletedAt) {
+
+  public JsonNullable<String> getDeletedAt_JsonNullable() {
+    return deletedAt;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_DELETED_AT)
+  public void setDeletedAt_JsonNullable(JsonNullable<String> deletedAt) {
     this.deletedAt = deletedAt;
+  }
+
+  public void setDeletedAt(@jakarta.annotation.Nullable String deletedAt) {
+    this.deletedAt = JsonNullable.<String>of(deletedAt);
   }
 
 
@@ -350,7 +369,7 @@ public class ModelsEventDeliveryResponse {
 
 
   public ModelsEventDeliveryResponse deviceMetadata(@jakarta.annotation.Nullable DatastoreDevice deviceMetadata) {
-    this.deviceMetadata = deviceMetadata;
+    this.deviceMetadata = JsonNullable.<DatastoreDevice>of(deviceMetadata);
     return this;
   }
 
@@ -359,17 +378,25 @@ public class ModelsEventDeliveryResponse {
    * @return deviceMetadata
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_DEVICE_METADATA, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreDevice getDeviceMetadata() {
-    return deviceMetadata;
+        return deviceMetadata.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_DEVICE_METADATA, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setDeviceMetadata(@jakarta.annotation.Nullable DatastoreDevice deviceMetadata) {
+
+  public JsonNullable<DatastoreDevice> getDeviceMetadata_JsonNullable() {
+    return deviceMetadata;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_DEVICE_METADATA)
+  public void setDeviceMetadata_JsonNullable(JsonNullable<DatastoreDevice> deviceMetadata) {
     this.deviceMetadata = deviceMetadata;
+  }
+
+  public void setDeviceMetadata(@jakarta.annotation.Nullable DatastoreDevice deviceMetadata) {
+    this.deviceMetadata = JsonNullable.<DatastoreDevice>of(deviceMetadata);
   }
 
 
@@ -398,7 +425,7 @@ public class ModelsEventDeliveryResponse {
 
 
   public ModelsEventDeliveryResponse endpointMetadata(@jakarta.annotation.Nullable DatastoreEndpoint endpointMetadata) {
-    this.endpointMetadata = endpointMetadata;
+    this.endpointMetadata = JsonNullable.<DatastoreEndpoint>of(endpointMetadata);
     return this;
   }
 
@@ -407,17 +434,25 @@ public class ModelsEventDeliveryResponse {
    * @return endpointMetadata
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_ENDPOINT_METADATA, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreEndpoint getEndpointMetadata() {
-    return endpointMetadata;
+        return endpointMetadata.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_ENDPOINT_METADATA, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setEndpointMetadata(@jakarta.annotation.Nullable DatastoreEndpoint endpointMetadata) {
+
+  public JsonNullable<DatastoreEndpoint> getEndpointMetadata_JsonNullable() {
+    return endpointMetadata;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_ENDPOINT_METADATA)
+  public void setEndpointMetadata_JsonNullable(JsonNullable<DatastoreEndpoint> endpointMetadata) {
     this.endpointMetadata = endpointMetadata;
+  }
+
+  public void setEndpointMetadata(@jakarta.annotation.Nullable DatastoreEndpoint endpointMetadata) {
+    this.endpointMetadata = JsonNullable.<DatastoreEndpoint>of(endpointMetadata);
   }
 
 
@@ -446,7 +481,7 @@ public class ModelsEventDeliveryResponse {
 
 
   public ModelsEventDeliveryResponse eventMetadata(@jakarta.annotation.Nullable DatastoreEvent eventMetadata) {
-    this.eventMetadata = eventMetadata;
+    this.eventMetadata = JsonNullable.<DatastoreEvent>of(eventMetadata);
     return this;
   }
 
@@ -455,17 +490,25 @@ public class ModelsEventDeliveryResponse {
    * @return eventMetadata
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_EVENT_METADATA, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreEvent getEventMetadata() {
-    return eventMetadata;
+        return eventMetadata.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_EVENT_METADATA, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setEventMetadata(@jakarta.annotation.Nullable DatastoreEvent eventMetadata) {
+
+  public JsonNullable<DatastoreEvent> getEventMetadata_JsonNullable() {
+    return eventMetadata;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_EVENT_METADATA)
+  public void setEventMetadata_JsonNullable(JsonNullable<DatastoreEvent> eventMetadata) {
     this.eventMetadata = eventMetadata;
+  }
+
+  public void setEventMetadata(@jakarta.annotation.Nullable DatastoreEvent eventMetadata) {
+    this.eventMetadata = JsonNullable.<DatastoreEvent>of(eventMetadata);
   }
 
 
@@ -494,15 +537,19 @@ public class ModelsEventDeliveryResponse {
 
 
   public ModelsEventDeliveryResponse headers(@jakarta.annotation.Nullable Map<String, List<String>> headers) {
-    this.headers = headers;
+    this.headers = JsonNullable.<Map<String, List<String>>>of(headers);
     return this;
   }
 
   public ModelsEventDeliveryResponse putHeadersItem(String key, List<String> headersItem) {
-    if (this.headers == null) {
-      this.headers = new HashMap<>();
+    if (this.headers == null || !this.headers.isPresent()) {
+      this.headers = JsonNullable.<Map<String, List<String>>>of(new HashMap<>());
     }
-    this.headers.put(key, headersItem);
+    try {
+      this.headers.get().put(key, headersItem);
+    } catch (java.util.NoSuchElementException e) {
+      // this can never happen, as we make sure above that the value is present
+    }
     return this;
   }
 
@@ -511,17 +558,25 @@ public class ModelsEventDeliveryResponse {
    * @return headers
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_HEADERS, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public Map<String, List<String>> getHeaders() {
-    return headers;
+        return headers.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_HEADERS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setHeaders(@jakarta.annotation.Nullable Map<String, List<String>> headers) {
+
+  public JsonNullable<Map<String, List<String>>> getHeaders_JsonNullable() {
+    return headers;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_HEADERS)
+  public void setHeaders_JsonNullable(JsonNullable<Map<String, List<String>>> headers) {
     this.headers = headers;
+  }
+
+  public void setHeaders(@jakarta.annotation.Nullable Map<String, List<String>> headers) {
+    this.headers = JsonNullable.<Map<String, List<String>>>of(headers);
   }
 
 
@@ -598,7 +653,7 @@ public class ModelsEventDeliveryResponse {
 
 
   public ModelsEventDeliveryResponse metadata(@jakarta.annotation.Nullable DatastoreMetadata metadata) {
-    this.metadata = metadata;
+    this.metadata = JsonNullable.<DatastoreMetadata>of(metadata);
     return this;
   }
 
@@ -607,17 +662,25 @@ public class ModelsEventDeliveryResponse {
    * @return metadata
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_METADATA, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreMetadata getMetadata() {
-    return metadata;
+        return metadata.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_METADATA, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setMetadata(@jakarta.annotation.Nullable DatastoreMetadata metadata) {
+
+  public JsonNullable<DatastoreMetadata> getMetadata_JsonNullable() {
+    return metadata;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_METADATA)
+  public void setMetadata_JsonNullable(JsonNullable<DatastoreMetadata> metadata) {
     this.metadata = metadata;
+  }
+
+  public void setMetadata(@jakarta.annotation.Nullable DatastoreMetadata metadata) {
+    this.metadata = JsonNullable.<DatastoreMetadata>of(metadata);
   }
 
 
@@ -646,7 +709,7 @@ public class ModelsEventDeliveryResponse {
 
 
   public ModelsEventDeliveryResponse sourceMetadata(@jakarta.annotation.Nullable DatastoreSource sourceMetadata) {
-    this.sourceMetadata = sourceMetadata;
+    this.sourceMetadata = JsonNullable.<DatastoreSource>of(sourceMetadata);
     return this;
   }
 
@@ -655,17 +718,25 @@ public class ModelsEventDeliveryResponse {
    * @return sourceMetadata
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_SOURCE_METADATA, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreSource getSourceMetadata() {
-    return sourceMetadata;
+        return sourceMetadata.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_SOURCE_METADATA, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setSourceMetadata(@jakarta.annotation.Nullable DatastoreSource sourceMetadata) {
+
+  public JsonNullable<DatastoreSource> getSourceMetadata_JsonNullable() {
+    return sourceMetadata;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_SOURCE_METADATA)
+  public void setSourceMetadata_JsonNullable(JsonNullable<DatastoreSource> sourceMetadata) {
     this.sourceMetadata = sourceMetadata;
+  }
+
+  public void setSourceMetadata(@jakarta.annotation.Nullable DatastoreSource sourceMetadata) {
+    this.sourceMetadata = JsonNullable.<DatastoreSource>of(sourceMetadata);
   }
 
 
@@ -825,26 +896,26 @@ public class ModelsEventDeliveryResponse {
       return false;
     }
     ModelsEventDeliveryResponse modelsEventDeliveryResponse = (ModelsEventDeliveryResponse) o;
-    return Objects.equals(this.acknowledgedAt, modelsEventDeliveryResponse.acknowledgedAt) &&
-        Objects.equals(this.cliMetadata, modelsEventDeliveryResponse.cliMetadata) &&
+    return equalsNullable(this.acknowledgedAt, modelsEventDeliveryResponse.acknowledgedAt) &&
+        equalsNullable(this.cliMetadata, modelsEventDeliveryResponse.cliMetadata) &&
         Objects.equals(this.createdAt, modelsEventDeliveryResponse.createdAt) &&
-        Objects.equals(this.deletedAt, modelsEventDeliveryResponse.deletedAt) &&
+        equalsNullable(this.deletedAt, modelsEventDeliveryResponse.deletedAt) &&
         Objects.equals(this.deliveryMode, modelsEventDeliveryResponse.deliveryMode) &&
         Objects.equals(this.description, modelsEventDeliveryResponse.description) &&
         Objects.equals(this.deviceId, modelsEventDeliveryResponse.deviceId) &&
-        Objects.equals(this.deviceMetadata, modelsEventDeliveryResponse.deviceMetadata) &&
+        equalsNullable(this.deviceMetadata, modelsEventDeliveryResponse.deviceMetadata) &&
         Objects.equals(this.endpointId, modelsEventDeliveryResponse.endpointId) &&
-        Objects.equals(this.endpointMetadata, modelsEventDeliveryResponse.endpointMetadata) &&
+        equalsNullable(this.endpointMetadata, modelsEventDeliveryResponse.endpointMetadata) &&
         Objects.equals(this.eventId, modelsEventDeliveryResponse.eventId) &&
-        Objects.equals(this.eventMetadata, modelsEventDeliveryResponse.eventMetadata) &&
+        equalsNullable(this.eventMetadata, modelsEventDeliveryResponse.eventMetadata) &&
         Objects.equals(this.eventType, modelsEventDeliveryResponse.eventType) &&
-        Objects.equals(this.headers, modelsEventDeliveryResponse.headers) &&
+        equalsNullable(this.headers, modelsEventDeliveryResponse.headers) &&
         Objects.equals(this.idempotencyKey, modelsEventDeliveryResponse.idempotencyKey) &&
         Objects.equals(this.latency, modelsEventDeliveryResponse.latency) &&
         Objects.equals(this.latencySeconds, modelsEventDeliveryResponse.latencySeconds) &&
-        Objects.equals(this.metadata, modelsEventDeliveryResponse.metadata) &&
+        equalsNullable(this.metadata, modelsEventDeliveryResponse.metadata) &&
         Objects.equals(this.projectId, modelsEventDeliveryResponse.projectId) &&
-        Objects.equals(this.sourceMetadata, modelsEventDeliveryResponse.sourceMetadata) &&
+        equalsNullable(this.sourceMetadata, modelsEventDeliveryResponse.sourceMetadata) &&
         Objects.equals(this.status, modelsEventDeliveryResponse.status) &&
         Objects.equals(this.subscriptionId, modelsEventDeliveryResponse.subscriptionId) &&
         Objects.equals(this.targetUrl, modelsEventDeliveryResponse.targetUrl) &&
@@ -853,9 +924,20 @@ public class ModelsEventDeliveryResponse {
         Objects.equals(this.urlQueryParams, modelsEventDeliveryResponse.urlQueryParams);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
-    return Objects.hash(acknowledgedAt, cliMetadata, createdAt, deletedAt, deliveryMode, description, deviceId, deviceMetadata, endpointId, endpointMetadata, eventId, eventMetadata, eventType, headers, idempotencyKey, latency, latencySeconds, metadata, projectId, sourceMetadata, status, subscriptionId, targetUrl, uid, updatedAt, urlQueryParams);
+    return Objects.hash(hashCodeNullable(acknowledgedAt), hashCodeNullable(cliMetadata), createdAt, hashCodeNullable(deletedAt), deliveryMode, description, deviceId, hashCodeNullable(deviceMetadata), endpointId, hashCodeNullable(endpointMetadata), eventId, hashCodeNullable(eventMetadata), eventType, hashCodeNullable(headers), idempotencyKey, latency, latencySeconds, hashCodeNullable(metadata), projectId, hashCodeNullable(sourceMetadata), status, subscriptionId, targetUrl, uid, updatedAt, urlQueryParams);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

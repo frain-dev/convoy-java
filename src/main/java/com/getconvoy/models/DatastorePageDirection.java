@@ -32,7 +32,9 @@ public enum DatastorePageDirection {
   
   Next("next"),
   
-  Prev("prev");
+  Prev("prev"),
+  
+  EMPTY("");
 
   private String value;
 

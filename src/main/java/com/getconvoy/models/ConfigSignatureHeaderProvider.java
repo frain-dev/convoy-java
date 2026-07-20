@@ -30,7 +30,9 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public enum ConfigSignatureHeaderProvider {
   
-  DefaultSignatureHeader("X-Convoy-Signature");
+  DefaultSignatureHeader("X-Convoy-Signature"),
+  
+  EMPTY("");
 
   private String value;
 

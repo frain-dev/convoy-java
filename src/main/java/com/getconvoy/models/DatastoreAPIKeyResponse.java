@@ -26,6 +26,10 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.getconvoy.models.DatastoreRole;
 import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
@@ -50,8 +54,7 @@ public class DatastoreAPIKeyResponse {
   private String createdAt;
 
   public static final String JSON_PROPERTY_EXPIRES_AT = "expires_at";
-  @jakarta.annotation.Nullable
-  private String expiresAt;
+  private JsonNullable<String> expiresAt = JsonNullable.<String>undefined();
 
   public static final String JSON_PROPERTY_KEY = "key";
   @jakarta.annotation.Nullable
@@ -105,7 +108,7 @@ public class DatastoreAPIKeyResponse {
 
 
   public DatastoreAPIKeyResponse expiresAt(@jakarta.annotation.Nullable String expiresAt) {
-    this.expiresAt = expiresAt;
+    this.expiresAt = JsonNullable.<String>of(expiresAt);
     return this;
   }
 
@@ -114,17 +117,25 @@ public class DatastoreAPIKeyResponse {
    * @return expiresAt
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_EXPIRES_AT, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public String getExpiresAt() {
-    return expiresAt;
+        return expiresAt.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_EXPIRES_AT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setExpiresAt(@jakarta.annotation.Nullable String expiresAt) {
+
+  public JsonNullable<String> getExpiresAt_JsonNullable() {
+    return expiresAt;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_EXPIRES_AT)
+  public void setExpiresAt_JsonNullable(JsonNullable<String> expiresAt) {
     this.expiresAt = expiresAt;
+  }
+
+  public void setExpiresAt(@jakarta.annotation.Nullable String expiresAt) {
+    this.expiresAt = JsonNullable.<String>of(expiresAt);
   }
 
 
@@ -285,7 +296,7 @@ public class DatastoreAPIKeyResponse {
     }
     DatastoreAPIKeyResponse datastoreAPIKeyResponse = (DatastoreAPIKeyResponse) o;
     return Objects.equals(this.createdAt, datastoreAPIKeyResponse.createdAt) &&
-        Objects.equals(this.expiresAt, datastoreAPIKeyResponse.expiresAt) &&
+        equalsNullable(this.expiresAt, datastoreAPIKeyResponse.expiresAt) &&
         Objects.equals(this.key, datastoreAPIKeyResponse.key) &&
         Objects.equals(this.keyType, datastoreAPIKeyResponse.keyType) &&
         Objects.equals(this.name, datastoreAPIKeyResponse.name) &&
@@ -294,9 +305,20 @@ public class DatastoreAPIKeyResponse {
         Objects.equals(this.userId, datastoreAPIKeyResponse.userId);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
-    return Objects.hash(createdAt, expiresAt, key, keyType, name, role, uid, userId);
+    return Objects.hash(createdAt, hashCodeNullable(expiresAt), key, keyType, name, role, uid, userId);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

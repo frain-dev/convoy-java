@@ -34,7 +34,9 @@ public enum DatastoreEndpointAuthenticationType {
   
   OAuth2Authentication("oauth2"),
   
-  BasicAuthentication("basic_auth");
+  BasicAuthentication("basic_auth"),
+  
+  EMPTY("");
 
   private String value;
 

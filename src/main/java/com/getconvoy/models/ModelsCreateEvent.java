@@ -27,6 +27,10 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import org.openapitools.jackson.nullable.JsonNullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
@@ -49,12 +53,10 @@ public class ModelsCreateEvent {
   private String appId;
 
   public static final String JSON_PROPERTY_CUSTOM_HEADERS = "custom_headers";
-  @jakarta.annotation.Nullable
-  private Map<String, String> customHeaders = new HashMap<>();
+  private JsonNullable<Map<String, String>> customHeaders = JsonNullable.<Map<String, String>>undefined();
 
   public static final String JSON_PROPERTY_DATA = "data";
-  @jakarta.annotation.Nullable
-  private Map<String, Object> data = new HashMap<>();
+  private JsonNullable<Map<String, Object>> data = JsonNullable.<Map<String, Object>>undefined();
 
   public static final String JSON_PROPERTY_ENDPOINT_ID = "endpoint_id";
   @jakarta.annotation.Nullable
@@ -96,15 +98,19 @@ public class ModelsCreateEvent {
 
 
   public ModelsCreateEvent customHeaders(@jakarta.annotation.Nullable Map<String, String> customHeaders) {
-    this.customHeaders = customHeaders;
+    this.customHeaders = JsonNullable.<Map<String, String>>of(customHeaders);
     return this;
   }
 
   public ModelsCreateEvent putCustomHeadersItem(String key, String customHeadersItem) {
-    if (this.customHeaders == null) {
-      this.customHeaders = new HashMap<>();
+    if (this.customHeaders == null || !this.customHeaders.isPresent()) {
+      this.customHeaders = JsonNullable.<Map<String, String>>of(new HashMap<>());
     }
-    this.customHeaders.put(key, customHeadersItem);
+    try {
+      this.customHeaders.get().put(key, customHeadersItem);
+    } catch (java.util.NoSuchElementException e) {
+      // this can never happen, as we make sure above that the value is present
+    }
     return this;
   }
 
@@ -113,30 +119,42 @@ public class ModelsCreateEvent {
    * @return customHeaders
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_CUSTOM_HEADERS, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public Map<String, String> getCustomHeaders() {
-    return customHeaders;
+        return customHeaders.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_CUSTOM_HEADERS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setCustomHeaders(@jakarta.annotation.Nullable Map<String, String> customHeaders) {
+
+  public JsonNullable<Map<String, String>> getCustomHeaders_JsonNullable() {
+    return customHeaders;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_CUSTOM_HEADERS)
+  public void setCustomHeaders_JsonNullable(JsonNullable<Map<String, String>> customHeaders) {
     this.customHeaders = customHeaders;
+  }
+
+  public void setCustomHeaders(@jakarta.annotation.Nullable Map<String, String> customHeaders) {
+    this.customHeaders = JsonNullable.<Map<String, String>>of(customHeaders);
   }
 
 
   public ModelsCreateEvent data(@jakarta.annotation.Nullable Map<String, Object> data) {
-    this.data = data;
+    this.data = JsonNullable.<Map<String, Object>>of(data);
     return this;
   }
 
   public ModelsCreateEvent putDataItem(String key, Object dataItem) {
-    if (this.data == null) {
-      this.data = new HashMap<>();
+    if (this.data == null || !this.data.isPresent()) {
+      this.data = JsonNullable.<Map<String, Object>>of(new HashMap<>());
     }
-    this.data.put(key, dataItem);
+    try {
+      this.data.get().put(key, dataItem);
+    } catch (java.util.NoSuchElementException e) {
+      // this can never happen, as we make sure above that the value is present
+    }
     return this;
   }
 
@@ -145,17 +163,25 @@ public class ModelsCreateEvent {
    * @return data
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_DATA, required = false)
-  @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public Map<String, Object> getData() {
-    return data;
+        return data.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_DATA, required = false)
   @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
-  public void setData(@jakarta.annotation.Nullable Map<String, Object> data) {
+
+  public JsonNullable<Map<String, Object>> getData_JsonNullable() {
+    return data;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_DATA)
+  public void setData_JsonNullable(JsonNullable<Map<String, Object>> data) {
     this.data = data;
+  }
+
+  public void setData(@jakarta.annotation.Nullable Map<String, Object> data) {
+    this.data = JsonNullable.<Map<String, Object>>of(data);
   }
 
 
@@ -244,16 +270,27 @@ public class ModelsCreateEvent {
     }
     ModelsCreateEvent modelsCreateEvent = (ModelsCreateEvent) o;
     return Objects.equals(this.appId, modelsCreateEvent.appId) &&
-        Objects.equals(this.customHeaders, modelsCreateEvent.customHeaders) &&
-        Objects.equals(this.data, modelsCreateEvent.data) &&
+        equalsNullable(this.customHeaders, modelsCreateEvent.customHeaders) &&
+        equalsNullable(this.data, modelsCreateEvent.data) &&
         Objects.equals(this.endpointId, modelsCreateEvent.endpointId) &&
         Objects.equals(this.eventType, modelsCreateEvent.eventType) &&
         Objects.equals(this.idempotencyKey, modelsCreateEvent.idempotencyKey);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
-    return Objects.hash(appId, customHeaders, data, endpointId, eventType, idempotencyKey);
+    return Objects.hash(appId, hashCodeNullable(customHeaders), hashCodeNullable(data), endpointId, eventType, idempotencyKey);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

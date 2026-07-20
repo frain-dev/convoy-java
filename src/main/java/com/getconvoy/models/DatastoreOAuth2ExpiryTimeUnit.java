@@ -36,7 +36,9 @@ public enum DatastoreOAuth2ExpiryTimeUnit {
   
   ExpiryTimeUnitMinutes("minutes"),
   
-  ExpiryTimeUnitHours("hours");
+  ExpiryTimeUnitHours("hours"),
+  
+  EMPTY("");
 
   private String value;
 

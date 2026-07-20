@@ -34,7 +34,9 @@ public enum DatastoreSourceProvider {
   
   TwitterSourceProvider("twitter"),
   
-  ShopifySourceProvider("shopify");
+  ShopifySourceProvider("shopify"),
+  
+  EMPTY("");
 
   private String value;
 

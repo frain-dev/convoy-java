@@ -26,6 +26,10 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.getconvoy.models.DatastoreTwitterProviderConfig;
 import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
@@ -39,14 +43,13 @@ import com.getconvoy.client.ApiClient;
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.23.0")
 public class DatastoreProviderConfig {
   public static final String JSON_PROPERTY_TWITTER = "twitter";
-  @jakarta.annotation.Nullable
-  private DatastoreTwitterProviderConfig twitter;
+  private JsonNullable<DatastoreTwitterProviderConfig> twitter = JsonNullable.<DatastoreTwitterProviderConfig>undefined();
 
   public DatastoreProviderConfig() { 
   }
 
   public DatastoreProviderConfig twitter(@jakarta.annotation.Nullable DatastoreTwitterProviderConfig twitter) {
-    this.twitter = twitter;
+    this.twitter = JsonNullable.<DatastoreTwitterProviderConfig>of(twitter);
     return this;
   }
 
@@ -55,17 +58,25 @@ public class DatastoreProviderConfig {
    * @return twitter
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_TWITTER, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreTwitterProviderConfig getTwitter() {
-    return twitter;
+        return twitter.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_TWITTER, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setTwitter(@jakarta.annotation.Nullable DatastoreTwitterProviderConfig twitter) {
+
+  public JsonNullable<DatastoreTwitterProviderConfig> getTwitter_JsonNullable() {
+    return twitter;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_TWITTER)
+  public void setTwitter_JsonNullable(JsonNullable<DatastoreTwitterProviderConfig> twitter) {
     this.twitter = twitter;
+  }
+
+  public void setTwitter(@jakarta.annotation.Nullable DatastoreTwitterProviderConfig twitter) {
+    this.twitter = JsonNullable.<DatastoreTwitterProviderConfig>of(twitter);
   }
 
 
@@ -81,12 +92,23 @@ public class DatastoreProviderConfig {
       return false;
     }
     DatastoreProviderConfig datastoreProviderConfig = (DatastoreProviderConfig) o;
-    return Objects.equals(this.twitter, datastoreProviderConfig.twitter);
+    return equalsNullable(this.twitter, datastoreProviderConfig.twitter);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(twitter);
+    return Objects.hash(hashCodeNullable(twitter));
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

@@ -32,6 +32,10 @@ import com.getconvoy.models.DatastoreSSLConfiguration;
 import com.getconvoy.models.DatastoreSignatureConfiguration;
 import com.getconvoy.models.DatastoreStrategyConfiguration;
 import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
@@ -61,8 +65,7 @@ public class DatastoreProjectConfig {
   private Boolean addEventIdTraceHeaders;
 
   public static final String JSON_PROPERTY_CIRCUIT_BREAKER = "circuit_breaker";
-  @jakarta.annotation.Nullable
-  private DatastoreCircuitBreakerConfiguration circuitBreaker;
+  private JsonNullable<DatastoreCircuitBreakerConfiguration> circuitBreaker = JsonNullable.<DatastoreCircuitBreakerConfiguration>undefined();
 
   public static final String JSON_PROPERTY_DISABLE_ENDPOINT = "disable_endpoint";
   @jakarta.annotation.Nullable
@@ -73,16 +76,14 @@ public class DatastoreProjectConfig {
   private Integer maxPayloadReadSize;
 
   public static final String JSON_PROPERTY_META_EVENT = "meta_event";
-  @jakarta.annotation.Nullable
-  private DatastoreMetaEventConfiguration metaEvent;
+  private JsonNullable<DatastoreMetaEventConfiguration> metaEvent = JsonNullable.<DatastoreMetaEventConfiguration>undefined();
 
   public static final String JSON_PROPERTY_MULTIPLE_ENDPOINT_SUBSCRIPTIONS = "multiple_endpoint_subscriptions";
   @jakarta.annotation.Nullable
   private Boolean multipleEndpointSubscriptions;
 
   public static final String JSON_PROPERTY_RATELIMIT = "ratelimit";
-  @jakarta.annotation.Nullable
-  private DatastoreRateLimitConfiguration ratelimit;
+  private JsonNullable<DatastoreRateLimitConfiguration> ratelimit = JsonNullable.<DatastoreRateLimitConfiguration>undefined();
 
   public static final String JSON_PROPERTY_REPLAY_ATTACKS_PREVENTION_ENABLED = "replay_attacks_prevention_enabled";
   @jakarta.annotation.Nullable
@@ -97,16 +98,13 @@ public class DatastoreProjectConfig {
   private String searchPolicy;
 
   public static final String JSON_PROPERTY_SIGNATURE = "signature";
-  @jakarta.annotation.Nullable
-  private DatastoreSignatureConfiguration signature;
+  private JsonNullable<DatastoreSignatureConfiguration> signature = JsonNullable.<DatastoreSignatureConfiguration>undefined();
 
   public static final String JSON_PROPERTY_SSL = "ssl";
-  @jakarta.annotation.Nullable
-  private DatastoreSSLConfiguration ssl;
+  private JsonNullable<DatastoreSSLConfiguration> ssl = JsonNullable.<DatastoreSSLConfiguration>undefined();
 
   public static final String JSON_PROPERTY_STRATEGY = "strategy";
-  @jakarta.annotation.Nullable
-  private DatastoreStrategyConfiguration strategy;
+  private JsonNullable<DatastoreStrategyConfiguration> strategy = JsonNullable.<DatastoreStrategyConfiguration>undefined();
 
   public DatastoreProjectConfig() { 
   }
@@ -136,7 +134,7 @@ public class DatastoreProjectConfig {
 
 
   public DatastoreProjectConfig circuitBreaker(@jakarta.annotation.Nullable DatastoreCircuitBreakerConfiguration circuitBreaker) {
-    this.circuitBreaker = circuitBreaker;
+    this.circuitBreaker = JsonNullable.<DatastoreCircuitBreakerConfiguration>of(circuitBreaker);
     return this;
   }
 
@@ -145,17 +143,25 @@ public class DatastoreProjectConfig {
    * @return circuitBreaker
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_CIRCUIT_BREAKER, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreCircuitBreakerConfiguration getCircuitBreaker() {
-    return circuitBreaker;
+        return circuitBreaker.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_CIRCUIT_BREAKER, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setCircuitBreaker(@jakarta.annotation.Nullable DatastoreCircuitBreakerConfiguration circuitBreaker) {
+
+  public JsonNullable<DatastoreCircuitBreakerConfiguration> getCircuitBreaker_JsonNullable() {
+    return circuitBreaker;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_CIRCUIT_BREAKER)
+  public void setCircuitBreaker_JsonNullable(JsonNullable<DatastoreCircuitBreakerConfiguration> circuitBreaker) {
     this.circuitBreaker = circuitBreaker;
+  }
+
+  public void setCircuitBreaker(@jakarta.annotation.Nullable DatastoreCircuitBreakerConfiguration circuitBreaker) {
+    this.circuitBreaker = JsonNullable.<DatastoreCircuitBreakerConfiguration>of(circuitBreaker);
   }
 
 
@@ -208,7 +214,7 @@ public class DatastoreProjectConfig {
 
 
   public DatastoreProjectConfig metaEvent(@jakarta.annotation.Nullable DatastoreMetaEventConfiguration metaEvent) {
-    this.metaEvent = metaEvent;
+    this.metaEvent = JsonNullable.<DatastoreMetaEventConfiguration>of(metaEvent);
     return this;
   }
 
@@ -217,17 +223,25 @@ public class DatastoreProjectConfig {
    * @return metaEvent
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_META_EVENT, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreMetaEventConfiguration getMetaEvent() {
-    return metaEvent;
+        return metaEvent.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_META_EVENT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setMetaEvent(@jakarta.annotation.Nullable DatastoreMetaEventConfiguration metaEvent) {
+
+  public JsonNullable<DatastoreMetaEventConfiguration> getMetaEvent_JsonNullable() {
+    return metaEvent;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_META_EVENT)
+  public void setMetaEvent_JsonNullable(JsonNullable<DatastoreMetaEventConfiguration> metaEvent) {
     this.metaEvent = metaEvent;
+  }
+
+  public void setMetaEvent(@jakarta.annotation.Nullable DatastoreMetaEventConfiguration metaEvent) {
+    this.metaEvent = JsonNullable.<DatastoreMetaEventConfiguration>of(metaEvent);
   }
 
 
@@ -256,7 +270,7 @@ public class DatastoreProjectConfig {
 
 
   public DatastoreProjectConfig ratelimit(@jakarta.annotation.Nullable DatastoreRateLimitConfiguration ratelimit) {
-    this.ratelimit = ratelimit;
+    this.ratelimit = JsonNullable.<DatastoreRateLimitConfiguration>of(ratelimit);
     return this;
   }
 
@@ -265,17 +279,25 @@ public class DatastoreProjectConfig {
    * @return ratelimit
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_RATELIMIT, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreRateLimitConfiguration getRatelimit() {
-    return ratelimit;
+        return ratelimit.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_RATELIMIT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setRatelimit(@jakarta.annotation.Nullable DatastoreRateLimitConfiguration ratelimit) {
+
+  public JsonNullable<DatastoreRateLimitConfiguration> getRatelimit_JsonNullable() {
+    return ratelimit;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_RATELIMIT)
+  public void setRatelimit_JsonNullable(JsonNullable<DatastoreRateLimitConfiguration> ratelimit) {
     this.ratelimit = ratelimit;
+  }
+
+  public void setRatelimit(@jakarta.annotation.Nullable DatastoreRateLimitConfiguration ratelimit) {
+    this.ratelimit = JsonNullable.<DatastoreRateLimitConfiguration>of(ratelimit);
   }
 
 
@@ -352,7 +374,7 @@ public class DatastoreProjectConfig {
 
 
   public DatastoreProjectConfig signature(@jakarta.annotation.Nullable DatastoreSignatureConfiguration signature) {
-    this.signature = signature;
+    this.signature = JsonNullable.<DatastoreSignatureConfiguration>of(signature);
     return this;
   }
 
@@ -361,22 +383,30 @@ public class DatastoreProjectConfig {
    * @return signature
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_SIGNATURE, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreSignatureConfiguration getSignature() {
-    return signature;
+        return signature.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_SIGNATURE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setSignature(@jakarta.annotation.Nullable DatastoreSignatureConfiguration signature) {
+
+  public JsonNullable<DatastoreSignatureConfiguration> getSignature_JsonNullable() {
+    return signature;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_SIGNATURE)
+  public void setSignature_JsonNullable(JsonNullable<DatastoreSignatureConfiguration> signature) {
     this.signature = signature;
+  }
+
+  public void setSignature(@jakarta.annotation.Nullable DatastoreSignatureConfiguration signature) {
+    this.signature = JsonNullable.<DatastoreSignatureConfiguration>of(signature);
   }
 
 
   public DatastoreProjectConfig ssl(@jakarta.annotation.Nullable DatastoreSSLConfiguration ssl) {
-    this.ssl = ssl;
+    this.ssl = JsonNullable.<DatastoreSSLConfiguration>of(ssl);
     return this;
   }
 
@@ -385,22 +415,30 @@ public class DatastoreProjectConfig {
    * @return ssl
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_SSL, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreSSLConfiguration getSsl() {
-    return ssl;
+        return ssl.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_SSL, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setSsl(@jakarta.annotation.Nullable DatastoreSSLConfiguration ssl) {
+
+  public JsonNullable<DatastoreSSLConfiguration> getSsl_JsonNullable() {
+    return ssl;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_SSL)
+  public void setSsl_JsonNullable(JsonNullable<DatastoreSSLConfiguration> ssl) {
     this.ssl = ssl;
+  }
+
+  public void setSsl(@jakarta.annotation.Nullable DatastoreSSLConfiguration ssl) {
+    this.ssl = JsonNullable.<DatastoreSSLConfiguration>of(ssl);
   }
 
 
   public DatastoreProjectConfig strategy(@jakarta.annotation.Nullable DatastoreStrategyConfiguration strategy) {
-    this.strategy = strategy;
+    this.strategy = JsonNullable.<DatastoreStrategyConfiguration>of(strategy);
     return this;
   }
 
@@ -409,17 +447,25 @@ public class DatastoreProjectConfig {
    * @return strategy
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_STRATEGY, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreStrategyConfiguration getStrategy() {
-    return strategy;
+        return strategy.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_STRATEGY, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setStrategy(@jakarta.annotation.Nullable DatastoreStrategyConfiguration strategy) {
+
+  public JsonNullable<DatastoreStrategyConfiguration> getStrategy_JsonNullable() {
+    return strategy;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_STRATEGY)
+  public void setStrategy_JsonNullable(JsonNullable<DatastoreStrategyConfiguration> strategy) {
     this.strategy = strategy;
+  }
+
+  public void setStrategy(@jakarta.annotation.Nullable DatastoreStrategyConfiguration strategy) {
+    this.strategy = JsonNullable.<DatastoreStrategyConfiguration>of(strategy);
   }
 
 
@@ -436,23 +482,34 @@ public class DatastoreProjectConfig {
     }
     DatastoreProjectConfig datastoreProjectConfig = (DatastoreProjectConfig) o;
     return Objects.equals(this.addEventIdTraceHeaders, datastoreProjectConfig.addEventIdTraceHeaders) &&
-        Objects.equals(this.circuitBreaker, datastoreProjectConfig.circuitBreaker) &&
+        equalsNullable(this.circuitBreaker, datastoreProjectConfig.circuitBreaker) &&
         Objects.equals(this.disableEndpoint, datastoreProjectConfig.disableEndpoint) &&
         Objects.equals(this.maxPayloadReadSize, datastoreProjectConfig.maxPayloadReadSize) &&
-        Objects.equals(this.metaEvent, datastoreProjectConfig.metaEvent) &&
+        equalsNullable(this.metaEvent, datastoreProjectConfig.metaEvent) &&
         Objects.equals(this.multipleEndpointSubscriptions, datastoreProjectConfig.multipleEndpointSubscriptions) &&
-        Objects.equals(this.ratelimit, datastoreProjectConfig.ratelimit) &&
+        equalsNullable(this.ratelimit, datastoreProjectConfig.ratelimit) &&
         Objects.equals(this.replayAttacksPreventionEnabled, datastoreProjectConfig.replayAttacksPreventionEnabled) &&
         Objects.equals(this.requestIdHeader, datastoreProjectConfig.requestIdHeader) &&
         Objects.equals(this.searchPolicy, datastoreProjectConfig.searchPolicy) &&
-        Objects.equals(this.signature, datastoreProjectConfig.signature) &&
-        Objects.equals(this.ssl, datastoreProjectConfig.ssl) &&
-        Objects.equals(this.strategy, datastoreProjectConfig.strategy);
+        equalsNullable(this.signature, datastoreProjectConfig.signature) &&
+        equalsNullable(this.ssl, datastoreProjectConfig.ssl) &&
+        equalsNullable(this.strategy, datastoreProjectConfig.strategy);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(addEventIdTraceHeaders, circuitBreaker, disableEndpoint, maxPayloadReadSize, metaEvent, multipleEndpointSubscriptions, ratelimit, replayAttacksPreventionEnabled, requestIdHeader, searchPolicy, signature, ssl, strategy);
+    return Objects.hash(addEventIdTraceHeaders, hashCodeNullable(circuitBreaker), disableEndpoint, maxPayloadReadSize, hashCodeNullable(metaEvent), multipleEndpointSubscriptions, hashCodeNullable(ratelimit), replayAttacksPreventionEnabled, requestIdHeader, searchPolicy, hashCodeNullable(signature), hashCodeNullable(ssl), hashCodeNullable(strategy));
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

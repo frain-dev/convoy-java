@@ -32,6 +32,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.openapitools.jackson.nullable.JsonNullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
@@ -65,8 +69,7 @@ import com.getconvoy.client.ApiClient;
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.23.0")
 public class DatastoreEvent {
   public static final String JSON_PROPERTY_ACKNOWLEDGED_AT = "acknowledged_at";
-  @jakarta.annotation.Nullable
-  private String acknowledgedAt;
+  private JsonNullable<String> acknowledgedAt = JsonNullable.<String>undefined();
 
   public static final String JSON_PROPERTY_APP_ID = "app_id";
   @jakarta.annotation.Nullable
@@ -77,12 +80,10 @@ public class DatastoreEvent {
   private String createdAt;
 
   public static final String JSON_PROPERTY_DATA = "data";
-  @jakarta.annotation.Nullable
-  private Map<String, Object> data = new HashMap<>();
+  private JsonNullable<Map<String, Object>> data = JsonNullable.<Map<String, Object>>undefined();
 
   public static final String JSON_PROPERTY_DELETED_AT = "deleted_at";
-  @jakarta.annotation.Nullable
-  private String deletedAt;
+  private JsonNullable<String> deletedAt = JsonNullable.<String>undefined();
 
   public static final String JSON_PROPERTY_ENDPOINT_METADATA = "endpoint_metadata";
   @jakarta.annotation.Nullable
@@ -97,8 +98,7 @@ public class DatastoreEvent {
   private String eventType;
 
   public static final String JSON_PROPERTY_HEADERS = "headers";
-  @jakarta.annotation.Nullable
-  private Map<String, List<String>> headers = new HashMap<>();
+  private JsonNullable<Map<String, List<String>>> headers = JsonNullable.<Map<String, List<String>>>undefined();
 
   public static final String JSON_PROPERTY_IDEMPOTENCY_KEY = "idempotency_key";
   @jakarta.annotation.Nullable
@@ -125,8 +125,7 @@ public class DatastoreEvent {
   private String sourceId;
 
   public static final String JSON_PROPERTY_SOURCE_METADATA = "source_metadata";
-  @jakarta.annotation.Nullable
-  private DatastoreSource sourceMetadata;
+  private JsonNullable<DatastoreSource> sourceMetadata = JsonNullable.<DatastoreSource>undefined();
 
   public static final String JSON_PROPERTY_STATUS = "status";
   @jakarta.annotation.Nullable
@@ -152,7 +151,7 @@ public class DatastoreEvent {
   }
 
   public DatastoreEvent acknowledgedAt(@jakarta.annotation.Nullable String acknowledgedAt) {
-    this.acknowledgedAt = acknowledgedAt;
+    this.acknowledgedAt = JsonNullable.<String>of(acknowledgedAt);
     return this;
   }
 
@@ -161,17 +160,25 @@ public class DatastoreEvent {
    * @return acknowledgedAt
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_ACKNOWLEDGED_AT, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public String getAcknowledgedAt() {
-    return acknowledgedAt;
+        return acknowledgedAt.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_ACKNOWLEDGED_AT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setAcknowledgedAt(@jakarta.annotation.Nullable String acknowledgedAt) {
+
+  public JsonNullable<String> getAcknowledgedAt_JsonNullable() {
+    return acknowledgedAt;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_ACKNOWLEDGED_AT)
+  public void setAcknowledgedAt_JsonNullable(JsonNullable<String> acknowledgedAt) {
     this.acknowledgedAt = acknowledgedAt;
+  }
+
+  public void setAcknowledgedAt(@jakarta.annotation.Nullable String acknowledgedAt) {
+    this.acknowledgedAt = JsonNullable.<String>of(acknowledgedAt);
   }
 
 
@@ -224,15 +231,19 @@ public class DatastoreEvent {
 
 
   public DatastoreEvent data(@jakarta.annotation.Nullable Map<String, Object> data) {
-    this.data = data;
+    this.data = JsonNullable.<Map<String, Object>>of(data);
     return this;
   }
 
   public DatastoreEvent putDataItem(String key, Object dataItem) {
-    if (this.data == null) {
-      this.data = new HashMap<>();
+    if (this.data == null || !this.data.isPresent()) {
+      this.data = JsonNullable.<Map<String, Object>>of(new HashMap<>());
     }
-    this.data.put(key, dataItem);
+    try {
+      this.data.get().put(key, dataItem);
+    } catch (java.util.NoSuchElementException e) {
+      // this can never happen, as we make sure above that the value is present
+    }
     return this;
   }
 
@@ -241,22 +252,30 @@ public class DatastoreEvent {
    * @return data
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_DATA, required = false)
-  @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public Map<String, Object> getData() {
-    return data;
+        return data.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_DATA, required = false)
   @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
-  public void setData(@jakarta.annotation.Nullable Map<String, Object> data) {
+
+  public JsonNullable<Map<String, Object>> getData_JsonNullable() {
+    return data;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_DATA)
+  public void setData_JsonNullable(JsonNullable<Map<String, Object>> data) {
     this.data = data;
+  }
+
+  public void setData(@jakarta.annotation.Nullable Map<String, Object> data) {
+    this.data = JsonNullable.<Map<String, Object>>of(data);
   }
 
 
   public DatastoreEvent deletedAt(@jakarta.annotation.Nullable String deletedAt) {
-    this.deletedAt = deletedAt;
+    this.deletedAt = JsonNullable.<String>of(deletedAt);
     return this;
   }
 
@@ -265,17 +284,25 @@ public class DatastoreEvent {
    * @return deletedAt
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_DELETED_AT, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public String getDeletedAt() {
-    return deletedAt;
+        return deletedAt.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_DELETED_AT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setDeletedAt(@jakarta.annotation.Nullable String deletedAt) {
+
+  public JsonNullable<String> getDeletedAt_JsonNullable() {
+    return deletedAt;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_DELETED_AT)
+  public void setDeletedAt_JsonNullable(JsonNullable<String> deletedAt) {
     this.deletedAt = deletedAt;
+  }
+
+  public void setDeletedAt(@jakarta.annotation.Nullable String deletedAt) {
+    this.deletedAt = JsonNullable.<String>of(deletedAt);
   }
 
 
@@ -368,15 +395,19 @@ public class DatastoreEvent {
 
 
   public DatastoreEvent headers(@jakarta.annotation.Nullable Map<String, List<String>> headers) {
-    this.headers = headers;
+    this.headers = JsonNullable.<Map<String, List<String>>>of(headers);
     return this;
   }
 
   public DatastoreEvent putHeadersItem(String key, List<String> headersItem) {
-    if (this.headers == null) {
-      this.headers = new HashMap<>();
+    if (this.headers == null || !this.headers.isPresent()) {
+      this.headers = JsonNullable.<Map<String, List<String>>>of(new HashMap<>());
     }
-    this.headers.put(key, headersItem);
+    try {
+      this.headers.get().put(key, headersItem);
+    } catch (java.util.NoSuchElementException e) {
+      // this can never happen, as we make sure above that the value is present
+    }
     return this;
   }
 
@@ -385,17 +416,25 @@ public class DatastoreEvent {
    * @return headers
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_HEADERS, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public Map<String, List<String>> getHeaders() {
-    return headers;
+        return headers.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_HEADERS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setHeaders(@jakarta.annotation.Nullable Map<String, List<String>> headers) {
+
+  public JsonNullable<Map<String, List<String>>> getHeaders_JsonNullable() {
+    return headers;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_HEADERS)
+  public void setHeaders_JsonNullable(JsonNullable<Map<String, List<String>>> headers) {
     this.headers = headers;
+  }
+
+  public void setHeaders(@jakarta.annotation.Nullable Map<String, List<String>> headers) {
+    this.headers = JsonNullable.<Map<String, List<String>>>of(headers);
   }
 
 
@@ -544,7 +583,7 @@ public class DatastoreEvent {
 
 
   public DatastoreEvent sourceMetadata(@jakarta.annotation.Nullable DatastoreSource sourceMetadata) {
-    this.sourceMetadata = sourceMetadata;
+    this.sourceMetadata = JsonNullable.<DatastoreSource>of(sourceMetadata);
     return this;
   }
 
@@ -553,17 +592,25 @@ public class DatastoreEvent {
    * @return sourceMetadata
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_SOURCE_METADATA, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreSource getSourceMetadata() {
-    return sourceMetadata;
+        return sourceMetadata.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_SOURCE_METADATA, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setSourceMetadata(@jakarta.annotation.Nullable DatastoreSource sourceMetadata) {
+
+  public JsonNullable<DatastoreSource> getSourceMetadata_JsonNullable() {
+    return sourceMetadata;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_SOURCE_METADATA)
+  public void setSourceMetadata_JsonNullable(JsonNullable<DatastoreSource> sourceMetadata) {
     this.sourceMetadata = sourceMetadata;
+  }
+
+  public void setSourceMetadata(@jakarta.annotation.Nullable DatastoreSource sourceMetadata) {
+    this.sourceMetadata = JsonNullable.<DatastoreSource>of(sourceMetadata);
   }
 
 
@@ -699,22 +746,22 @@ public class DatastoreEvent {
       return false;
     }
     DatastoreEvent datastoreEvent = (DatastoreEvent) o;
-    return Objects.equals(this.acknowledgedAt, datastoreEvent.acknowledgedAt) &&
+    return equalsNullable(this.acknowledgedAt, datastoreEvent.acknowledgedAt) &&
         Objects.equals(this.appId, datastoreEvent.appId) &&
         Objects.equals(this.createdAt, datastoreEvent.createdAt) &&
-        Objects.equals(this.data, datastoreEvent.data) &&
-        Objects.equals(this.deletedAt, datastoreEvent.deletedAt) &&
+        equalsNullable(this.data, datastoreEvent.data) &&
+        equalsNullable(this.deletedAt, datastoreEvent.deletedAt) &&
         Objects.equals(this.endpointMetadata, datastoreEvent.endpointMetadata) &&
         Objects.equals(this.endpoints, datastoreEvent.endpoints) &&
         Objects.equals(this.eventType, datastoreEvent.eventType) &&
-        Objects.equals(this.headers, datastoreEvent.headers) &&
+        equalsNullable(this.headers, datastoreEvent.headers) &&
         Objects.equals(this.idempotencyKey, datastoreEvent.idempotencyKey) &&
         Objects.equals(this.isDuplicateEvent, datastoreEvent.isDuplicateEvent) &&
         Objects.equals(this.metadata, datastoreEvent.metadata) &&
         Objects.equals(this.projectId, datastoreEvent.projectId) &&
         Objects.equals(this.raw, datastoreEvent.raw) &&
         Objects.equals(this.sourceId, datastoreEvent.sourceId) &&
-        Objects.equals(this.sourceMetadata, datastoreEvent.sourceMetadata) &&
+        equalsNullable(this.sourceMetadata, datastoreEvent.sourceMetadata) &&
         Objects.equals(this.status, datastoreEvent.status) &&
         Objects.equals(this.uid, datastoreEvent.uid) &&
         Objects.equals(this.updatedAt, datastoreEvent.updatedAt) &&
@@ -722,9 +769,20 @@ public class DatastoreEvent {
         Objects.equals(this.urlQueryParams, datastoreEvent.urlQueryParams);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
-    return Objects.hash(acknowledgedAt, appId, createdAt, data, deletedAt, endpointMetadata, endpoints, eventType, headers, idempotencyKey, isDuplicateEvent, metadata, projectId, raw, sourceId, sourceMetadata, status, uid, updatedAt, urlPath, urlQueryParams);
+    return Objects.hash(hashCodeNullable(acknowledgedAt), appId, createdAt, hashCodeNullable(data), hashCodeNullable(deletedAt), endpointMetadata, endpoints, eventType, hashCodeNullable(headers), idempotencyKey, isDuplicateEvent, metadata, projectId, raw, sourceId, hashCodeNullable(sourceMetadata), status, uid, updatedAt, urlPath, urlQueryParams);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

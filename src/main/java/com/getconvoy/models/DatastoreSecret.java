@@ -25,6 +25,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
@@ -47,12 +51,10 @@ public class DatastoreSecret {
   private String createdAt;
 
   public static final String JSON_PROPERTY_DELETED_AT = "deleted_at";
-  @jakarta.annotation.Nullable
-  private String deletedAt;
+  private JsonNullable<String> deletedAt = JsonNullable.<String>undefined();
 
   public static final String JSON_PROPERTY_EXPIRES_AT = "expires_at";
-  @jakarta.annotation.Nullable
-  private String expiresAt;
+  private JsonNullable<String> expiresAt = JsonNullable.<String>undefined();
 
   public static final String JSON_PROPERTY_UID = "uid";
   @jakarta.annotation.Nullable
@@ -94,7 +96,7 @@ public class DatastoreSecret {
 
 
   public DatastoreSecret deletedAt(@jakarta.annotation.Nullable String deletedAt) {
-    this.deletedAt = deletedAt;
+    this.deletedAt = JsonNullable.<String>of(deletedAt);
     return this;
   }
 
@@ -103,22 +105,30 @@ public class DatastoreSecret {
    * @return deletedAt
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_DELETED_AT, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public String getDeletedAt() {
-    return deletedAt;
+        return deletedAt.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_DELETED_AT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setDeletedAt(@jakarta.annotation.Nullable String deletedAt) {
+
+  public JsonNullable<String> getDeletedAt_JsonNullable() {
+    return deletedAt;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_DELETED_AT)
+  public void setDeletedAt_JsonNullable(JsonNullable<String> deletedAt) {
     this.deletedAt = deletedAt;
+  }
+
+  public void setDeletedAt(@jakarta.annotation.Nullable String deletedAt) {
+    this.deletedAt = JsonNullable.<String>of(deletedAt);
   }
 
 
   public DatastoreSecret expiresAt(@jakarta.annotation.Nullable String expiresAt) {
-    this.expiresAt = expiresAt;
+    this.expiresAt = JsonNullable.<String>of(expiresAt);
     return this;
   }
 
@@ -127,17 +137,25 @@ public class DatastoreSecret {
    * @return expiresAt
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_EXPIRES_AT, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public String getExpiresAt() {
-    return expiresAt;
+        return expiresAt.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_EXPIRES_AT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setExpiresAt(@jakarta.annotation.Nullable String expiresAt) {
+
+  public JsonNullable<String> getExpiresAt_JsonNullable() {
+    return expiresAt;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_EXPIRES_AT)
+  public void setExpiresAt_JsonNullable(JsonNullable<String> expiresAt) {
     this.expiresAt = expiresAt;
+  }
+
+  public void setExpiresAt(@jakarta.annotation.Nullable String expiresAt) {
+    this.expiresAt = JsonNullable.<String>of(expiresAt);
   }
 
 
@@ -226,16 +244,27 @@ public class DatastoreSecret {
     }
     DatastoreSecret datastoreSecret = (DatastoreSecret) o;
     return Objects.equals(this.createdAt, datastoreSecret.createdAt) &&
-        Objects.equals(this.deletedAt, datastoreSecret.deletedAt) &&
-        Objects.equals(this.expiresAt, datastoreSecret.expiresAt) &&
+        equalsNullable(this.deletedAt, datastoreSecret.deletedAt) &&
+        equalsNullable(this.expiresAt, datastoreSecret.expiresAt) &&
         Objects.equals(this.uid, datastoreSecret.uid) &&
         Objects.equals(this.updatedAt, datastoreSecret.updatedAt) &&
         Objects.equals(this.value, datastoreSecret.value);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
-    return Objects.hash(createdAt, deletedAt, expiresAt, uid, updatedAt, value);
+    return Objects.hash(createdAt, hashCodeNullable(deletedAt), hashCodeNullable(expiresAt), uid, updatedAt, value);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

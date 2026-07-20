@@ -30,6 +30,10 @@ import com.getconvoy.models.DatastoreKafkaPubSubConfig;
 import com.getconvoy.models.DatastorePubSubType;
 import com.getconvoy.models.DatastoreSQSPubSubConfig;
 import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
@@ -48,20 +52,16 @@ import com.getconvoy.client.ApiClient;
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.23.0")
 public class DatastorePubSubConfig {
   public static final String JSON_PROPERTY_AMQP = "amqp";
-  @jakarta.annotation.Nullable
-  private DatastoreAmqpPubSubConfig amqp;
+  private JsonNullable<DatastoreAmqpPubSubConfig> amqp = JsonNullable.<DatastoreAmqpPubSubConfig>undefined();
 
   public static final String JSON_PROPERTY_GOOGLE = "google";
-  @jakarta.annotation.Nullable
-  private DatastoreGooglePubSubConfig google;
+  private JsonNullable<DatastoreGooglePubSubConfig> google = JsonNullable.<DatastoreGooglePubSubConfig>undefined();
 
   public static final String JSON_PROPERTY_KAFKA = "kafka";
-  @jakarta.annotation.Nullable
-  private DatastoreKafkaPubSubConfig kafka;
+  private JsonNullable<DatastoreKafkaPubSubConfig> kafka = JsonNullable.<DatastoreKafkaPubSubConfig>undefined();
 
   public static final String JSON_PROPERTY_SQS = "sqs";
-  @jakarta.annotation.Nullable
-  private DatastoreSQSPubSubConfig sqs;
+  private JsonNullable<DatastoreSQSPubSubConfig> sqs = JsonNullable.<DatastoreSQSPubSubConfig>undefined();
 
   public static final String JSON_PROPERTY_TYPE = "type";
   @jakarta.annotation.Nullable
@@ -75,7 +75,7 @@ public class DatastorePubSubConfig {
   }
 
   public DatastorePubSubConfig amqp(@jakarta.annotation.Nullable DatastoreAmqpPubSubConfig amqp) {
-    this.amqp = amqp;
+    this.amqp = JsonNullable.<DatastoreAmqpPubSubConfig>of(amqp);
     return this;
   }
 
@@ -84,22 +84,30 @@ public class DatastorePubSubConfig {
    * @return amqp
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_AMQP, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreAmqpPubSubConfig getAmqp() {
-    return amqp;
+        return amqp.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_AMQP, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setAmqp(@jakarta.annotation.Nullable DatastoreAmqpPubSubConfig amqp) {
+
+  public JsonNullable<DatastoreAmqpPubSubConfig> getAmqp_JsonNullable() {
+    return amqp;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_AMQP)
+  public void setAmqp_JsonNullable(JsonNullable<DatastoreAmqpPubSubConfig> amqp) {
     this.amqp = amqp;
+  }
+
+  public void setAmqp(@jakarta.annotation.Nullable DatastoreAmqpPubSubConfig amqp) {
+    this.amqp = JsonNullable.<DatastoreAmqpPubSubConfig>of(amqp);
   }
 
 
   public DatastorePubSubConfig google(@jakarta.annotation.Nullable DatastoreGooglePubSubConfig google) {
-    this.google = google;
+    this.google = JsonNullable.<DatastoreGooglePubSubConfig>of(google);
     return this;
   }
 
@@ -108,22 +116,30 @@ public class DatastorePubSubConfig {
    * @return google
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_GOOGLE, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreGooglePubSubConfig getGoogle() {
-    return google;
+        return google.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_GOOGLE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setGoogle(@jakarta.annotation.Nullable DatastoreGooglePubSubConfig google) {
+
+  public JsonNullable<DatastoreGooglePubSubConfig> getGoogle_JsonNullable() {
+    return google;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_GOOGLE)
+  public void setGoogle_JsonNullable(JsonNullable<DatastoreGooglePubSubConfig> google) {
     this.google = google;
+  }
+
+  public void setGoogle(@jakarta.annotation.Nullable DatastoreGooglePubSubConfig google) {
+    this.google = JsonNullable.<DatastoreGooglePubSubConfig>of(google);
   }
 
 
   public DatastorePubSubConfig kafka(@jakarta.annotation.Nullable DatastoreKafkaPubSubConfig kafka) {
-    this.kafka = kafka;
+    this.kafka = JsonNullable.<DatastoreKafkaPubSubConfig>of(kafka);
     return this;
   }
 
@@ -132,22 +148,30 @@ public class DatastorePubSubConfig {
    * @return kafka
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_KAFKA, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreKafkaPubSubConfig getKafka() {
-    return kafka;
+        return kafka.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_KAFKA, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setKafka(@jakarta.annotation.Nullable DatastoreKafkaPubSubConfig kafka) {
+
+  public JsonNullable<DatastoreKafkaPubSubConfig> getKafka_JsonNullable() {
+    return kafka;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_KAFKA)
+  public void setKafka_JsonNullable(JsonNullable<DatastoreKafkaPubSubConfig> kafka) {
     this.kafka = kafka;
+  }
+
+  public void setKafka(@jakarta.annotation.Nullable DatastoreKafkaPubSubConfig kafka) {
+    this.kafka = JsonNullable.<DatastoreKafkaPubSubConfig>of(kafka);
   }
 
 
   public DatastorePubSubConfig sqs(@jakarta.annotation.Nullable DatastoreSQSPubSubConfig sqs) {
-    this.sqs = sqs;
+    this.sqs = JsonNullable.<DatastoreSQSPubSubConfig>of(sqs);
     return this;
   }
 
@@ -156,17 +180,25 @@ public class DatastorePubSubConfig {
    * @return sqs
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_SQS, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreSQSPubSubConfig getSqs() {
-    return sqs;
+        return sqs.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_SQS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setSqs(@jakarta.annotation.Nullable DatastoreSQSPubSubConfig sqs) {
+
+  public JsonNullable<DatastoreSQSPubSubConfig> getSqs_JsonNullable() {
+    return sqs;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_SQS)
+  public void setSqs_JsonNullable(JsonNullable<DatastoreSQSPubSubConfig> sqs) {
     this.sqs = sqs;
+  }
+
+  public void setSqs(@jakarta.annotation.Nullable DatastoreSQSPubSubConfig sqs) {
+    this.sqs = JsonNullable.<DatastoreSQSPubSubConfig>of(sqs);
   }
 
 
@@ -230,17 +262,28 @@ public class DatastorePubSubConfig {
       return false;
     }
     DatastorePubSubConfig datastorePubSubConfig = (DatastorePubSubConfig) o;
-    return Objects.equals(this.amqp, datastorePubSubConfig.amqp) &&
-        Objects.equals(this.google, datastorePubSubConfig.google) &&
-        Objects.equals(this.kafka, datastorePubSubConfig.kafka) &&
-        Objects.equals(this.sqs, datastorePubSubConfig.sqs) &&
+    return equalsNullable(this.amqp, datastorePubSubConfig.amqp) &&
+        equalsNullable(this.google, datastorePubSubConfig.google) &&
+        equalsNullable(this.kafka, datastorePubSubConfig.kafka) &&
+        equalsNullable(this.sqs, datastorePubSubConfig.sqs) &&
         Objects.equals(this.type, datastorePubSubConfig.type) &&
         Objects.equals(this.workers, datastorePubSubConfig.workers);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
-    return Objects.hash(amqp, google, kafka, sqs, type, workers);
+    return Objects.hash(hashCodeNullable(amqp), hashCodeNullable(google), hashCodeNullable(kafka), hashCodeNullable(sqs), type, workers);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

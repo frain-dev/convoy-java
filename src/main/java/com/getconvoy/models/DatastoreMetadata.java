@@ -28,6 +28,10 @@ import com.getconvoy.models.DatastoreStrategyProvider;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import org.openapitools.jackson.nullable.JsonNullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
@@ -48,8 +52,7 @@ import com.getconvoy.client.ApiClient;
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.23.0")
 public class DatastoreMetadata {
   public static final String JSON_PROPERTY_DATA = "data";
-  @jakarta.annotation.Nullable
-  private Map<String, Object> data = new HashMap<>();
+  private JsonNullable<Map<String, Object>> data = JsonNullable.<Map<String, Object>>undefined();
 
   public static final String JSON_PROPERTY_INTERVAL_SECONDS = "interval_seconds";
   @jakarta.annotation.Nullable
@@ -83,15 +86,19 @@ public class DatastoreMetadata {
   }
 
   public DatastoreMetadata data(@jakarta.annotation.Nullable Map<String, Object> data) {
-    this.data = data;
+    this.data = JsonNullable.<Map<String, Object>>of(data);
     return this;
   }
 
   public DatastoreMetadata putDataItem(String key, Object dataItem) {
-    if (this.data == null) {
-      this.data = new HashMap<>();
+    if (this.data == null || !this.data.isPresent()) {
+      this.data = JsonNullable.<Map<String, Object>>of(new HashMap<>());
     }
-    this.data.put(key, dataItem);
+    try {
+      this.data.get().put(key, dataItem);
+    } catch (java.util.NoSuchElementException e) {
+      // this can never happen, as we make sure above that the value is present
+    }
     return this;
   }
 
@@ -100,17 +107,25 @@ public class DatastoreMetadata {
    * @return data
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_DATA, required = false)
-  @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public Map<String, Object> getData() {
-    return data;
+        return data.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_DATA, required = false)
   @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
-  public void setData(@jakarta.annotation.Nullable Map<String, Object> data) {
+
+  public JsonNullable<Map<String, Object>> getData_JsonNullable() {
+    return data;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_DATA)
+  public void setData_JsonNullable(JsonNullable<Map<String, Object>> data) {
     this.data = data;
+  }
+
+  public void setData(@jakarta.annotation.Nullable Map<String, Object> data) {
+    this.data = JsonNullable.<Map<String, Object>>of(data);
   }
 
 
@@ -294,7 +309,7 @@ public class DatastoreMetadata {
       return false;
     }
     DatastoreMetadata datastoreMetadata = (DatastoreMetadata) o;
-    return Objects.equals(this.data, datastoreMetadata.data) &&
+    return equalsNullable(this.data, datastoreMetadata.data) &&
         Objects.equals(this.intervalSeconds, datastoreMetadata.intervalSeconds) &&
         Objects.equals(this.maxRetrySeconds, datastoreMetadata.maxRetrySeconds) &&
         Objects.equals(this.nextSendTime, datastoreMetadata.nextSendTime) &&
@@ -304,9 +319,20 @@ public class DatastoreMetadata {
         Objects.equals(this.strategy, datastoreMetadata.strategy);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
-    return Objects.hash(data, intervalSeconds, maxRetrySeconds, nextSendTime, numTrials, raw, retryLimit, strategy);
+    return Objects.hash(hashCodeNullable(data), intervalSeconds, maxRetrySeconds, nextSendTime, numTrials, raw, retryLimit, strategy);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

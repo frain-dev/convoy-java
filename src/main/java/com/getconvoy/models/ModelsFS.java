@@ -27,6 +27,10 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import org.openapitools.jackson.nullable.JsonNullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
@@ -43,34 +47,34 @@ import com.getconvoy.client.ApiClient;
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.23.0")
 public class ModelsFS {
   public static final String JSON_PROPERTY_BODY = "body";
-  @jakarta.annotation.Nullable
-  private Map<String, Object> body = new HashMap<>();
+  private JsonNullable<Map<String, Object>> body = JsonNullable.<Map<String, Object>>undefined();
 
   public static final String JSON_PROPERTY_HEADERS = "headers";
-  @jakarta.annotation.Nullable
-  private Map<String, Object> headers = new HashMap<>();
+  private JsonNullable<Map<String, Object>> headers = JsonNullable.<Map<String, Object>>undefined();
 
   public static final String JSON_PROPERTY_PATH = "path";
-  @jakarta.annotation.Nullable
-  private Map<String, Object> path = new HashMap<>();
+  private JsonNullable<Map<String, Object>> path = JsonNullable.<Map<String, Object>>undefined();
 
   public static final String JSON_PROPERTY_QUERY = "query";
-  @jakarta.annotation.Nullable
-  private Map<String, Object> query = new HashMap<>();
+  private JsonNullable<Map<String, Object>> query = JsonNullable.<Map<String, Object>>undefined();
 
   public ModelsFS() { 
   }
 
   public ModelsFS body(@jakarta.annotation.Nullable Map<String, Object> body) {
-    this.body = body;
+    this.body = JsonNullable.<Map<String, Object>>of(body);
     return this;
   }
 
   public ModelsFS putBodyItem(String key, Object bodyItem) {
-    if (this.body == null) {
-      this.body = new HashMap<>();
+    if (this.body == null || !this.body.isPresent()) {
+      this.body = JsonNullable.<Map<String, Object>>of(new HashMap<>());
     }
-    this.body.put(key, bodyItem);
+    try {
+      this.body.get().put(key, bodyItem);
+    } catch (java.util.NoSuchElementException e) {
+      // this can never happen, as we make sure above that the value is present
+    }
     return this;
   }
 
@@ -79,30 +83,42 @@ public class ModelsFS {
    * @return body
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_BODY, required = false)
-  @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public Map<String, Object> getBody() {
-    return body;
+        return body.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_BODY, required = false)
   @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
-  public void setBody(@jakarta.annotation.Nullable Map<String, Object> body) {
+
+  public JsonNullable<Map<String, Object>> getBody_JsonNullable() {
+    return body;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_BODY)
+  public void setBody_JsonNullable(JsonNullable<Map<String, Object>> body) {
     this.body = body;
+  }
+
+  public void setBody(@jakarta.annotation.Nullable Map<String, Object> body) {
+    this.body = JsonNullable.<Map<String, Object>>of(body);
   }
 
 
   public ModelsFS headers(@jakarta.annotation.Nullable Map<String, Object> headers) {
-    this.headers = headers;
+    this.headers = JsonNullable.<Map<String, Object>>of(headers);
     return this;
   }
 
   public ModelsFS putHeadersItem(String key, Object headersItem) {
-    if (this.headers == null) {
-      this.headers = new HashMap<>();
+    if (this.headers == null || !this.headers.isPresent()) {
+      this.headers = JsonNullable.<Map<String, Object>>of(new HashMap<>());
     }
-    this.headers.put(key, headersItem);
+    try {
+      this.headers.get().put(key, headersItem);
+    } catch (java.util.NoSuchElementException e) {
+      // this can never happen, as we make sure above that the value is present
+    }
     return this;
   }
 
@@ -111,30 +127,42 @@ public class ModelsFS {
    * @return headers
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_HEADERS, required = false)
-  @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public Map<String, Object> getHeaders() {
-    return headers;
+        return headers.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_HEADERS, required = false)
   @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
-  public void setHeaders(@jakarta.annotation.Nullable Map<String, Object> headers) {
+
+  public JsonNullable<Map<String, Object>> getHeaders_JsonNullable() {
+    return headers;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_HEADERS)
+  public void setHeaders_JsonNullable(JsonNullable<Map<String, Object>> headers) {
     this.headers = headers;
+  }
+
+  public void setHeaders(@jakarta.annotation.Nullable Map<String, Object> headers) {
+    this.headers = JsonNullable.<Map<String, Object>>of(headers);
   }
 
 
   public ModelsFS path(@jakarta.annotation.Nullable Map<String, Object> path) {
-    this.path = path;
+    this.path = JsonNullable.<Map<String, Object>>of(path);
     return this;
   }
 
   public ModelsFS putPathItem(String key, Object pathItem) {
-    if (this.path == null) {
-      this.path = new HashMap<>();
+    if (this.path == null || !this.path.isPresent()) {
+      this.path = JsonNullable.<Map<String, Object>>of(new HashMap<>());
     }
-    this.path.put(key, pathItem);
+    try {
+      this.path.get().put(key, pathItem);
+    } catch (java.util.NoSuchElementException e) {
+      // this can never happen, as we make sure above that the value is present
+    }
     return this;
   }
 
@@ -143,30 +171,42 @@ public class ModelsFS {
    * @return path
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_PATH, required = false)
-  @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public Map<String, Object> getPath() {
-    return path;
+        return path.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_PATH, required = false)
   @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
-  public void setPath(@jakarta.annotation.Nullable Map<String, Object> path) {
+
+  public JsonNullable<Map<String, Object>> getPath_JsonNullable() {
+    return path;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_PATH)
+  public void setPath_JsonNullable(JsonNullable<Map<String, Object>> path) {
     this.path = path;
+  }
+
+  public void setPath(@jakarta.annotation.Nullable Map<String, Object> path) {
+    this.path = JsonNullable.<Map<String, Object>>of(path);
   }
 
 
   public ModelsFS query(@jakarta.annotation.Nullable Map<String, Object> query) {
-    this.query = query;
+    this.query = JsonNullable.<Map<String, Object>>of(query);
     return this;
   }
 
   public ModelsFS putQueryItem(String key, Object queryItem) {
-    if (this.query == null) {
-      this.query = new HashMap<>();
+    if (this.query == null || !this.query.isPresent()) {
+      this.query = JsonNullable.<Map<String, Object>>of(new HashMap<>());
     }
-    this.query.put(key, queryItem);
+    try {
+      this.query.get().put(key, queryItem);
+    } catch (java.util.NoSuchElementException e) {
+      // this can never happen, as we make sure above that the value is present
+    }
     return this;
   }
 
@@ -175,17 +215,25 @@ public class ModelsFS {
    * @return query
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_QUERY, required = false)
-  @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public Map<String, Object> getQuery() {
-    return query;
+        return query.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_QUERY, required = false)
   @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
-  public void setQuery(@jakarta.annotation.Nullable Map<String, Object> query) {
+
+  public JsonNullable<Map<String, Object>> getQuery_JsonNullable() {
+    return query;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_QUERY)
+  public void setQuery_JsonNullable(JsonNullable<Map<String, Object>> query) {
     this.query = query;
+  }
+
+  public void setQuery(@jakarta.annotation.Nullable Map<String, Object> query) {
+    this.query = JsonNullable.<Map<String, Object>>of(query);
   }
 
 
@@ -201,15 +249,26 @@ public class ModelsFS {
       return false;
     }
     ModelsFS modelsFS = (ModelsFS) o;
-    return Objects.equals(this.body, modelsFS.body) &&
-        Objects.equals(this.headers, modelsFS.headers) &&
-        Objects.equals(this.path, modelsFS.path) &&
-        Objects.equals(this.query, modelsFS.query);
+    return equalsNullable(this.body, modelsFS.body) &&
+        equalsNullable(this.headers, modelsFS.headers) &&
+        equalsNullable(this.path, modelsFS.path) &&
+        equalsNullable(this.query, modelsFS.query);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(body, headers, path, query);
+    return Objects.hash(hashCodeNullable(body), hashCodeNullable(headers), hashCodeNullable(path), hashCodeNullable(query));
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

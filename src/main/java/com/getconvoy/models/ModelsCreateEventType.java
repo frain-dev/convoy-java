@@ -27,6 +27,10 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import org.openapitools.jackson.nullable.JsonNullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
@@ -51,8 +55,7 @@ public class ModelsCreateEventType {
   private String description;
 
   public static final String JSON_PROPERTY_JSON_SCHEMA = "json_schema";
-  @jakarta.annotation.Nullable
-  private Map<String, Object> jsonSchema = new HashMap<>();
+  private JsonNullable<Map<String, Object>> jsonSchema = JsonNullable.<Map<String, Object>>undefined();
 
   public static final String JSON_PROPERTY_NAME = "name";
   @jakarta.annotation.Nullable
@@ -110,15 +113,19 @@ public class ModelsCreateEventType {
 
 
   public ModelsCreateEventType jsonSchema(@jakarta.annotation.Nullable Map<String, Object> jsonSchema) {
-    this.jsonSchema = jsonSchema;
+    this.jsonSchema = JsonNullable.<Map<String, Object>>of(jsonSchema);
     return this;
   }
 
   public ModelsCreateEventType putJsonSchemaItem(String key, Object jsonSchemaItem) {
-    if (this.jsonSchema == null) {
-      this.jsonSchema = new HashMap<>();
+    if (this.jsonSchema == null || !this.jsonSchema.isPresent()) {
+      this.jsonSchema = JsonNullable.<Map<String, Object>>of(new HashMap<>());
     }
-    this.jsonSchema.put(key, jsonSchemaItem);
+    try {
+      this.jsonSchema.get().put(key, jsonSchemaItem);
+    } catch (java.util.NoSuchElementException e) {
+      // this can never happen, as we make sure above that the value is present
+    }
     return this;
   }
 
@@ -127,17 +134,25 @@ public class ModelsCreateEventType {
    * @return jsonSchema
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_JSON_SCHEMA, required = false)
-  @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public Map<String, Object> getJsonSchema() {
-    return jsonSchema;
+        return jsonSchema.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_JSON_SCHEMA, required = false)
   @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
-  public void setJsonSchema(@jakarta.annotation.Nullable Map<String, Object> jsonSchema) {
+
+  public JsonNullable<Map<String, Object>> getJsonSchema_JsonNullable() {
+    return jsonSchema;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_JSON_SCHEMA)
+  public void setJsonSchema_JsonNullable(JsonNullable<Map<String, Object>> jsonSchema) {
     this.jsonSchema = jsonSchema;
+  }
+
+  public void setJsonSchema(@jakarta.annotation.Nullable Map<String, Object> jsonSchema) {
+    this.jsonSchema = JsonNullable.<Map<String, Object>>of(jsonSchema);
   }
 
 
@@ -179,13 +194,24 @@ public class ModelsCreateEventType {
     ModelsCreateEventType modelsCreateEventType = (ModelsCreateEventType) o;
     return Objects.equals(this.category, modelsCreateEventType.category) &&
         Objects.equals(this.description, modelsCreateEventType.description) &&
-        Objects.equals(this.jsonSchema, modelsCreateEventType.jsonSchema) &&
+        equalsNullable(this.jsonSchema, modelsCreateEventType.jsonSchema) &&
         Objects.equals(this.name, modelsCreateEventType.name);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(category, description, jsonSchema, name);
+    return Objects.hash(category, description, hashCodeNullable(jsonSchema), name);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

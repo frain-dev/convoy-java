@@ -34,7 +34,9 @@ public enum DatastoreDeviceStatus {
   
   DeviceStatusOnline("online"),
   
-  DeviceStatusDisabled("disabled");
+  DeviceStatusDisabled("disabled"),
+  
+  EMPTY("");
 
   private String value;
 

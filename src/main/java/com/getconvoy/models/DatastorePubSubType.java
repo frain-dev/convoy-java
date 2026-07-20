@@ -36,7 +36,9 @@ public enum DatastorePubSubType {
   
   KafkaPubSub("kafka"),
   
-  AmqpPubSub("amqp");
+  AmqpPubSub("amqp"),
+  
+  EMPTY("");
 
   private String value;
 

@@ -28,6 +28,10 @@ import com.getconvoy.models.ModelsOptionalTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import org.openapitools.jackson.nullable.JsonNullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
@@ -47,8 +51,7 @@ import com.getconvoy.client.ApiClient;
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.23.0")
 public class ModelsUpdateFilterRequest {
   public static final String JSON_PROPERTY_BODY = "body";
-  @jakarta.annotation.Nullable
-  private Map<String, Object> body;
+  private JsonNullable<Map<String, Object>> body = JsonNullable.<Map<String, Object>>undefined();
 
   public static final String JSON_PROPERTY_ENABLED_AT = "enabled_at";
   @jakarta.annotation.Nullable
@@ -59,34 +62,35 @@ public class ModelsUpdateFilterRequest {
   private String eventType;
 
   public static final String JSON_PROPERTY_HEADERS = "headers";
-  @jakarta.annotation.Nullable
-  private Map<String, Object> headers;
+  private JsonNullable<Map<String, Object>> headers = JsonNullable.<Map<String, Object>>undefined();
 
   public static final String JSON_PROPERTY_IS_FLATTENED = "is_flattened";
   @jakarta.annotation.Nullable
   private Boolean isFlattened;
 
   public static final String JSON_PROPERTY_PATH = "path";
-  @jakarta.annotation.Nullable
-  private Map<String, Object> path;
+  private JsonNullable<Map<String, Object>> path = JsonNullable.<Map<String, Object>>undefined();
 
   public static final String JSON_PROPERTY_QUERY = "query";
-  @jakarta.annotation.Nullable
-  private Map<String, Object> query;
+  private JsonNullable<Map<String, Object>> query = JsonNullable.<Map<String, Object>>undefined();
 
   public ModelsUpdateFilterRequest() { 
   }
 
   public ModelsUpdateFilterRequest body(@jakarta.annotation.Nullable Map<String, Object> body) {
-    this.body = body;
+    this.body = JsonNullable.<Map<String, Object>>of(body);
     return this;
   }
 
   public ModelsUpdateFilterRequest putBodyItem(String key, Object bodyItem) {
-    if (this.body == null) {
-      this.body = new HashMap<>();
+    if (this.body == null || !this.body.isPresent()) {
+      this.body = JsonNullable.<Map<String, Object>>of(new HashMap<>());
     }
-    this.body.put(key, bodyItem);
+    try {
+      this.body.get().put(key, bodyItem);
+    } catch (java.util.NoSuchElementException e) {
+      // this can never happen, as we make sure above that the value is present
+    }
     return this;
   }
 
@@ -95,17 +99,25 @@ public class ModelsUpdateFilterRequest {
    * @return body
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_BODY, required = false)
-  @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public Map<String, Object> getBody() {
-    return body;
+        return body.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_BODY, required = false)
   @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
-  public void setBody(@jakarta.annotation.Nullable Map<String, Object> body) {
+
+  public JsonNullable<Map<String, Object>> getBody_JsonNullable() {
+    return body;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_BODY)
+  public void setBody_JsonNullable(JsonNullable<Map<String, Object>> body) {
     this.body = body;
+  }
+
+  public void setBody(@jakarta.annotation.Nullable Map<String, Object> body) {
+    this.body = JsonNullable.<Map<String, Object>>of(body);
   }
 
 
@@ -158,15 +170,19 @@ public class ModelsUpdateFilterRequest {
 
 
   public ModelsUpdateFilterRequest headers(@jakarta.annotation.Nullable Map<String, Object> headers) {
-    this.headers = headers;
+    this.headers = JsonNullable.<Map<String, Object>>of(headers);
     return this;
   }
 
   public ModelsUpdateFilterRequest putHeadersItem(String key, Object headersItem) {
-    if (this.headers == null) {
-      this.headers = new HashMap<>();
+    if (this.headers == null || !this.headers.isPresent()) {
+      this.headers = JsonNullable.<Map<String, Object>>of(new HashMap<>());
     }
-    this.headers.put(key, headersItem);
+    try {
+      this.headers.get().put(key, headersItem);
+    } catch (java.util.NoSuchElementException e) {
+      // this can never happen, as we make sure above that the value is present
+    }
     return this;
   }
 
@@ -175,17 +191,25 @@ public class ModelsUpdateFilterRequest {
    * @return headers
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_HEADERS, required = false)
-  @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public Map<String, Object> getHeaders() {
-    return headers;
+        return headers.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_HEADERS, required = false)
   @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
-  public void setHeaders(@jakarta.annotation.Nullable Map<String, Object> headers) {
+
+  public JsonNullable<Map<String, Object>> getHeaders_JsonNullable() {
+    return headers;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_HEADERS)
+  public void setHeaders_JsonNullable(JsonNullable<Map<String, Object>> headers) {
     this.headers = headers;
+  }
+
+  public void setHeaders(@jakarta.annotation.Nullable Map<String, Object> headers) {
+    this.headers = JsonNullable.<Map<String, Object>>of(headers);
   }
 
 
@@ -214,15 +238,19 @@ public class ModelsUpdateFilterRequest {
 
 
   public ModelsUpdateFilterRequest path(@jakarta.annotation.Nullable Map<String, Object> path) {
-    this.path = path;
+    this.path = JsonNullable.<Map<String, Object>>of(path);
     return this;
   }
 
   public ModelsUpdateFilterRequest putPathItem(String key, Object pathItem) {
-    if (this.path == null) {
-      this.path = new HashMap<>();
+    if (this.path == null || !this.path.isPresent()) {
+      this.path = JsonNullable.<Map<String, Object>>of(new HashMap<>());
     }
-    this.path.put(key, pathItem);
+    try {
+      this.path.get().put(key, pathItem);
+    } catch (java.util.NoSuchElementException e) {
+      // this can never happen, as we make sure above that the value is present
+    }
     return this;
   }
 
@@ -231,30 +259,42 @@ public class ModelsUpdateFilterRequest {
    * @return path
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_PATH, required = false)
-  @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public Map<String, Object> getPath() {
-    return path;
+        return path.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_PATH, required = false)
   @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
-  public void setPath(@jakarta.annotation.Nullable Map<String, Object> path) {
+
+  public JsonNullable<Map<String, Object>> getPath_JsonNullable() {
+    return path;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_PATH)
+  public void setPath_JsonNullable(JsonNullable<Map<String, Object>> path) {
     this.path = path;
+  }
+
+  public void setPath(@jakarta.annotation.Nullable Map<String, Object> path) {
+    this.path = JsonNullable.<Map<String, Object>>of(path);
   }
 
 
   public ModelsUpdateFilterRequest query(@jakarta.annotation.Nullable Map<String, Object> query) {
-    this.query = query;
+    this.query = JsonNullable.<Map<String, Object>>of(query);
     return this;
   }
 
   public ModelsUpdateFilterRequest putQueryItem(String key, Object queryItem) {
-    if (this.query == null) {
-      this.query = new HashMap<>();
+    if (this.query == null || !this.query.isPresent()) {
+      this.query = JsonNullable.<Map<String, Object>>of(new HashMap<>());
     }
-    this.query.put(key, queryItem);
+    try {
+      this.query.get().put(key, queryItem);
+    } catch (java.util.NoSuchElementException e) {
+      // this can never happen, as we make sure above that the value is present
+    }
     return this;
   }
 
@@ -263,17 +303,25 @@ public class ModelsUpdateFilterRequest {
    * @return query
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_QUERY, required = false)
-  @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public Map<String, Object> getQuery() {
-    return query;
+        return query.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_QUERY, required = false)
   @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
-  public void setQuery(@jakarta.annotation.Nullable Map<String, Object> query) {
+
+  public JsonNullable<Map<String, Object>> getQuery_JsonNullable() {
+    return query;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_QUERY)
+  public void setQuery_JsonNullable(JsonNullable<Map<String, Object>> query) {
     this.query = query;
+  }
+
+  public void setQuery(@jakarta.annotation.Nullable Map<String, Object> query) {
+    this.query = JsonNullable.<Map<String, Object>>of(query);
   }
 
 
@@ -289,18 +337,29 @@ public class ModelsUpdateFilterRequest {
       return false;
     }
     ModelsUpdateFilterRequest modelsUpdateFilterRequest = (ModelsUpdateFilterRequest) o;
-    return Objects.equals(this.body, modelsUpdateFilterRequest.body) &&
+    return equalsNullable(this.body, modelsUpdateFilterRequest.body) &&
         Objects.equals(this.enabledAt, modelsUpdateFilterRequest.enabledAt) &&
         Objects.equals(this.eventType, modelsUpdateFilterRequest.eventType) &&
-        Objects.equals(this.headers, modelsUpdateFilterRequest.headers) &&
+        equalsNullable(this.headers, modelsUpdateFilterRequest.headers) &&
         Objects.equals(this.isFlattened, modelsUpdateFilterRequest.isFlattened) &&
-        Objects.equals(this.path, modelsUpdateFilterRequest.path) &&
-        Objects.equals(this.query, modelsUpdateFilterRequest.query);
+        equalsNullable(this.path, modelsUpdateFilterRequest.path) &&
+        equalsNullable(this.query, modelsUpdateFilterRequest.query);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(body, enabledAt, eventType, headers, isFlattened, path, query);
+    return Objects.hash(hashCodeNullable(body), enabledAt, eventType, hashCodeNullable(headers), isFlattened, hashCodeNullable(path), hashCodeNullable(query));
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

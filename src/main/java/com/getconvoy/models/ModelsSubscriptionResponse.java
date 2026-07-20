@@ -34,6 +34,10 @@ import com.getconvoy.models.DatastoreRetryConfiguration;
 import com.getconvoy.models.DatastoreSource;
 import com.getconvoy.models.DatastoreSubscriptionType;
 import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
@@ -62,36 +66,30 @@ import com.getconvoy.client.ApiClient;
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.23.0")
 public class ModelsSubscriptionResponse {
   public static final String JSON_PROPERTY_ALERT_CONFIG = "alert_config";
-  @jakarta.annotation.Nullable
-  private DatastoreAlertConfiguration alertConfig;
+  private JsonNullable<DatastoreAlertConfiguration> alertConfig = JsonNullable.<DatastoreAlertConfiguration>undefined();
 
   public static final String JSON_PROPERTY_CREATED_AT = "created_at";
   @jakarta.annotation.Nullable
   private String createdAt;
 
   public static final String JSON_PROPERTY_DELETED_AT = "deleted_at";
-  @jakarta.annotation.Nullable
-  private String deletedAt;
+  private JsonNullable<String> deletedAt = JsonNullable.<String>undefined();
 
   public static final String JSON_PROPERTY_DELIVERY_MODE = "delivery_mode";
   @jakarta.annotation.Nullable
   private DatastoreDeliveryMode deliveryMode;
 
   public static final String JSON_PROPERTY_DEVICE_METADATA = "device_metadata";
-  @jakarta.annotation.Nullable
-  private DatastoreDevice deviceMetadata;
+  private JsonNullable<DatastoreDevice> deviceMetadata = JsonNullable.<DatastoreDevice>undefined();
 
   public static final String JSON_PROPERTY_ENDPOINT_METADATA = "endpoint_metadata";
-  @jakarta.annotation.Nullable
-  private DatastoreEndpoint endpointMetadata;
+  private JsonNullable<DatastoreEndpoint> endpointMetadata = JsonNullable.<DatastoreEndpoint>undefined();
 
   public static final String JSON_PROPERTY_FILTER_CONFIG = "filter_config";
-  @jakarta.annotation.Nullable
-  private DatastoreFilterConfiguration filterConfig;
+  private JsonNullable<DatastoreFilterConfiguration> filterConfig = JsonNullable.<DatastoreFilterConfiguration>undefined();
 
   public static final String JSON_PROPERTY_FUNCTION = "function";
-  @jakarta.annotation.Nullable
-  private String function;
+  private JsonNullable<String> function = JsonNullable.<String>undefined();
 
   public static final String JSON_PROPERTY_NAME = "name";
   @jakarta.annotation.Nullable
@@ -102,16 +100,13 @@ public class ModelsSubscriptionResponse {
   private String projectId;
 
   public static final String JSON_PROPERTY_RATE_LIMIT_CONFIG = "rate_limit_config";
-  @jakarta.annotation.Nullable
-  private DatastoreRateLimitConfiguration rateLimitConfig;
+  private JsonNullable<DatastoreRateLimitConfiguration> rateLimitConfig = JsonNullable.<DatastoreRateLimitConfiguration>undefined();
 
   public static final String JSON_PROPERTY_RETRY_CONFIG = "retry_config";
-  @jakarta.annotation.Nullable
-  private DatastoreRetryConfiguration retryConfig;
+  private JsonNullable<DatastoreRetryConfiguration> retryConfig = JsonNullable.<DatastoreRetryConfiguration>undefined();
 
   public static final String JSON_PROPERTY_SOURCE_METADATA = "source_metadata";
-  @jakarta.annotation.Nullable
-  private DatastoreSource sourceMetadata;
+  private JsonNullable<DatastoreSource> sourceMetadata = JsonNullable.<DatastoreSource>undefined();
 
   public static final String JSON_PROPERTY_TYPE = "type";
   @jakarta.annotation.Nullable
@@ -129,7 +124,7 @@ public class ModelsSubscriptionResponse {
   }
 
   public ModelsSubscriptionResponse alertConfig(@jakarta.annotation.Nullable DatastoreAlertConfiguration alertConfig) {
-    this.alertConfig = alertConfig;
+    this.alertConfig = JsonNullable.<DatastoreAlertConfiguration>of(alertConfig);
     return this;
   }
 
@@ -138,17 +133,25 @@ public class ModelsSubscriptionResponse {
    * @return alertConfig
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_ALERT_CONFIG, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreAlertConfiguration getAlertConfig() {
-    return alertConfig;
+        return alertConfig.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_ALERT_CONFIG, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setAlertConfig(@jakarta.annotation.Nullable DatastoreAlertConfiguration alertConfig) {
+
+  public JsonNullable<DatastoreAlertConfiguration> getAlertConfig_JsonNullable() {
+    return alertConfig;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_ALERT_CONFIG)
+  public void setAlertConfig_JsonNullable(JsonNullable<DatastoreAlertConfiguration> alertConfig) {
     this.alertConfig = alertConfig;
+  }
+
+  public void setAlertConfig(@jakarta.annotation.Nullable DatastoreAlertConfiguration alertConfig) {
+    this.alertConfig = JsonNullable.<DatastoreAlertConfiguration>of(alertConfig);
   }
 
 
@@ -177,7 +180,7 @@ public class ModelsSubscriptionResponse {
 
 
   public ModelsSubscriptionResponse deletedAt(@jakarta.annotation.Nullable String deletedAt) {
-    this.deletedAt = deletedAt;
+    this.deletedAt = JsonNullable.<String>of(deletedAt);
     return this;
   }
 
@@ -186,17 +189,25 @@ public class ModelsSubscriptionResponse {
    * @return deletedAt
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_DELETED_AT, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public String getDeletedAt() {
-    return deletedAt;
+        return deletedAt.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_DELETED_AT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setDeletedAt(@jakarta.annotation.Nullable String deletedAt) {
+
+  public JsonNullable<String> getDeletedAt_JsonNullable() {
+    return deletedAt;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_DELETED_AT)
+  public void setDeletedAt_JsonNullable(JsonNullable<String> deletedAt) {
     this.deletedAt = deletedAt;
+  }
+
+  public void setDeletedAt(@jakarta.annotation.Nullable String deletedAt) {
+    this.deletedAt = JsonNullable.<String>of(deletedAt);
   }
 
 
@@ -225,7 +236,7 @@ public class ModelsSubscriptionResponse {
 
 
   public ModelsSubscriptionResponse deviceMetadata(@jakarta.annotation.Nullable DatastoreDevice deviceMetadata) {
-    this.deviceMetadata = deviceMetadata;
+    this.deviceMetadata = JsonNullable.<DatastoreDevice>of(deviceMetadata);
     return this;
   }
 
@@ -234,22 +245,30 @@ public class ModelsSubscriptionResponse {
    * @return deviceMetadata
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_DEVICE_METADATA, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreDevice getDeviceMetadata() {
-    return deviceMetadata;
+        return deviceMetadata.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_DEVICE_METADATA, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setDeviceMetadata(@jakarta.annotation.Nullable DatastoreDevice deviceMetadata) {
+
+  public JsonNullable<DatastoreDevice> getDeviceMetadata_JsonNullable() {
+    return deviceMetadata;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_DEVICE_METADATA)
+  public void setDeviceMetadata_JsonNullable(JsonNullable<DatastoreDevice> deviceMetadata) {
     this.deviceMetadata = deviceMetadata;
+  }
+
+  public void setDeviceMetadata(@jakarta.annotation.Nullable DatastoreDevice deviceMetadata) {
+    this.deviceMetadata = JsonNullable.<DatastoreDevice>of(deviceMetadata);
   }
 
 
   public ModelsSubscriptionResponse endpointMetadata(@jakarta.annotation.Nullable DatastoreEndpoint endpointMetadata) {
-    this.endpointMetadata = endpointMetadata;
+    this.endpointMetadata = JsonNullable.<DatastoreEndpoint>of(endpointMetadata);
     return this;
   }
 
@@ -258,22 +277,30 @@ public class ModelsSubscriptionResponse {
    * @return endpointMetadata
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_ENDPOINT_METADATA, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreEndpoint getEndpointMetadata() {
-    return endpointMetadata;
+        return endpointMetadata.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_ENDPOINT_METADATA, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setEndpointMetadata(@jakarta.annotation.Nullable DatastoreEndpoint endpointMetadata) {
+
+  public JsonNullable<DatastoreEndpoint> getEndpointMetadata_JsonNullable() {
+    return endpointMetadata;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_ENDPOINT_METADATA)
+  public void setEndpointMetadata_JsonNullable(JsonNullable<DatastoreEndpoint> endpointMetadata) {
     this.endpointMetadata = endpointMetadata;
+  }
+
+  public void setEndpointMetadata(@jakarta.annotation.Nullable DatastoreEndpoint endpointMetadata) {
+    this.endpointMetadata = JsonNullable.<DatastoreEndpoint>of(endpointMetadata);
   }
 
 
   public ModelsSubscriptionResponse filterConfig(@jakarta.annotation.Nullable DatastoreFilterConfiguration filterConfig) {
-    this.filterConfig = filterConfig;
+    this.filterConfig = JsonNullable.<DatastoreFilterConfiguration>of(filterConfig);
     return this;
   }
 
@@ -282,22 +309,30 @@ public class ModelsSubscriptionResponse {
    * @return filterConfig
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_FILTER_CONFIG, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreFilterConfiguration getFilterConfig() {
-    return filterConfig;
+        return filterConfig.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_FILTER_CONFIG, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setFilterConfig(@jakarta.annotation.Nullable DatastoreFilterConfiguration filterConfig) {
+
+  public JsonNullable<DatastoreFilterConfiguration> getFilterConfig_JsonNullable() {
+    return filterConfig;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_FILTER_CONFIG)
+  public void setFilterConfig_JsonNullable(JsonNullable<DatastoreFilterConfiguration> filterConfig) {
     this.filterConfig = filterConfig;
+  }
+
+  public void setFilterConfig(@jakarta.annotation.Nullable DatastoreFilterConfiguration filterConfig) {
+    this.filterConfig = JsonNullable.<DatastoreFilterConfiguration>of(filterConfig);
   }
 
 
   public ModelsSubscriptionResponse function(@jakarta.annotation.Nullable String function) {
-    this.function = function;
+    this.function = JsonNullable.<String>of(function);
     return this;
   }
 
@@ -306,17 +341,25 @@ public class ModelsSubscriptionResponse {
    * @return function
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_FUNCTION, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public String getFunction() {
-    return function;
+        return function.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_FUNCTION, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setFunction(@jakarta.annotation.Nullable String function) {
+
+  public JsonNullable<String> getFunction_JsonNullable() {
+    return function;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_FUNCTION)
+  public void setFunction_JsonNullable(JsonNullable<String> function) {
     this.function = function;
+  }
+
+  public void setFunction(@jakarta.annotation.Nullable String function) {
+    this.function = JsonNullable.<String>of(function);
   }
 
 
@@ -369,7 +412,7 @@ public class ModelsSubscriptionResponse {
 
 
   public ModelsSubscriptionResponse rateLimitConfig(@jakarta.annotation.Nullable DatastoreRateLimitConfiguration rateLimitConfig) {
-    this.rateLimitConfig = rateLimitConfig;
+    this.rateLimitConfig = JsonNullable.<DatastoreRateLimitConfiguration>of(rateLimitConfig);
     return this;
   }
 
@@ -378,22 +421,30 @@ public class ModelsSubscriptionResponse {
    * @return rateLimitConfig
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_RATE_LIMIT_CONFIG, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreRateLimitConfiguration getRateLimitConfig() {
-    return rateLimitConfig;
+        return rateLimitConfig.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_RATE_LIMIT_CONFIG, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setRateLimitConfig(@jakarta.annotation.Nullable DatastoreRateLimitConfiguration rateLimitConfig) {
+
+  public JsonNullable<DatastoreRateLimitConfiguration> getRateLimitConfig_JsonNullable() {
+    return rateLimitConfig;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_RATE_LIMIT_CONFIG)
+  public void setRateLimitConfig_JsonNullable(JsonNullable<DatastoreRateLimitConfiguration> rateLimitConfig) {
     this.rateLimitConfig = rateLimitConfig;
+  }
+
+  public void setRateLimitConfig(@jakarta.annotation.Nullable DatastoreRateLimitConfiguration rateLimitConfig) {
+    this.rateLimitConfig = JsonNullable.<DatastoreRateLimitConfiguration>of(rateLimitConfig);
   }
 
 
   public ModelsSubscriptionResponse retryConfig(@jakarta.annotation.Nullable DatastoreRetryConfiguration retryConfig) {
-    this.retryConfig = retryConfig;
+    this.retryConfig = JsonNullable.<DatastoreRetryConfiguration>of(retryConfig);
     return this;
   }
 
@@ -402,22 +453,30 @@ public class ModelsSubscriptionResponse {
    * @return retryConfig
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_RETRY_CONFIG, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreRetryConfiguration getRetryConfig() {
-    return retryConfig;
+        return retryConfig.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_RETRY_CONFIG, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setRetryConfig(@jakarta.annotation.Nullable DatastoreRetryConfiguration retryConfig) {
+
+  public JsonNullable<DatastoreRetryConfiguration> getRetryConfig_JsonNullable() {
+    return retryConfig;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_RETRY_CONFIG)
+  public void setRetryConfig_JsonNullable(JsonNullable<DatastoreRetryConfiguration> retryConfig) {
     this.retryConfig = retryConfig;
+  }
+
+  public void setRetryConfig(@jakarta.annotation.Nullable DatastoreRetryConfiguration retryConfig) {
+    this.retryConfig = JsonNullable.<DatastoreRetryConfiguration>of(retryConfig);
   }
 
 
   public ModelsSubscriptionResponse sourceMetadata(@jakarta.annotation.Nullable DatastoreSource sourceMetadata) {
-    this.sourceMetadata = sourceMetadata;
+    this.sourceMetadata = JsonNullable.<DatastoreSource>of(sourceMetadata);
     return this;
   }
 
@@ -426,17 +485,25 @@ public class ModelsSubscriptionResponse {
    * @return sourceMetadata
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_SOURCE_METADATA, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreSource getSourceMetadata() {
-    return sourceMetadata;
+        return sourceMetadata.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_SOURCE_METADATA, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setSourceMetadata(@jakarta.annotation.Nullable DatastoreSource sourceMetadata) {
+
+  public JsonNullable<DatastoreSource> getSourceMetadata_JsonNullable() {
+    return sourceMetadata;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_SOURCE_METADATA)
+  public void setSourceMetadata_JsonNullable(JsonNullable<DatastoreSource> sourceMetadata) {
     this.sourceMetadata = sourceMetadata;
+  }
+
+  public void setSourceMetadata(@jakarta.annotation.Nullable DatastoreSource sourceMetadata) {
+    this.sourceMetadata = JsonNullable.<DatastoreSource>of(sourceMetadata);
   }
 
 
@@ -524,27 +591,38 @@ public class ModelsSubscriptionResponse {
       return false;
     }
     ModelsSubscriptionResponse modelsSubscriptionResponse = (ModelsSubscriptionResponse) o;
-    return Objects.equals(this.alertConfig, modelsSubscriptionResponse.alertConfig) &&
+    return equalsNullable(this.alertConfig, modelsSubscriptionResponse.alertConfig) &&
         Objects.equals(this.createdAt, modelsSubscriptionResponse.createdAt) &&
-        Objects.equals(this.deletedAt, modelsSubscriptionResponse.deletedAt) &&
+        equalsNullable(this.deletedAt, modelsSubscriptionResponse.deletedAt) &&
         Objects.equals(this.deliveryMode, modelsSubscriptionResponse.deliveryMode) &&
-        Objects.equals(this.deviceMetadata, modelsSubscriptionResponse.deviceMetadata) &&
-        Objects.equals(this.endpointMetadata, modelsSubscriptionResponse.endpointMetadata) &&
-        Objects.equals(this.filterConfig, modelsSubscriptionResponse.filterConfig) &&
-        Objects.equals(this.function, modelsSubscriptionResponse.function) &&
+        equalsNullable(this.deviceMetadata, modelsSubscriptionResponse.deviceMetadata) &&
+        equalsNullable(this.endpointMetadata, modelsSubscriptionResponse.endpointMetadata) &&
+        equalsNullable(this.filterConfig, modelsSubscriptionResponse.filterConfig) &&
+        equalsNullable(this.function, modelsSubscriptionResponse.function) &&
         Objects.equals(this.name, modelsSubscriptionResponse.name) &&
         Objects.equals(this.projectId, modelsSubscriptionResponse.projectId) &&
-        Objects.equals(this.rateLimitConfig, modelsSubscriptionResponse.rateLimitConfig) &&
-        Objects.equals(this.retryConfig, modelsSubscriptionResponse.retryConfig) &&
-        Objects.equals(this.sourceMetadata, modelsSubscriptionResponse.sourceMetadata) &&
+        equalsNullable(this.rateLimitConfig, modelsSubscriptionResponse.rateLimitConfig) &&
+        equalsNullable(this.retryConfig, modelsSubscriptionResponse.retryConfig) &&
+        equalsNullable(this.sourceMetadata, modelsSubscriptionResponse.sourceMetadata) &&
         Objects.equals(this.type, modelsSubscriptionResponse.type) &&
         Objects.equals(this.uid, modelsSubscriptionResponse.uid) &&
         Objects.equals(this.updatedAt, modelsSubscriptionResponse.updatedAt);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
-    return Objects.hash(alertConfig, createdAt, deletedAt, deliveryMode, deviceMetadata, endpointMetadata, filterConfig, function, name, projectId, rateLimitConfig, retryConfig, sourceMetadata, type, uid, updatedAt);
+    return Objects.hash(hashCodeNullable(alertConfig), createdAt, hashCodeNullable(deletedAt), deliveryMode, hashCodeNullable(deviceMetadata), hashCodeNullable(endpointMetadata), hashCodeNullable(filterConfig), hashCodeNullable(function), name, projectId, hashCodeNullable(rateLimitConfig), hashCodeNullable(retryConfig), hashCodeNullable(sourceMetadata), type, uid, updatedAt);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

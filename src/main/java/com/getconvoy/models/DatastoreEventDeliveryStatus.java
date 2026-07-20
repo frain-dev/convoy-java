@@ -40,7 +40,9 @@ public enum DatastoreEventDeliveryStatus {
   
   SuccessEventStatus("Success"),
   
-  RetryEventStatus("Retry");
+  RetryEventStatus("Retry"),
+  
+  EMPTY("");
 
   private String value;
 

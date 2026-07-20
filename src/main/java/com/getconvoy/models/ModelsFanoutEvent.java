@@ -27,6 +27,10 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import org.openapitools.jackson.nullable.JsonNullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
@@ -44,12 +48,10 @@ import com.getconvoy.client.ApiClient;
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.23.0")
 public class ModelsFanoutEvent {
   public static final String JSON_PROPERTY_CUSTOM_HEADERS = "custom_headers";
-  @jakarta.annotation.Nullable
-  private Map<String, String> customHeaders = new HashMap<>();
+  private JsonNullable<Map<String, String>> customHeaders = JsonNullable.<Map<String, String>>undefined();
 
   public static final String JSON_PROPERTY_DATA = "data";
-  @jakarta.annotation.Nullable
-  private Map<String, Object> data = new HashMap<>();
+  private JsonNullable<Map<String, Object>> data = JsonNullable.<Map<String, Object>>undefined();
 
   public static final String JSON_PROPERTY_EVENT_TYPE = "event_type";
   @jakarta.annotation.Nullable
@@ -67,15 +69,19 @@ public class ModelsFanoutEvent {
   }
 
   public ModelsFanoutEvent customHeaders(@jakarta.annotation.Nullable Map<String, String> customHeaders) {
-    this.customHeaders = customHeaders;
+    this.customHeaders = JsonNullable.<Map<String, String>>of(customHeaders);
     return this;
   }
 
   public ModelsFanoutEvent putCustomHeadersItem(String key, String customHeadersItem) {
-    if (this.customHeaders == null) {
-      this.customHeaders = new HashMap<>();
+    if (this.customHeaders == null || !this.customHeaders.isPresent()) {
+      this.customHeaders = JsonNullable.<Map<String, String>>of(new HashMap<>());
     }
-    this.customHeaders.put(key, customHeadersItem);
+    try {
+      this.customHeaders.get().put(key, customHeadersItem);
+    } catch (java.util.NoSuchElementException e) {
+      // this can never happen, as we make sure above that the value is present
+    }
     return this;
   }
 
@@ -84,30 +90,42 @@ public class ModelsFanoutEvent {
    * @return customHeaders
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_CUSTOM_HEADERS, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public Map<String, String> getCustomHeaders() {
-    return customHeaders;
+        return customHeaders.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_CUSTOM_HEADERS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setCustomHeaders(@jakarta.annotation.Nullable Map<String, String> customHeaders) {
+
+  public JsonNullable<Map<String, String>> getCustomHeaders_JsonNullable() {
+    return customHeaders;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_CUSTOM_HEADERS)
+  public void setCustomHeaders_JsonNullable(JsonNullable<Map<String, String>> customHeaders) {
     this.customHeaders = customHeaders;
+  }
+
+  public void setCustomHeaders(@jakarta.annotation.Nullable Map<String, String> customHeaders) {
+    this.customHeaders = JsonNullable.<Map<String, String>>of(customHeaders);
   }
 
 
   public ModelsFanoutEvent data(@jakarta.annotation.Nullable Map<String, Object> data) {
-    this.data = data;
+    this.data = JsonNullable.<Map<String, Object>>of(data);
     return this;
   }
 
   public ModelsFanoutEvent putDataItem(String key, Object dataItem) {
-    if (this.data == null) {
-      this.data = new HashMap<>();
+    if (this.data == null || !this.data.isPresent()) {
+      this.data = JsonNullable.<Map<String, Object>>of(new HashMap<>());
     }
-    this.data.put(key, dataItem);
+    try {
+      this.data.get().put(key, dataItem);
+    } catch (java.util.NoSuchElementException e) {
+      // this can never happen, as we make sure above that the value is present
+    }
     return this;
   }
 
@@ -116,17 +134,25 @@ public class ModelsFanoutEvent {
    * @return data
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_DATA, required = false)
-  @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public Map<String, Object> getData() {
-    return data;
+        return data.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_DATA, required = false)
   @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
-  public void setData(@jakarta.annotation.Nullable Map<String, Object> data) {
+
+  public JsonNullable<Map<String, Object>> getData_JsonNullable() {
+    return data;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_DATA)
+  public void setData_JsonNullable(JsonNullable<Map<String, Object>> data) {
     this.data = data;
+  }
+
+  public void setData(@jakarta.annotation.Nullable Map<String, Object> data) {
+    this.data = JsonNullable.<Map<String, Object>>of(data);
   }
 
 
@@ -214,16 +240,27 @@ public class ModelsFanoutEvent {
       return false;
     }
     ModelsFanoutEvent modelsFanoutEvent = (ModelsFanoutEvent) o;
-    return Objects.equals(this.customHeaders, modelsFanoutEvent.customHeaders) &&
-        Objects.equals(this.data, modelsFanoutEvent.data) &&
+    return equalsNullable(this.customHeaders, modelsFanoutEvent.customHeaders) &&
+        equalsNullable(this.data, modelsFanoutEvent.data) &&
         Objects.equals(this.eventType, modelsFanoutEvent.eventType) &&
         Objects.equals(this.idempotencyKey, modelsFanoutEvent.idempotencyKey) &&
         Objects.equals(this.ownerId, modelsFanoutEvent.ownerId);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
-    return Objects.hash(customHeaders, data, eventType, idempotencyKey, ownerId);
+    return Objects.hash(hashCodeNullable(customHeaders), hashCodeNullable(data), eventType, idempotencyKey, ownerId);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

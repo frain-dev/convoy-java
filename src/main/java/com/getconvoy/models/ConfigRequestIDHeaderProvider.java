@@ -30,7 +30,9 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public enum ConfigRequestIDHeaderProvider {
   
-  DefaultRequestIDHeader("X-Convoy-Idempotency-Key");
+  DefaultRequestIDHeader("X-Convoy-Idempotency-Key"),
+  
+  EMPTY("");
 
   private String value;
 

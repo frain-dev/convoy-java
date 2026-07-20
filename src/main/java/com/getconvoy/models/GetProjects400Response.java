@@ -25,6 +25,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import org.openapitools.jackson.nullable.JsonNullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
@@ -48,8 +54,7 @@ public class GetProjects400Response {
   private Boolean status;
 
   public static final String JSON_PROPERTY_DATA = "data";
-  @jakarta.annotation.Nullable
-  private Object data;
+  private JsonNullable<Map<String, Object>> data = JsonNullable.<Map<String, Object>>undefined();
 
   public GetProjects400Response() { 
   }
@@ -102,8 +107,20 @@ public class GetProjects400Response {
   }
 
 
-  public GetProjects400Response data(@jakarta.annotation.Nullable Object data) {
-    this.data = data;
+  public GetProjects400Response data(@jakarta.annotation.Nullable Map<String, Object> data) {
+    this.data = JsonNullable.<Map<String, Object>>of(data);
+    return this;
+  }
+
+  public GetProjects400Response putDataItem(String key, Object dataItem) {
+    if (this.data == null || !this.data.isPresent()) {
+      this.data = JsonNullable.<Map<String, Object>>of(new HashMap<>());
+    }
+    try {
+      this.data.get().put(key, dataItem);
+    } catch (java.util.NoSuchElementException e) {
+      // this can never happen, as we make sure above that the value is present
+    }
     return this;
   }
 
@@ -112,17 +129,25 @@ public class GetProjects400Response {
    * @return data
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_DATA, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public Object getData() {
-    return data;
+  @JsonIgnore
+  public Map<String, Object> getData() {
+        return data.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_DATA, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setData(@jakarta.annotation.Nullable Object data) {
+  @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
+
+  public JsonNullable<Map<String, Object>> getData_JsonNullable() {
+    return data;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_DATA)
+  public void setData_JsonNullable(JsonNullable<Map<String, Object>> data) {
     this.data = data;
+  }
+
+  public void setData(@jakarta.annotation.Nullable Map<String, Object> data) {
+    this.data = JsonNullable.<Map<String, Object>>of(data);
   }
 
 
@@ -140,12 +165,23 @@ public class GetProjects400Response {
     GetProjects400Response getProjects400Response = (GetProjects400Response) o;
     return Objects.equals(this.message, getProjects400Response.message) &&
         Objects.equals(this.status, getProjects400Response.status) &&
-        Objects.equals(this.data, getProjects400Response.data);
+        equalsNullable(this.data, getProjects400Response.data);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(message, status, data);
+    return Objects.hash(message, status, hashCodeNullable(data));
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -211,7 +247,11 @@ public class GetProjects400Response {
 
     // add `data` to the URL query string
     if (getData() != null) {
-      joiner.add(String.format(java.util.Locale.ROOT, "%sdata%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getData()))));
+      for (String _key : getData().keySet()) {
+        joiner.add(String.format(java.util.Locale.ROOT, "%sdata%s%s=%s", prefix, suffix,
+            "".equals(suffix) ? "" : String.format(java.util.Locale.ROOT, "%s%d%s", containerPrefix, _key, containerSuffix),
+            getData().get(_key), ApiClient.urlEncode(ApiClient.valueToString(getData().get(_key)))));
+      }
     }
 
     return joiner.toString();
