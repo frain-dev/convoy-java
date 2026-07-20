@@ -29,6 +29,10 @@ import com.getconvoy.models.DatastorePubSubConfig;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
@@ -55,8 +59,7 @@ public class DatastoreMetaEventConfiguration {
   private Boolean isEnabled;
 
   public static final String JSON_PROPERTY_PUB_SUB = "pub_sub";
-  @jakarta.annotation.Nullable
-  private DatastorePubSubConfig pubSub;
+  private JsonNullable<DatastorePubSubConfig> pubSub = JsonNullable.<DatastorePubSubConfig>undefined();
 
   public static final String JSON_PROPERTY_SECRET = "secret";
   @jakarta.annotation.Nullable
@@ -130,7 +133,7 @@ public class DatastoreMetaEventConfiguration {
 
 
   public DatastoreMetaEventConfiguration pubSub(@jakarta.annotation.Nullable DatastorePubSubConfig pubSub) {
-    this.pubSub = pubSub;
+    this.pubSub = JsonNullable.<DatastorePubSubConfig>of(pubSub);
     return this;
   }
 
@@ -139,17 +142,25 @@ public class DatastoreMetaEventConfiguration {
    * @return pubSub
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_PUB_SUB, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastorePubSubConfig getPubSub() {
-    return pubSub;
+        return pubSub.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_PUB_SUB, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setPubSub(@jakarta.annotation.Nullable DatastorePubSubConfig pubSub) {
+
+  public JsonNullable<DatastorePubSubConfig> getPubSub_JsonNullable() {
+    return pubSub;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_PUB_SUB)
+  public void setPubSub_JsonNullable(JsonNullable<DatastorePubSubConfig> pubSub) {
     this.pubSub = pubSub;
+  }
+
+  public void setPubSub(@jakarta.annotation.Nullable DatastorePubSubConfig pubSub) {
+    this.pubSub = JsonNullable.<DatastorePubSubConfig>of(pubSub);
   }
 
 
@@ -239,15 +250,26 @@ public class DatastoreMetaEventConfiguration {
     DatastoreMetaEventConfiguration datastoreMetaEventConfiguration = (DatastoreMetaEventConfiguration) o;
     return Objects.equals(this.eventType, datastoreMetaEventConfiguration.eventType) &&
         Objects.equals(this.isEnabled, datastoreMetaEventConfiguration.isEnabled) &&
-        Objects.equals(this.pubSub, datastoreMetaEventConfiguration.pubSub) &&
+        equalsNullable(this.pubSub, datastoreMetaEventConfiguration.pubSub) &&
         Objects.equals(this.secret, datastoreMetaEventConfiguration.secret) &&
         Objects.equals(this.type, datastoreMetaEventConfiguration.type) &&
         Objects.equals(this.url, datastoreMetaEventConfiguration.url);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
-    return Objects.hash(eventType, isEnabled, pubSub, secret, type, url);
+    return Objects.hash(eventType, isEnabled, hashCodeNullable(pubSub), secret, type, url);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

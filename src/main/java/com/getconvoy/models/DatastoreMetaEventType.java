@@ -32,7 +32,9 @@ public enum DatastoreMetaEventType {
   
   HTTPMetaEvent("http"),
   
-  PubSubMetaEvent("pub_sub");
+  PubSubMetaEvent("pub_sub"),
+  
+  EMPTY("");
 
   private String value;
 

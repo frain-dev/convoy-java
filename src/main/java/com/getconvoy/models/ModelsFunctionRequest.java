@@ -27,6 +27,10 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import org.openapitools.jackson.nullable.JsonNullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
@@ -46,8 +50,7 @@ public class ModelsFunctionRequest {
   private String function;
 
   public static final String JSON_PROPERTY_PAYLOAD = "payload";
-  @jakarta.annotation.Nullable
-  private Map<String, Object> payload = new HashMap<>();
+  private JsonNullable<Map<String, Object>> payload = JsonNullable.<Map<String, Object>>undefined();
 
   public static final String JSON_PROPERTY_TYPE = "type";
   @jakarta.annotation.Nullable
@@ -81,15 +84,19 @@ public class ModelsFunctionRequest {
 
 
   public ModelsFunctionRequest payload(@jakarta.annotation.Nullable Map<String, Object> payload) {
-    this.payload = payload;
+    this.payload = JsonNullable.<Map<String, Object>>of(payload);
     return this;
   }
 
   public ModelsFunctionRequest putPayloadItem(String key, Object payloadItem) {
-    if (this.payload == null) {
-      this.payload = new HashMap<>();
+    if (this.payload == null || !this.payload.isPresent() || this.payload.get() == null) {
+      this.payload = JsonNullable.<Map<String, Object>>of(new HashMap<>());
     }
-    this.payload.put(key, payloadItem);
+    try {
+      this.payload.get().put(key, payloadItem);
+    } catch (java.util.NoSuchElementException e) {
+      // this can never happen, as we make sure above that the value is present
+    }
     return this;
   }
 
@@ -98,17 +105,25 @@ public class ModelsFunctionRequest {
    * @return payload
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_PAYLOAD, required = false)
-  @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public Map<String, Object> getPayload() {
-    return payload;
+        return payload.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_PAYLOAD, required = false)
   @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
-  public void setPayload(@jakarta.annotation.Nullable Map<String, Object> payload) {
+
+  public JsonNullable<Map<String, Object>> getPayload_JsonNullable() {
+    return payload;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_PAYLOAD)
+  public void setPayload_JsonNullable(JsonNullable<Map<String, Object>> payload) {
     this.payload = payload;
+  }
+
+  public void setPayload(@jakarta.annotation.Nullable Map<String, Object> payload) {
+    this.payload = JsonNullable.<Map<String, Object>>of(payload);
   }
 
 
@@ -149,13 +164,24 @@ public class ModelsFunctionRequest {
     }
     ModelsFunctionRequest modelsFunctionRequest = (ModelsFunctionRequest) o;
     return Objects.equals(this.function, modelsFunctionRequest.function) &&
-        Objects.equals(this.payload, modelsFunctionRequest.payload) &&
+        equalsNullable(this.payload, modelsFunctionRequest.payload) &&
         Objects.equals(this.type, modelsFunctionRequest.type);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(function, payload, type);
+    return Objects.hash(function, hashCodeNullable(payload), type);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

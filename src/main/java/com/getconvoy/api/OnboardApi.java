@@ -20,8 +20,8 @@ import com.getconvoy.client.Pair;
 
 import com.getconvoy.models.BulkOnboard200Response;
 import com.getconvoy.models.BulkOnboard202Response;
-import java.io.File;
 import com.getconvoy.models.GetProjects400Response;
+import com.getconvoy.models.ModelsBulkOnboardRequest;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -170,12 +170,12 @@ public class OnboardApi {
    * This endpoint accepts a CSV file or JSON body to bulk-create endpoints with subscriptions
    * @param projectID Project ID (required)
    * @param dryRun Validate without creating (optional)
-   * @param body Onboard Details (JSON) (optional)
+   * @param modelsBulkOnboardRequest Onboard Details (JSON) (optional)
    * @return BulkOnboard200Response
    * @throws ApiException if fails to make API call
    */
-  public BulkOnboard200Response bulkOnboard(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable Boolean dryRun, @jakarta.annotation.Nullable File body) throws ApiException {
-    return bulkOnboard(projectID, dryRun, body, null);
+  public BulkOnboard200Response bulkOnboard(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable Boolean dryRun, @jakarta.annotation.Nullable ModelsBulkOnboardRequest modelsBulkOnboardRequest) throws ApiException {
+    return bulkOnboard(projectID, dryRun, modelsBulkOnboardRequest, null);
   }
 
   /**
@@ -183,13 +183,13 @@ public class OnboardApi {
    * This endpoint accepts a CSV file or JSON body to bulk-create endpoints with subscriptions
    * @param projectID Project ID (required)
    * @param dryRun Validate without creating (optional)
-   * @param body Onboard Details (JSON) (optional)
+   * @param modelsBulkOnboardRequest Onboard Details (JSON) (optional)
    * @param headers Optional headers to include in the request
    * @return BulkOnboard200Response
    * @throws ApiException if fails to make API call
    */
-  public BulkOnboard200Response bulkOnboard(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable Boolean dryRun, @jakarta.annotation.Nullable File body, Map<String, String> headers) throws ApiException {
-    ApiResponse<BulkOnboard200Response> localVarResponse = bulkOnboardWithHttpInfo(projectID, dryRun, body, headers);
+  public BulkOnboard200Response bulkOnboard(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable Boolean dryRun, @jakarta.annotation.Nullable ModelsBulkOnboardRequest modelsBulkOnboardRequest, Map<String, String> headers) throws ApiException {
+    ApiResponse<BulkOnboard200Response> localVarResponse = bulkOnboardWithHttpInfo(projectID, dryRun, modelsBulkOnboardRequest, headers);
     return localVarResponse.getData();
   }
 
@@ -198,12 +198,12 @@ public class OnboardApi {
    * This endpoint accepts a CSV file or JSON body to bulk-create endpoints with subscriptions
    * @param projectID Project ID (required)
    * @param dryRun Validate without creating (optional)
-   * @param body Onboard Details (JSON) (optional)
+   * @param modelsBulkOnboardRequest Onboard Details (JSON) (optional)
    * @return ApiResponse&lt;BulkOnboard200Response&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<BulkOnboard200Response> bulkOnboardWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable Boolean dryRun, @jakarta.annotation.Nullable File body) throws ApiException {
-    return bulkOnboardWithHttpInfo(projectID, dryRun, body, null);
+  public ApiResponse<BulkOnboard200Response> bulkOnboardWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable Boolean dryRun, @jakarta.annotation.Nullable ModelsBulkOnboardRequest modelsBulkOnboardRequest) throws ApiException {
+    return bulkOnboardWithHttpInfo(projectID, dryRun, modelsBulkOnboardRequest, null);
   }
 
   /**
@@ -211,13 +211,13 @@ public class OnboardApi {
    * This endpoint accepts a CSV file or JSON body to bulk-create endpoints with subscriptions
    * @param projectID Project ID (required)
    * @param dryRun Validate without creating (optional)
-   * @param body Onboard Details (JSON) (optional)
+   * @param modelsBulkOnboardRequest Onboard Details (JSON) (optional)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;BulkOnboard200Response&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<BulkOnboard200Response> bulkOnboardWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable Boolean dryRun, @jakarta.annotation.Nullable File body, Map<String, String> headers) throws ApiException {
-    HttpRequest.Builder localVarRequestBuilder = bulkOnboardRequestBuilder(projectID, dryRun, body, headers);
+  public ApiResponse<BulkOnboard200Response> bulkOnboardWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable Boolean dryRun, @jakarta.annotation.Nullable ModelsBulkOnboardRequest modelsBulkOnboardRequest, Map<String, String> headers) throws ApiException {
+    HttpRequest.Builder localVarRequestBuilder = bulkOnboardRequestBuilder(projectID, dryRun, modelsBulkOnboardRequest, headers);
     try {
       HttpResponse<InputStream> localVarResponse = memberVarHttpClient.send(
           localVarRequestBuilder.build(),
@@ -264,7 +264,7 @@ public class OnboardApi {
     }
   }
 
-  private HttpRequest.Builder bulkOnboardRequestBuilder(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable Boolean dryRun, @jakarta.annotation.Nullable File body, Map<String, String> headers) throws ApiException {
+  private HttpRequest.Builder bulkOnboardRequestBuilder(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable Boolean dryRun, @jakarta.annotation.Nullable ModelsBulkOnboardRequest modelsBulkOnboardRequest, Map<String, String> headers) throws ApiException {
     // verify the required parameter 'projectID' is set
     if (projectID == null) {
       throw new ApiException(400, "Missing the required parameter 'projectID' when calling bulkOnboard");
@@ -292,11 +292,11 @@ public class OnboardApi {
       localVarRequestBuilder.uri(URI.create(memberVarBaseUri + localVarPath));
     }
 
-    localVarRequestBuilder.header("Content-Type", "application/octet-stream");
+    localVarRequestBuilder.header("Content-Type", "application/json");
     localVarRequestBuilder.header("Accept", "application/json");
 
     try {
-      byte[] localVarPostBody = memberVarObjectMapper.writeValueAsBytes(body);
+      byte[] localVarPostBody = memberVarObjectMapper.writeValueAsBytes(modelsBulkOnboardRequest);
       localVarRequestBuilder.method("POST", HttpRequest.BodyPublishers.ofByteArray(localVarPostBody));
     } catch (IOException e) {
       throw new ApiException(e);

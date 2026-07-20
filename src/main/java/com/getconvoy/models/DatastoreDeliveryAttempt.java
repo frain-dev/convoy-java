@@ -27,6 +27,10 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import org.openapitools.jackson.nullable.JsonNullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
@@ -66,8 +70,7 @@ public class DatastoreDeliveryAttempt {
   private String createdAt;
 
   public static final String JSON_PROPERTY_DELETED_AT = "deleted_at";
-  @jakarta.annotation.Nullable
-  private String deletedAt;
+  private JsonNullable<String> deletedAt = JsonNullable.<String>undefined();
 
   public static final String JSON_PROPERTY_ENDPOINT_ID = "endpoint_id";
   @jakarta.annotation.Nullable
@@ -98,24 +101,20 @@ public class DatastoreDeliveryAttempt {
   private String projectId;
 
   public static final String JSON_PROPERTY_REQUEST_HTTP_HEADER = "request_http_header";
-  @jakarta.annotation.Nullable
-  private Map<String, String> requestHttpHeader = new HashMap<>();
+  private JsonNullable<Map<String, String>> requestHttpHeader = JsonNullable.<Map<String, String>>undefined();
 
   public static final String JSON_PROPERTY_REQUESTED_AT = "requested_at";
-  @jakarta.annotation.Nullable
-  private String requestedAt;
+  private JsonNullable<String> requestedAt = JsonNullable.<String>undefined();
 
   public static final String JSON_PROPERTY_RESPONDED_AT = "responded_at";
-  @jakarta.annotation.Nullable
-  private String respondedAt;
+  private JsonNullable<String> respondedAt = JsonNullable.<String>undefined();
 
   public static final String JSON_PROPERTY_RESPONSE_DATA = "response_data";
   @jakarta.annotation.Nullable
   private String responseData;
 
   public static final String JSON_PROPERTY_RESPONSE_HTTP_HEADER = "response_http_header";
-  @jakarta.annotation.Nullable
-  private Map<String, String> responseHttpHeader = new HashMap<>();
+  private JsonNullable<Map<String, String>> responseHttpHeader = JsonNullable.<Map<String, String>>undefined();
 
   public static final String JSON_PROPERTY_STATUS = "status";
   @jakarta.annotation.Nullable
@@ -185,7 +184,7 @@ public class DatastoreDeliveryAttempt {
 
 
   public DatastoreDeliveryAttempt deletedAt(@jakarta.annotation.Nullable String deletedAt) {
-    this.deletedAt = deletedAt;
+    this.deletedAt = JsonNullable.<String>of(deletedAt);
     return this;
   }
 
@@ -194,17 +193,25 @@ public class DatastoreDeliveryAttempt {
    * @return deletedAt
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_DELETED_AT, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public String getDeletedAt() {
-    return deletedAt;
+        return deletedAt.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_DELETED_AT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setDeletedAt(@jakarta.annotation.Nullable String deletedAt) {
+
+  public JsonNullable<String> getDeletedAt_JsonNullable() {
+    return deletedAt;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_DELETED_AT)
+  public void setDeletedAt_JsonNullable(JsonNullable<String> deletedAt) {
     this.deletedAt = deletedAt;
+  }
+
+  public void setDeletedAt(@jakarta.annotation.Nullable String deletedAt) {
+    this.deletedAt = JsonNullable.<String>of(deletedAt);
   }
 
 
@@ -377,15 +384,19 @@ public class DatastoreDeliveryAttempt {
 
 
   public DatastoreDeliveryAttempt requestHttpHeader(@jakarta.annotation.Nullable Map<String, String> requestHttpHeader) {
-    this.requestHttpHeader = requestHttpHeader;
+    this.requestHttpHeader = JsonNullable.<Map<String, String>>of(requestHttpHeader);
     return this;
   }
 
   public DatastoreDeliveryAttempt putRequestHttpHeaderItem(String key, String requestHttpHeaderItem) {
-    if (this.requestHttpHeader == null) {
-      this.requestHttpHeader = new HashMap<>();
+    if (this.requestHttpHeader == null || !this.requestHttpHeader.isPresent() || this.requestHttpHeader.get() == null) {
+      this.requestHttpHeader = JsonNullable.<Map<String, String>>of(new HashMap<>());
     }
-    this.requestHttpHeader.put(key, requestHttpHeaderItem);
+    try {
+      this.requestHttpHeader.get().put(key, requestHttpHeaderItem);
+    } catch (java.util.NoSuchElementException e) {
+      // this can never happen, as we make sure above that the value is present
+    }
     return this;
   }
 
@@ -394,22 +405,30 @@ public class DatastoreDeliveryAttempt {
    * @return requestHttpHeader
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_REQUEST_HTTP_HEADER, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public Map<String, String> getRequestHttpHeader() {
-    return requestHttpHeader;
+        return requestHttpHeader.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_REQUEST_HTTP_HEADER, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setRequestHttpHeader(@jakarta.annotation.Nullable Map<String, String> requestHttpHeader) {
+
+  public JsonNullable<Map<String, String>> getRequestHttpHeader_JsonNullable() {
+    return requestHttpHeader;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_REQUEST_HTTP_HEADER)
+  public void setRequestHttpHeader_JsonNullable(JsonNullable<Map<String, String>> requestHttpHeader) {
     this.requestHttpHeader = requestHttpHeader;
+  }
+
+  public void setRequestHttpHeader(@jakarta.annotation.Nullable Map<String, String> requestHttpHeader) {
+    this.requestHttpHeader = JsonNullable.<Map<String, String>>of(requestHttpHeader);
   }
 
 
   public DatastoreDeliveryAttempt requestedAt(@jakarta.annotation.Nullable String requestedAt) {
-    this.requestedAt = requestedAt;
+    this.requestedAt = JsonNullable.<String>of(requestedAt);
     return this;
   }
 
@@ -418,22 +437,30 @@ public class DatastoreDeliveryAttempt {
    * @return requestedAt
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_REQUESTED_AT, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public String getRequestedAt() {
-    return requestedAt;
+        return requestedAt.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_REQUESTED_AT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setRequestedAt(@jakarta.annotation.Nullable String requestedAt) {
+
+  public JsonNullable<String> getRequestedAt_JsonNullable() {
+    return requestedAt;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_REQUESTED_AT)
+  public void setRequestedAt_JsonNullable(JsonNullable<String> requestedAt) {
     this.requestedAt = requestedAt;
+  }
+
+  public void setRequestedAt(@jakarta.annotation.Nullable String requestedAt) {
+    this.requestedAt = JsonNullable.<String>of(requestedAt);
   }
 
 
   public DatastoreDeliveryAttempt respondedAt(@jakarta.annotation.Nullable String respondedAt) {
-    this.respondedAt = respondedAt;
+    this.respondedAt = JsonNullable.<String>of(respondedAt);
     return this;
   }
 
@@ -442,17 +469,25 @@ public class DatastoreDeliveryAttempt {
    * @return respondedAt
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_RESPONDED_AT, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public String getRespondedAt() {
-    return respondedAt;
+        return respondedAt.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_RESPONDED_AT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setRespondedAt(@jakarta.annotation.Nullable String respondedAt) {
+
+  public JsonNullable<String> getRespondedAt_JsonNullable() {
+    return respondedAt;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_RESPONDED_AT)
+  public void setRespondedAt_JsonNullable(JsonNullable<String> respondedAt) {
     this.respondedAt = respondedAt;
+  }
+
+  public void setRespondedAt(@jakarta.annotation.Nullable String respondedAt) {
+    this.respondedAt = JsonNullable.<String>of(respondedAt);
   }
 
 
@@ -481,15 +516,19 @@ public class DatastoreDeliveryAttempt {
 
 
   public DatastoreDeliveryAttempt responseHttpHeader(@jakarta.annotation.Nullable Map<String, String> responseHttpHeader) {
-    this.responseHttpHeader = responseHttpHeader;
+    this.responseHttpHeader = JsonNullable.<Map<String, String>>of(responseHttpHeader);
     return this;
   }
 
   public DatastoreDeliveryAttempt putResponseHttpHeaderItem(String key, String responseHttpHeaderItem) {
-    if (this.responseHttpHeader == null) {
-      this.responseHttpHeader = new HashMap<>();
+    if (this.responseHttpHeader == null || !this.responseHttpHeader.isPresent() || this.responseHttpHeader.get() == null) {
+      this.responseHttpHeader = JsonNullable.<Map<String, String>>of(new HashMap<>());
     }
-    this.responseHttpHeader.put(key, responseHttpHeaderItem);
+    try {
+      this.responseHttpHeader.get().put(key, responseHttpHeaderItem);
+    } catch (java.util.NoSuchElementException e) {
+      // this can never happen, as we make sure above that the value is present
+    }
     return this;
   }
 
@@ -498,17 +537,25 @@ public class DatastoreDeliveryAttempt {
    * @return responseHttpHeader
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_RESPONSE_HTTP_HEADER, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public Map<String, String> getResponseHttpHeader() {
-    return responseHttpHeader;
+        return responseHttpHeader.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_RESPONSE_HTTP_HEADER, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setResponseHttpHeader(@jakarta.annotation.Nullable Map<String, String> responseHttpHeader) {
+
+  public JsonNullable<Map<String, String>> getResponseHttpHeader_JsonNullable() {
+    return responseHttpHeader;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_RESPONSE_HTTP_HEADER)
+  public void setResponseHttpHeader_JsonNullable(JsonNullable<Map<String, String>> responseHttpHeader) {
     this.responseHttpHeader = responseHttpHeader;
+  }
+
+  public void setResponseHttpHeader(@jakarta.annotation.Nullable Map<String, String> responseHttpHeader) {
+    this.responseHttpHeader = JsonNullable.<Map<String, String>>of(responseHttpHeader);
   }
 
 
@@ -622,7 +669,7 @@ public class DatastoreDeliveryAttempt {
     DatastoreDeliveryAttempt datastoreDeliveryAttempt = (DatastoreDeliveryAttempt) o;
     return Objects.equals(this.apiVersion, datastoreDeliveryAttempt.apiVersion) &&
         Objects.equals(this.createdAt, datastoreDeliveryAttempt.createdAt) &&
-        Objects.equals(this.deletedAt, datastoreDeliveryAttempt.deletedAt) &&
+        equalsNullable(this.deletedAt, datastoreDeliveryAttempt.deletedAt) &&
         Objects.equals(this.endpointId, datastoreDeliveryAttempt.endpointId) &&
         Objects.equals(this.error, datastoreDeliveryAttempt.error) &&
         Objects.equals(this.httpStatus, datastoreDeliveryAttempt.httpStatus) &&
@@ -630,20 +677,31 @@ public class DatastoreDeliveryAttempt {
         Objects.equals(this.method, datastoreDeliveryAttempt.method) &&
         Objects.equals(this.msgId, datastoreDeliveryAttempt.msgId) &&
         Objects.equals(this.projectId, datastoreDeliveryAttempt.projectId) &&
-        Objects.equals(this.requestHttpHeader, datastoreDeliveryAttempt.requestHttpHeader) &&
-        Objects.equals(this.requestedAt, datastoreDeliveryAttempt.requestedAt) &&
-        Objects.equals(this.respondedAt, datastoreDeliveryAttempt.respondedAt) &&
+        equalsNullable(this.requestHttpHeader, datastoreDeliveryAttempt.requestHttpHeader) &&
+        equalsNullable(this.requestedAt, datastoreDeliveryAttempt.requestedAt) &&
+        equalsNullable(this.respondedAt, datastoreDeliveryAttempt.respondedAt) &&
         Objects.equals(this.responseData, datastoreDeliveryAttempt.responseData) &&
-        Objects.equals(this.responseHttpHeader, datastoreDeliveryAttempt.responseHttpHeader) &&
+        equalsNullable(this.responseHttpHeader, datastoreDeliveryAttempt.responseHttpHeader) &&
         Objects.equals(this.status, datastoreDeliveryAttempt.status) &&
         Objects.equals(this.uid, datastoreDeliveryAttempt.uid) &&
         Objects.equals(this.updatedAt, datastoreDeliveryAttempt.updatedAt) &&
         Objects.equals(this.url, datastoreDeliveryAttempt.url);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
-    return Objects.hash(apiVersion, createdAt, deletedAt, endpointId, error, httpStatus, ipAddress, method, msgId, projectId, requestHttpHeader, requestedAt, respondedAt, responseData, responseHttpHeader, status, uid, updatedAt, url);
+    return Objects.hash(apiVersion, createdAt, hashCodeNullable(deletedAt), endpointId, error, httpStatus, ipAddress, method, msgId, projectId, hashCodeNullable(requestHttpHeader), hashCodeNullable(requestedAt), hashCodeNullable(respondedAt), responseData, hashCodeNullable(responseHttpHeader), status, uid, updatedAt, url);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

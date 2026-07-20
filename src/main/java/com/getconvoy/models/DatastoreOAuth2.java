@@ -29,6 +29,10 @@ import com.getconvoy.models.DatastoreOAuth2ExpiryTimeUnit;
 import com.getconvoy.models.DatastoreOAuth2FieldMapping;
 import com.getconvoy.models.DatastoreOAuth2SigningKey;
 import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
@@ -74,8 +78,7 @@ public class DatastoreOAuth2 {
   private DatastoreOAuth2ExpiryTimeUnit expiryTimeUnit;
 
   public static final String JSON_PROPERTY_FIELD_MAPPING = "field_mapping";
-  @jakarta.annotation.Nullable
-  private DatastoreOAuth2FieldMapping fieldMapping;
+  private JsonNullable<DatastoreOAuth2FieldMapping> fieldMapping = JsonNullable.<DatastoreOAuth2FieldMapping>undefined();
 
   public static final String JSON_PROPERTY_GRANT_TYPE = "grant_type";
   @jakarta.annotation.Nullable
@@ -94,8 +97,7 @@ public class DatastoreOAuth2 {
   private String signingAlgorithm;
 
   public static final String JSON_PROPERTY_SIGNING_KEY = "signing_key";
-  @jakarta.annotation.Nullable
-  private DatastoreOAuth2SigningKey signingKey;
+  private JsonNullable<DatastoreOAuth2SigningKey> signingKey = JsonNullable.<DatastoreOAuth2SigningKey>undefined();
 
   public static final String JSON_PROPERTY_SUBJECT = "subject";
   @jakarta.annotation.Nullable
@@ -229,7 +231,7 @@ public class DatastoreOAuth2 {
 
 
   public DatastoreOAuth2 fieldMapping(@jakarta.annotation.Nullable DatastoreOAuth2FieldMapping fieldMapping) {
-    this.fieldMapping = fieldMapping;
+    this.fieldMapping = JsonNullable.<DatastoreOAuth2FieldMapping>of(fieldMapping);
     return this;
   }
 
@@ -238,17 +240,25 @@ public class DatastoreOAuth2 {
    * @return fieldMapping
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_FIELD_MAPPING, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreOAuth2FieldMapping getFieldMapping() {
-    return fieldMapping;
+        return fieldMapping.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_FIELD_MAPPING, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setFieldMapping(@jakarta.annotation.Nullable DatastoreOAuth2FieldMapping fieldMapping) {
+
+  public JsonNullable<DatastoreOAuth2FieldMapping> getFieldMapping_JsonNullable() {
+    return fieldMapping;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_FIELD_MAPPING)
+  public void setFieldMapping_JsonNullable(JsonNullable<DatastoreOAuth2FieldMapping> fieldMapping) {
     this.fieldMapping = fieldMapping;
+  }
+
+  public void setFieldMapping(@jakarta.annotation.Nullable DatastoreOAuth2FieldMapping fieldMapping) {
+    this.fieldMapping = JsonNullable.<DatastoreOAuth2FieldMapping>of(fieldMapping);
   }
 
 
@@ -349,7 +359,7 @@ public class DatastoreOAuth2 {
 
 
   public DatastoreOAuth2 signingKey(@jakarta.annotation.Nullable DatastoreOAuth2SigningKey signingKey) {
-    this.signingKey = signingKey;
+    this.signingKey = JsonNullable.<DatastoreOAuth2SigningKey>of(signingKey);
     return this;
   }
 
@@ -358,17 +368,25 @@ public class DatastoreOAuth2 {
    * @return signingKey
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_SIGNING_KEY, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreOAuth2SigningKey getSigningKey() {
-    return signingKey;
+        return signingKey.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_SIGNING_KEY, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setSigningKey(@jakarta.annotation.Nullable DatastoreOAuth2SigningKey signingKey) {
+
+  public JsonNullable<DatastoreOAuth2SigningKey> getSigningKey_JsonNullable() {
+    return signingKey;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_SIGNING_KEY)
+  public void setSigningKey_JsonNullable(JsonNullable<DatastoreOAuth2SigningKey> signingKey) {
     this.signingKey = signingKey;
+  }
+
+  public void setSigningKey(@jakarta.annotation.Nullable DatastoreOAuth2SigningKey signingKey) {
+    this.signingKey = JsonNullable.<DatastoreOAuth2SigningKey>of(signingKey);
   }
 
 
@@ -437,19 +455,30 @@ public class DatastoreOAuth2 {
         Objects.equals(this.clientId, datastoreOAuth2.clientId) &&
         Objects.equals(this.clientSecret, datastoreOAuth2.clientSecret) &&
         Objects.equals(this.expiryTimeUnit, datastoreOAuth2.expiryTimeUnit) &&
-        Objects.equals(this.fieldMapping, datastoreOAuth2.fieldMapping) &&
+        equalsNullable(this.fieldMapping, datastoreOAuth2.fieldMapping) &&
         Objects.equals(this.grantType, datastoreOAuth2.grantType) &&
         Objects.equals(this.issuer, datastoreOAuth2.issuer) &&
         Objects.equals(this.scope, datastoreOAuth2.scope) &&
         Objects.equals(this.signingAlgorithm, datastoreOAuth2.signingAlgorithm) &&
-        Objects.equals(this.signingKey, datastoreOAuth2.signingKey) &&
+        equalsNullable(this.signingKey, datastoreOAuth2.signingKey) &&
         Objects.equals(this.subject, datastoreOAuth2.subject) &&
         Objects.equals(this.url, datastoreOAuth2.url);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
-    return Objects.hash(audience, authenticationType, clientId, clientSecret, expiryTimeUnit, fieldMapping, grantType, issuer, scope, signingAlgorithm, signingKey, subject, url);
+    return Objects.hash(audience, authenticationType, clientId, clientSecret, expiryTimeUnit, hashCodeNullable(fieldMapping), grantType, issuer, scope, signingAlgorithm, hashCodeNullable(signingKey), subject, url);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

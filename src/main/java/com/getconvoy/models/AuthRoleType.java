@@ -58,7 +58,9 @@ public enum AuthRoleType {
   /**
    * 
    */
-  RoleAPI("api");
+  RoleAPI("api"),
+  
+  EMPTY("");
 
   private String value;
 

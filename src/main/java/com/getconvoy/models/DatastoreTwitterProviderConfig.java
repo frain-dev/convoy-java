@@ -25,6 +25,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
@@ -38,14 +42,13 @@ import com.getconvoy.client.ApiClient;
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.23.0")
 public class DatastoreTwitterProviderConfig {
   public static final String JSON_PROPERTY_CRC_VERIFIED_AT = "crc_verified_at";
-  @jakarta.annotation.Nullable
-  private String crcVerifiedAt;
+  private JsonNullable<String> crcVerifiedAt = JsonNullable.<String>undefined();
 
   public DatastoreTwitterProviderConfig() { 
   }
 
   public DatastoreTwitterProviderConfig crcVerifiedAt(@jakarta.annotation.Nullable String crcVerifiedAt) {
-    this.crcVerifiedAt = crcVerifiedAt;
+    this.crcVerifiedAt = JsonNullable.<String>of(crcVerifiedAt);
     return this;
   }
 
@@ -54,17 +57,25 @@ public class DatastoreTwitterProviderConfig {
    * @return crcVerifiedAt
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_CRC_VERIFIED_AT, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public String getCrcVerifiedAt() {
-    return crcVerifiedAt;
+        return crcVerifiedAt.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_CRC_VERIFIED_AT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setCrcVerifiedAt(@jakarta.annotation.Nullable String crcVerifiedAt) {
+
+  public JsonNullable<String> getCrcVerifiedAt_JsonNullable() {
+    return crcVerifiedAt;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_CRC_VERIFIED_AT)
+  public void setCrcVerifiedAt_JsonNullable(JsonNullable<String> crcVerifiedAt) {
     this.crcVerifiedAt = crcVerifiedAt;
+  }
+
+  public void setCrcVerifiedAt(@jakarta.annotation.Nullable String crcVerifiedAt) {
+    this.crcVerifiedAt = JsonNullable.<String>of(crcVerifiedAt);
   }
 
 
@@ -80,12 +91,23 @@ public class DatastoreTwitterProviderConfig {
       return false;
     }
     DatastoreTwitterProviderConfig datastoreTwitterProviderConfig = (DatastoreTwitterProviderConfig) o;
-    return Objects.equals(this.crcVerifiedAt, datastoreTwitterProviderConfig.crcVerifiedAt);
+    return equalsNullable(this.crcVerifiedAt, datastoreTwitterProviderConfig.crcVerifiedAt);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(crcVerifiedAt);
+    return Objects.hash(hashCodeNullable(crcVerifiedAt));
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

@@ -38,7 +38,9 @@ public enum DatastoreEventStatus {
   
   RetryStatus("Retry"),
   
-  PendingStatus("Pending");
+  PendingStatus("Pending"),
+  
+  EMPTY("");
 
   private String value;
 

@@ -32,7 +32,9 @@ public enum DatastoreSubscriptionType {
   
   SubscriptionTypeCLI("cli"),
   
-  SubscriptionTypeAPI("api");
+  SubscriptionTypeAPI("api"),
+  
+  EMPTY("");
 
   private String value;
 

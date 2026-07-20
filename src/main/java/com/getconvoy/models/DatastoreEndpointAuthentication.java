@@ -29,6 +29,10 @@ import com.getconvoy.models.DatastoreBasicAuth;
 import com.getconvoy.models.DatastoreEndpointAuthenticationType;
 import com.getconvoy.models.DatastoreOAuth2;
 import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
@@ -45,16 +49,13 @@ import com.getconvoy.client.ApiClient;
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.23.0")
 public class DatastoreEndpointAuthentication {
   public static final String JSON_PROPERTY_API_KEY = "api_key";
-  @jakarta.annotation.Nullable
-  private DatastoreApiKey apiKey;
+  private JsonNullable<DatastoreApiKey> apiKey = JsonNullable.<DatastoreApiKey>undefined();
 
   public static final String JSON_PROPERTY_BASIC_AUTH = "basic_auth";
-  @jakarta.annotation.Nullable
-  private DatastoreBasicAuth basicAuth;
+  private JsonNullable<DatastoreBasicAuth> basicAuth = JsonNullable.<DatastoreBasicAuth>undefined();
 
   public static final String JSON_PROPERTY_OAUTH2 = "oauth2";
-  @jakarta.annotation.Nullable
-  private DatastoreOAuth2 oauth2;
+  private JsonNullable<DatastoreOAuth2> oauth2 = JsonNullable.<DatastoreOAuth2>undefined();
 
   public static final String JSON_PROPERTY_TYPE = "type";
   @jakarta.annotation.Nullable
@@ -64,7 +65,7 @@ public class DatastoreEndpointAuthentication {
   }
 
   public DatastoreEndpointAuthentication apiKey(@jakarta.annotation.Nullable DatastoreApiKey apiKey) {
-    this.apiKey = apiKey;
+    this.apiKey = JsonNullable.<DatastoreApiKey>of(apiKey);
     return this;
   }
 
@@ -73,22 +74,30 @@ public class DatastoreEndpointAuthentication {
    * @return apiKey
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_API_KEY, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreApiKey getApiKey() {
-    return apiKey;
+        return apiKey.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_API_KEY, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setApiKey(@jakarta.annotation.Nullable DatastoreApiKey apiKey) {
+
+  public JsonNullable<DatastoreApiKey> getApiKey_JsonNullable() {
+    return apiKey;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_API_KEY)
+  public void setApiKey_JsonNullable(JsonNullable<DatastoreApiKey> apiKey) {
     this.apiKey = apiKey;
+  }
+
+  public void setApiKey(@jakarta.annotation.Nullable DatastoreApiKey apiKey) {
+    this.apiKey = JsonNullable.<DatastoreApiKey>of(apiKey);
   }
 
 
   public DatastoreEndpointAuthentication basicAuth(@jakarta.annotation.Nullable DatastoreBasicAuth basicAuth) {
-    this.basicAuth = basicAuth;
+    this.basicAuth = JsonNullable.<DatastoreBasicAuth>of(basicAuth);
     return this;
   }
 
@@ -97,22 +106,30 @@ public class DatastoreEndpointAuthentication {
    * @return basicAuth
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_BASIC_AUTH, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreBasicAuth getBasicAuth() {
-    return basicAuth;
+        return basicAuth.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_BASIC_AUTH, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setBasicAuth(@jakarta.annotation.Nullable DatastoreBasicAuth basicAuth) {
+
+  public JsonNullable<DatastoreBasicAuth> getBasicAuth_JsonNullable() {
+    return basicAuth;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_BASIC_AUTH)
+  public void setBasicAuth_JsonNullable(JsonNullable<DatastoreBasicAuth> basicAuth) {
     this.basicAuth = basicAuth;
+  }
+
+  public void setBasicAuth(@jakarta.annotation.Nullable DatastoreBasicAuth basicAuth) {
+    this.basicAuth = JsonNullable.<DatastoreBasicAuth>of(basicAuth);
   }
 
 
   public DatastoreEndpointAuthentication oauth2(@jakarta.annotation.Nullable DatastoreOAuth2 oauth2) {
-    this.oauth2 = oauth2;
+    this.oauth2 = JsonNullable.<DatastoreOAuth2>of(oauth2);
     return this;
   }
 
@@ -121,17 +138,25 @@ public class DatastoreEndpointAuthentication {
    * @return oauth2
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_OAUTH2, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreOAuth2 getOauth2() {
-    return oauth2;
+        return oauth2.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_OAUTH2, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setOauth2(@jakarta.annotation.Nullable DatastoreOAuth2 oauth2) {
+
+  public JsonNullable<DatastoreOAuth2> getOauth2_JsonNullable() {
+    return oauth2;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_OAUTH2)
+  public void setOauth2_JsonNullable(JsonNullable<DatastoreOAuth2> oauth2) {
     this.oauth2 = oauth2;
+  }
+
+  public void setOauth2(@jakarta.annotation.Nullable DatastoreOAuth2 oauth2) {
+    this.oauth2 = JsonNullable.<DatastoreOAuth2>of(oauth2);
   }
 
 
@@ -171,15 +196,26 @@ public class DatastoreEndpointAuthentication {
       return false;
     }
     DatastoreEndpointAuthentication datastoreEndpointAuthentication = (DatastoreEndpointAuthentication) o;
-    return Objects.equals(this.apiKey, datastoreEndpointAuthentication.apiKey) &&
-        Objects.equals(this.basicAuth, datastoreEndpointAuthentication.basicAuth) &&
-        Objects.equals(this.oauth2, datastoreEndpointAuthentication.oauth2) &&
+    return equalsNullable(this.apiKey, datastoreEndpointAuthentication.apiKey) &&
+        equalsNullable(this.basicAuth, datastoreEndpointAuthentication.basicAuth) &&
+        equalsNullable(this.oauth2, datastoreEndpointAuthentication.oauth2) &&
         Objects.equals(this.type, datastoreEndpointAuthentication.type);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(apiKey, basicAuth, oauth2, type);
+    return Objects.hash(hashCodeNullable(apiKey), hashCodeNullable(basicAuth), hashCodeNullable(oauth2), type);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

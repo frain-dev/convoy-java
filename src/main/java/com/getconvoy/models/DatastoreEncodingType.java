@@ -32,7 +32,9 @@ public enum DatastoreEncodingType {
   
   Base64Encoding("base64"),
   
-  HexEncoding("hex");
+  HexEncoding("hex"),
+  
+  EMPTY("");
 
   private String value;
 

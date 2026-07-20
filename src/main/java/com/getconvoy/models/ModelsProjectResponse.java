@@ -28,6 +28,10 @@ import com.getconvoy.models.DatastoreProjectConfig;
 import com.getconvoy.models.DatastoreProjectStatistics;
 import com.getconvoy.models.DatastoreProjectType;
 import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
@@ -51,16 +55,14 @@ import com.getconvoy.client.ApiClient;
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.23.0")
 public class ModelsProjectResponse {
   public static final String JSON_PROPERTY_CONFIG = "config";
-  @jakarta.annotation.Nullable
-  private DatastoreProjectConfig config;
+  private JsonNullable<DatastoreProjectConfig> config = JsonNullable.<DatastoreProjectConfig>undefined();
 
   public static final String JSON_PROPERTY_CREATED_AT = "created_at";
   @jakarta.annotation.Nullable
   private String createdAt;
 
   public static final String JSON_PROPERTY_DELETED_AT = "deleted_at";
-  @jakarta.annotation.Nullable
-  private String deletedAt;
+  private JsonNullable<String> deletedAt = JsonNullable.<String>undefined();
 
   public static final String JSON_PROPERTY_LOGO_URL = "logo_url";
   @jakarta.annotation.Nullable
@@ -79,8 +81,7 @@ public class ModelsProjectResponse {
   private Integer retainedEvents;
 
   public static final String JSON_PROPERTY_STATISTICS = "statistics";
-  @jakarta.annotation.Nullable
-  private DatastoreProjectStatistics statistics;
+  private JsonNullable<DatastoreProjectStatistics> statistics = JsonNullable.<DatastoreProjectStatistics>undefined();
 
   public static final String JSON_PROPERTY_TYPE = "type";
   @jakarta.annotation.Nullable
@@ -98,7 +99,7 @@ public class ModelsProjectResponse {
   }
 
   public ModelsProjectResponse config(@jakarta.annotation.Nullable DatastoreProjectConfig config) {
-    this.config = config;
+    this.config = JsonNullable.<DatastoreProjectConfig>of(config);
     return this;
   }
 
@@ -107,17 +108,25 @@ public class ModelsProjectResponse {
    * @return config
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_CONFIG, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreProjectConfig getConfig() {
-    return config;
+        return config.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_CONFIG, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setConfig(@jakarta.annotation.Nullable DatastoreProjectConfig config) {
+
+  public JsonNullable<DatastoreProjectConfig> getConfig_JsonNullable() {
+    return config;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_CONFIG)
+  public void setConfig_JsonNullable(JsonNullable<DatastoreProjectConfig> config) {
     this.config = config;
+  }
+
+  public void setConfig(@jakarta.annotation.Nullable DatastoreProjectConfig config) {
+    this.config = JsonNullable.<DatastoreProjectConfig>of(config);
   }
 
 
@@ -146,7 +155,7 @@ public class ModelsProjectResponse {
 
 
   public ModelsProjectResponse deletedAt(@jakarta.annotation.Nullable String deletedAt) {
-    this.deletedAt = deletedAt;
+    this.deletedAt = JsonNullable.<String>of(deletedAt);
     return this;
   }
 
@@ -155,17 +164,25 @@ public class ModelsProjectResponse {
    * @return deletedAt
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_DELETED_AT, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public String getDeletedAt() {
-    return deletedAt;
+        return deletedAt.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_DELETED_AT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setDeletedAt(@jakarta.annotation.Nullable String deletedAt) {
+
+  public JsonNullable<String> getDeletedAt_JsonNullable() {
+    return deletedAt;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_DELETED_AT)
+  public void setDeletedAt_JsonNullable(JsonNullable<String> deletedAt) {
     this.deletedAt = deletedAt;
+  }
+
+  public void setDeletedAt(@jakarta.annotation.Nullable String deletedAt) {
+    this.deletedAt = JsonNullable.<String>of(deletedAt);
   }
 
 
@@ -266,7 +283,7 @@ public class ModelsProjectResponse {
 
 
   public ModelsProjectResponse statistics(@jakarta.annotation.Nullable DatastoreProjectStatistics statistics) {
-    this.statistics = statistics;
+    this.statistics = JsonNullable.<DatastoreProjectStatistics>of(statistics);
     return this;
   }
 
@@ -275,17 +292,25 @@ public class ModelsProjectResponse {
    * @return statistics
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_STATISTICS, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreProjectStatistics getStatistics() {
-    return statistics;
+        return statistics.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_STATISTICS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setStatistics(@jakarta.annotation.Nullable DatastoreProjectStatistics statistics) {
+
+  public JsonNullable<DatastoreProjectStatistics> getStatistics_JsonNullable() {
+    return statistics;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_STATISTICS)
+  public void setStatistics_JsonNullable(JsonNullable<DatastoreProjectStatistics> statistics) {
     this.statistics = statistics;
+  }
+
+  public void setStatistics(@jakarta.annotation.Nullable DatastoreProjectStatistics statistics) {
+    this.statistics = JsonNullable.<DatastoreProjectStatistics>of(statistics);
   }
 
 
@@ -373,22 +398,33 @@ public class ModelsProjectResponse {
       return false;
     }
     ModelsProjectResponse modelsProjectResponse = (ModelsProjectResponse) o;
-    return Objects.equals(this.config, modelsProjectResponse.config) &&
+    return equalsNullable(this.config, modelsProjectResponse.config) &&
         Objects.equals(this.createdAt, modelsProjectResponse.createdAt) &&
-        Objects.equals(this.deletedAt, modelsProjectResponse.deletedAt) &&
+        equalsNullable(this.deletedAt, modelsProjectResponse.deletedAt) &&
         Objects.equals(this.logoUrl, modelsProjectResponse.logoUrl) &&
         Objects.equals(this.name, modelsProjectResponse.name) &&
         Objects.equals(this.organisationId, modelsProjectResponse.organisationId) &&
         Objects.equals(this.retainedEvents, modelsProjectResponse.retainedEvents) &&
-        Objects.equals(this.statistics, modelsProjectResponse.statistics) &&
+        equalsNullable(this.statistics, modelsProjectResponse.statistics) &&
         Objects.equals(this.type, modelsProjectResponse.type) &&
         Objects.equals(this.uid, modelsProjectResponse.uid) &&
         Objects.equals(this.updatedAt, modelsProjectResponse.updatedAt);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
-    return Objects.hash(config, createdAt, deletedAt, logoUrl, name, organisationId, retainedEvents, statistics, type, uid, updatedAt);
+    return Objects.hash(hashCodeNullable(config), createdAt, hashCodeNullable(deletedAt), logoUrl, name, organisationId, retainedEvents, hashCodeNullable(statistics), type, uid, updatedAt);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

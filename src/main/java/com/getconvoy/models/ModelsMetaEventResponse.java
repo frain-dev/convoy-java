@@ -28,6 +28,10 @@ import com.getconvoy.models.DatastoreEventDeliveryStatus;
 import com.getconvoy.models.DatastoreMetaEventAttempt;
 import com.getconvoy.models.DatastoreMetadata;
 import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
@@ -49,24 +53,21 @@ import com.getconvoy.client.ApiClient;
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.23.0")
 public class ModelsMetaEventResponse {
   public static final String JSON_PROPERTY_ATTEMPT = "attempt";
-  @jakarta.annotation.Nullable
-  private DatastoreMetaEventAttempt attempt;
+  private JsonNullable<DatastoreMetaEventAttempt> attempt = JsonNullable.<DatastoreMetaEventAttempt>undefined();
 
   public static final String JSON_PROPERTY_CREATED_AT = "created_at";
   @jakarta.annotation.Nullable
   private String createdAt;
 
   public static final String JSON_PROPERTY_DELETED_AT = "deleted_at";
-  @jakarta.annotation.Nullable
-  private String deletedAt;
+  private JsonNullable<String> deletedAt = JsonNullable.<String>undefined();
 
   public static final String JSON_PROPERTY_EVENT_TYPE = "event_type";
   @jakarta.annotation.Nullable
   private String eventType;
 
   public static final String JSON_PROPERTY_METADATA = "metadata";
-  @jakarta.annotation.Nullable
-  private DatastoreMetadata metadata;
+  private JsonNullable<DatastoreMetadata> metadata = JsonNullable.<DatastoreMetadata>undefined();
 
   public static final String JSON_PROPERTY_PROJECT_ID = "project_id";
   @jakarta.annotation.Nullable
@@ -88,7 +89,7 @@ public class ModelsMetaEventResponse {
   }
 
   public ModelsMetaEventResponse attempt(@jakarta.annotation.Nullable DatastoreMetaEventAttempt attempt) {
-    this.attempt = attempt;
+    this.attempt = JsonNullable.<DatastoreMetaEventAttempt>of(attempt);
     return this;
   }
 
@@ -97,17 +98,25 @@ public class ModelsMetaEventResponse {
    * @return attempt
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_ATTEMPT, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreMetaEventAttempt getAttempt() {
-    return attempt;
+        return attempt.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_ATTEMPT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setAttempt(@jakarta.annotation.Nullable DatastoreMetaEventAttempt attempt) {
+
+  public JsonNullable<DatastoreMetaEventAttempt> getAttempt_JsonNullable() {
+    return attempt;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_ATTEMPT)
+  public void setAttempt_JsonNullable(JsonNullable<DatastoreMetaEventAttempt> attempt) {
     this.attempt = attempt;
+  }
+
+  public void setAttempt(@jakarta.annotation.Nullable DatastoreMetaEventAttempt attempt) {
+    this.attempt = JsonNullable.<DatastoreMetaEventAttempt>of(attempt);
   }
 
 
@@ -136,7 +145,7 @@ public class ModelsMetaEventResponse {
 
 
   public ModelsMetaEventResponse deletedAt(@jakarta.annotation.Nullable String deletedAt) {
-    this.deletedAt = deletedAt;
+    this.deletedAt = JsonNullable.<String>of(deletedAt);
     return this;
   }
 
@@ -145,17 +154,25 @@ public class ModelsMetaEventResponse {
    * @return deletedAt
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_DELETED_AT, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public String getDeletedAt() {
-    return deletedAt;
+        return deletedAt.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_DELETED_AT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setDeletedAt(@jakarta.annotation.Nullable String deletedAt) {
+
+  public JsonNullable<String> getDeletedAt_JsonNullable() {
+    return deletedAt;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_DELETED_AT)
+  public void setDeletedAt_JsonNullable(JsonNullable<String> deletedAt) {
     this.deletedAt = deletedAt;
+  }
+
+  public void setDeletedAt(@jakarta.annotation.Nullable String deletedAt) {
+    this.deletedAt = JsonNullable.<String>of(deletedAt);
   }
 
 
@@ -184,7 +201,7 @@ public class ModelsMetaEventResponse {
 
 
   public ModelsMetaEventResponse metadata(@jakarta.annotation.Nullable DatastoreMetadata metadata) {
-    this.metadata = metadata;
+    this.metadata = JsonNullable.<DatastoreMetadata>of(metadata);
     return this;
   }
 
@@ -193,17 +210,25 @@ public class ModelsMetaEventResponse {
    * @return metadata
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_METADATA, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreMetadata getMetadata() {
-    return metadata;
+        return metadata.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_METADATA, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setMetadata(@jakarta.annotation.Nullable DatastoreMetadata metadata) {
+
+  public JsonNullable<DatastoreMetadata> getMetadata_JsonNullable() {
+    return metadata;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_METADATA)
+  public void setMetadata_JsonNullable(JsonNullable<DatastoreMetadata> metadata) {
     this.metadata = metadata;
+  }
+
+  public void setMetadata(@jakarta.annotation.Nullable DatastoreMetadata metadata) {
+    this.metadata = JsonNullable.<DatastoreMetadata>of(metadata);
   }
 
 
@@ -315,20 +340,31 @@ public class ModelsMetaEventResponse {
       return false;
     }
     ModelsMetaEventResponse modelsMetaEventResponse = (ModelsMetaEventResponse) o;
-    return Objects.equals(this.attempt, modelsMetaEventResponse.attempt) &&
+    return equalsNullable(this.attempt, modelsMetaEventResponse.attempt) &&
         Objects.equals(this.createdAt, modelsMetaEventResponse.createdAt) &&
-        Objects.equals(this.deletedAt, modelsMetaEventResponse.deletedAt) &&
+        equalsNullable(this.deletedAt, modelsMetaEventResponse.deletedAt) &&
         Objects.equals(this.eventType, modelsMetaEventResponse.eventType) &&
-        Objects.equals(this.metadata, modelsMetaEventResponse.metadata) &&
+        equalsNullable(this.metadata, modelsMetaEventResponse.metadata) &&
         Objects.equals(this.projectId, modelsMetaEventResponse.projectId) &&
         Objects.equals(this.status, modelsMetaEventResponse.status) &&
         Objects.equals(this.uid, modelsMetaEventResponse.uid) &&
         Objects.equals(this.updatedAt, modelsMetaEventResponse.updatedAt);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
-    return Objects.hash(attempt, createdAt, deletedAt, eventType, metadata, projectId, status, uid, updatedAt);
+    return Objects.hash(hashCodeNullable(attempt), createdAt, hashCodeNullable(deletedAt), eventType, hashCodeNullable(metadata), projectId, status, uid, updatedAt);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

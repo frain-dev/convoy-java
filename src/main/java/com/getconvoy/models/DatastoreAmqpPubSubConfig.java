@@ -26,6 +26,10 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.getconvoy.models.DatastoreAmqpCredentials;
 import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
@@ -51,16 +55,13 @@ public class DatastoreAmqpPubSubConfig {
   private String host;
 
   public static final String JSON_PROPERTY_AUTH = "auth";
-  @jakarta.annotation.Nullable
-  private DatastoreAmqpCredentials auth;
+  private JsonNullable<DatastoreAmqpCredentials> auth = JsonNullable.<DatastoreAmqpCredentials>undefined();
 
   public static final String JSON_PROPERTY_BINDED_EXCHANGE = "bindedExchange";
-  @jakarta.annotation.Nullable
-  private String bindedExchange;
+  private JsonNullable<String> bindedExchange = JsonNullable.<String>undefined();
 
   public static final String JSON_PROPERTY_DEAD_LETTER_EXCHANGE = "deadLetterExchange";
-  @jakarta.annotation.Nullable
-  private String deadLetterExchange;
+  private JsonNullable<String> deadLetterExchange = JsonNullable.<String>undefined();
 
   public static final String JSON_PROPERTY_PORT = "port";
   @jakarta.annotation.Nullable
@@ -79,8 +80,7 @@ public class DatastoreAmqpPubSubConfig {
   private String schema;
 
   public static final String JSON_PROPERTY_VHOST = "vhost";
-  @jakarta.annotation.Nullable
-  private String vhost;
+  private JsonNullable<String> vhost = JsonNullable.<String>undefined();
 
   public DatastoreAmqpPubSubConfig() { 
   }
@@ -110,7 +110,7 @@ public class DatastoreAmqpPubSubConfig {
 
 
   public DatastoreAmqpPubSubConfig auth(@jakarta.annotation.Nullable DatastoreAmqpCredentials auth) {
-    this.auth = auth;
+    this.auth = JsonNullable.<DatastoreAmqpCredentials>of(auth);
     return this;
   }
 
@@ -119,22 +119,30 @@ public class DatastoreAmqpPubSubConfig {
    * @return auth
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_AUTH, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreAmqpCredentials getAuth() {
-    return auth;
+        return auth.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_AUTH, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setAuth(@jakarta.annotation.Nullable DatastoreAmqpCredentials auth) {
+
+  public JsonNullable<DatastoreAmqpCredentials> getAuth_JsonNullable() {
+    return auth;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_AUTH)
+  public void setAuth_JsonNullable(JsonNullable<DatastoreAmqpCredentials> auth) {
     this.auth = auth;
+  }
+
+  public void setAuth(@jakarta.annotation.Nullable DatastoreAmqpCredentials auth) {
+    this.auth = JsonNullable.<DatastoreAmqpCredentials>of(auth);
   }
 
 
   public DatastoreAmqpPubSubConfig bindedExchange(@jakarta.annotation.Nullable String bindedExchange) {
-    this.bindedExchange = bindedExchange;
+    this.bindedExchange = JsonNullable.<String>of(bindedExchange);
     return this;
   }
 
@@ -143,22 +151,30 @@ public class DatastoreAmqpPubSubConfig {
    * @return bindedExchange
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_BINDED_EXCHANGE, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public String getBindedExchange() {
-    return bindedExchange;
+        return bindedExchange.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_BINDED_EXCHANGE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setBindedExchange(@jakarta.annotation.Nullable String bindedExchange) {
+
+  public JsonNullable<String> getBindedExchange_JsonNullable() {
+    return bindedExchange;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_BINDED_EXCHANGE)
+  public void setBindedExchange_JsonNullable(JsonNullable<String> bindedExchange) {
     this.bindedExchange = bindedExchange;
+  }
+
+  public void setBindedExchange(@jakarta.annotation.Nullable String bindedExchange) {
+    this.bindedExchange = JsonNullable.<String>of(bindedExchange);
   }
 
 
   public DatastoreAmqpPubSubConfig deadLetterExchange(@jakarta.annotation.Nullable String deadLetterExchange) {
-    this.deadLetterExchange = deadLetterExchange;
+    this.deadLetterExchange = JsonNullable.<String>of(deadLetterExchange);
     return this;
   }
 
@@ -167,17 +183,25 @@ public class DatastoreAmqpPubSubConfig {
    * @return deadLetterExchange
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_DEAD_LETTER_EXCHANGE, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public String getDeadLetterExchange() {
-    return deadLetterExchange;
+        return deadLetterExchange.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_DEAD_LETTER_EXCHANGE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setDeadLetterExchange(@jakarta.annotation.Nullable String deadLetterExchange) {
+
+  public JsonNullable<String> getDeadLetterExchange_JsonNullable() {
+    return deadLetterExchange;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_DEAD_LETTER_EXCHANGE)
+  public void setDeadLetterExchange_JsonNullable(JsonNullable<String> deadLetterExchange) {
     this.deadLetterExchange = deadLetterExchange;
+  }
+
+  public void setDeadLetterExchange(@jakarta.annotation.Nullable String deadLetterExchange) {
+    this.deadLetterExchange = JsonNullable.<String>of(deadLetterExchange);
   }
 
 
@@ -278,7 +302,7 @@ public class DatastoreAmqpPubSubConfig {
 
 
   public DatastoreAmqpPubSubConfig vhost(@jakarta.annotation.Nullable String vhost) {
-    this.vhost = vhost;
+    this.vhost = JsonNullable.<String>of(vhost);
     return this;
   }
 
@@ -287,17 +311,25 @@ public class DatastoreAmqpPubSubConfig {
    * @return vhost
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_VHOST, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public String getVhost() {
-    return vhost;
+        return vhost.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_VHOST, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setVhost(@jakarta.annotation.Nullable String vhost) {
+
+  public JsonNullable<String> getVhost_JsonNullable() {
+    return vhost;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_VHOST)
+  public void setVhost_JsonNullable(JsonNullable<String> vhost) {
     this.vhost = vhost;
+  }
+
+  public void setVhost(@jakarta.annotation.Nullable String vhost) {
+    this.vhost = JsonNullable.<String>of(vhost);
   }
 
 
@@ -314,19 +346,30 @@ public class DatastoreAmqpPubSubConfig {
     }
     DatastoreAmqpPubSubConfig datastoreAmqpPubSubConfig = (DatastoreAmqpPubSubConfig) o;
     return Objects.equals(this.host, datastoreAmqpPubSubConfig.host) &&
-        Objects.equals(this.auth, datastoreAmqpPubSubConfig.auth) &&
-        Objects.equals(this.bindedExchange, datastoreAmqpPubSubConfig.bindedExchange) &&
-        Objects.equals(this.deadLetterExchange, datastoreAmqpPubSubConfig.deadLetterExchange) &&
+        equalsNullable(this.auth, datastoreAmqpPubSubConfig.auth) &&
+        equalsNullable(this.bindedExchange, datastoreAmqpPubSubConfig.bindedExchange) &&
+        equalsNullable(this.deadLetterExchange, datastoreAmqpPubSubConfig.deadLetterExchange) &&
         Objects.equals(this.port, datastoreAmqpPubSubConfig.port) &&
         Objects.equals(this.queue, datastoreAmqpPubSubConfig.queue) &&
         Objects.equals(this.routingKey, datastoreAmqpPubSubConfig.routingKey) &&
         Objects.equals(this.schema, datastoreAmqpPubSubConfig.schema) &&
-        Objects.equals(this.vhost, datastoreAmqpPubSubConfig.vhost);
+        equalsNullable(this.vhost, datastoreAmqpPubSubConfig.vhost);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(host, auth, bindedExchange, deadLetterExchange, port, queue, routingKey, schema, vhost);
+    return Objects.hash(host, hashCodeNullable(auth), hashCodeNullable(bindedExchange), hashCodeNullable(deadLetterExchange), port, queue, routingKey, schema, hashCodeNullable(vhost));
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

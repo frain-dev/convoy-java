@@ -32,7 +32,9 @@ public enum DatastoreStrategyProvider {
   
   LinearStrategyProvider("linear"),
   
-  ExponentialStrategyProvider("exponential");
+  ExponentialStrategyProvider("exponential"),
+  
+  EMPTY("");
 
   private String value;
 

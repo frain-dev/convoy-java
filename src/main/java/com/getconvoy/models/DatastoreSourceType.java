@@ -36,7 +36,9 @@ public enum DatastoreSourceType {
   
   PubSubSource("pub_sub"),
   
-  DBChangeStream("db_change_stream");
+  DBChangeStream("db_change_stream"),
+  
+  EMPTY("");
 
   private String value;
 

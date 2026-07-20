@@ -32,7 +32,9 @@ public enum DatastoreDeliveryMode {
   
   AtLeastOnceDeliveryMode("at_least_once"),
   
-  AtMostOnceDeliveryMode("at_most_once");
+  AtMostOnceDeliveryMode("at_most_once"),
+  
+  EMPTY("");
 
   private String value;
 

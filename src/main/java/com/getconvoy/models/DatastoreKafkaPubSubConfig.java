@@ -28,6 +28,10 @@ import com.getconvoy.models.DatastoreKafkaAuth;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
@@ -44,8 +48,7 @@ import com.getconvoy.client.ApiClient;
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.23.0")
 public class DatastoreKafkaPubSubConfig {
   public static final String JSON_PROPERTY_AUTH = "auth";
-  @jakarta.annotation.Nullable
-  private DatastoreKafkaAuth auth;
+  private JsonNullable<DatastoreKafkaAuth> auth = JsonNullable.<DatastoreKafkaAuth>undefined();
 
   public static final String JSON_PROPERTY_BROKERS = "brokers";
   @jakarta.annotation.Nullable
@@ -63,7 +66,7 @@ public class DatastoreKafkaPubSubConfig {
   }
 
   public DatastoreKafkaPubSubConfig auth(@jakarta.annotation.Nullable DatastoreKafkaAuth auth) {
-    this.auth = auth;
+    this.auth = JsonNullable.<DatastoreKafkaAuth>of(auth);
     return this;
   }
 
@@ -72,17 +75,25 @@ public class DatastoreKafkaPubSubConfig {
    * @return auth
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_AUTH, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreKafkaAuth getAuth() {
-    return auth;
+        return auth.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_AUTH, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setAuth(@jakarta.annotation.Nullable DatastoreKafkaAuth auth) {
+
+  public JsonNullable<DatastoreKafkaAuth> getAuth_JsonNullable() {
+    return auth;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_AUTH)
+  public void setAuth_JsonNullable(JsonNullable<DatastoreKafkaAuth> auth) {
     this.auth = auth;
+  }
+
+  public void setAuth(@jakarta.annotation.Nullable DatastoreKafkaAuth auth) {
+    this.auth = JsonNullable.<DatastoreKafkaAuth>of(auth);
   }
 
 
@@ -178,15 +189,26 @@ public class DatastoreKafkaPubSubConfig {
       return false;
     }
     DatastoreKafkaPubSubConfig datastoreKafkaPubSubConfig = (DatastoreKafkaPubSubConfig) o;
-    return Objects.equals(this.auth, datastoreKafkaPubSubConfig.auth) &&
+    return equalsNullable(this.auth, datastoreKafkaPubSubConfig.auth) &&
         Objects.equals(this.brokers, datastoreKafkaPubSubConfig.brokers) &&
         Objects.equals(this.consumerGroupId, datastoreKafkaPubSubConfig.consumerGroupId) &&
         Objects.equals(this.topicName, datastoreKafkaPubSubConfig.topicName);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
-    return Objects.hash(auth, brokers, consumerGroupId, topicName);
+    return Objects.hash(hashCodeNullable(auth), brokers, consumerGroupId, topicName);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

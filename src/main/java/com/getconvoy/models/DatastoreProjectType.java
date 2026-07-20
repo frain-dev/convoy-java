@@ -32,7 +32,9 @@ public enum DatastoreProjectType {
   
   OutgoingProject("outgoing"),
   
-  IncomingProject("incoming");
+  IncomingProject("incoming"),
+  
+  EMPTY("");
 
   private String value;
 

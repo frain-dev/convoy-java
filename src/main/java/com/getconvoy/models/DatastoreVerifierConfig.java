@@ -29,6 +29,10 @@ import com.getconvoy.models.DatastoreBasicAuth;
 import com.getconvoy.models.DatastoreHMac;
 import com.getconvoy.models.DatastoreVerifierType;
 import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
@@ -45,16 +49,13 @@ import com.getconvoy.client.ApiClient;
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.23.0")
 public class DatastoreVerifierConfig {
   public static final String JSON_PROPERTY_API_KEY = "api_key";
-  @jakarta.annotation.Nullable
-  private DatastoreApiKey apiKey;
+  private JsonNullable<DatastoreApiKey> apiKey = JsonNullable.<DatastoreApiKey>undefined();
 
   public static final String JSON_PROPERTY_BASIC_AUTH = "basic_auth";
-  @jakarta.annotation.Nullable
-  private DatastoreBasicAuth basicAuth;
+  private JsonNullable<DatastoreBasicAuth> basicAuth = JsonNullable.<DatastoreBasicAuth>undefined();
 
   public static final String JSON_PROPERTY_HMAC = "hmac";
-  @jakarta.annotation.Nullable
-  private DatastoreHMac hmac;
+  private JsonNullable<DatastoreHMac> hmac = JsonNullable.<DatastoreHMac>undefined();
 
   public static final String JSON_PROPERTY_TYPE = "type";
   @jakarta.annotation.Nullable
@@ -64,7 +65,7 @@ public class DatastoreVerifierConfig {
   }
 
   public DatastoreVerifierConfig apiKey(@jakarta.annotation.Nullable DatastoreApiKey apiKey) {
-    this.apiKey = apiKey;
+    this.apiKey = JsonNullable.<DatastoreApiKey>of(apiKey);
     return this;
   }
 
@@ -73,22 +74,30 @@ public class DatastoreVerifierConfig {
    * @return apiKey
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_API_KEY, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreApiKey getApiKey() {
-    return apiKey;
+        return apiKey.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_API_KEY, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setApiKey(@jakarta.annotation.Nullable DatastoreApiKey apiKey) {
+
+  public JsonNullable<DatastoreApiKey> getApiKey_JsonNullable() {
+    return apiKey;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_API_KEY)
+  public void setApiKey_JsonNullable(JsonNullable<DatastoreApiKey> apiKey) {
     this.apiKey = apiKey;
+  }
+
+  public void setApiKey(@jakarta.annotation.Nullable DatastoreApiKey apiKey) {
+    this.apiKey = JsonNullable.<DatastoreApiKey>of(apiKey);
   }
 
 
   public DatastoreVerifierConfig basicAuth(@jakarta.annotation.Nullable DatastoreBasicAuth basicAuth) {
-    this.basicAuth = basicAuth;
+    this.basicAuth = JsonNullable.<DatastoreBasicAuth>of(basicAuth);
     return this;
   }
 
@@ -97,22 +106,30 @@ public class DatastoreVerifierConfig {
    * @return basicAuth
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_BASIC_AUTH, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreBasicAuth getBasicAuth() {
-    return basicAuth;
+        return basicAuth.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_BASIC_AUTH, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setBasicAuth(@jakarta.annotation.Nullable DatastoreBasicAuth basicAuth) {
+
+  public JsonNullable<DatastoreBasicAuth> getBasicAuth_JsonNullable() {
+    return basicAuth;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_BASIC_AUTH)
+  public void setBasicAuth_JsonNullable(JsonNullable<DatastoreBasicAuth> basicAuth) {
     this.basicAuth = basicAuth;
+  }
+
+  public void setBasicAuth(@jakarta.annotation.Nullable DatastoreBasicAuth basicAuth) {
+    this.basicAuth = JsonNullable.<DatastoreBasicAuth>of(basicAuth);
   }
 
 
   public DatastoreVerifierConfig hmac(@jakarta.annotation.Nullable DatastoreHMac hmac) {
-    this.hmac = hmac;
+    this.hmac = JsonNullable.<DatastoreHMac>of(hmac);
     return this;
   }
 
@@ -121,17 +138,25 @@ public class DatastoreVerifierConfig {
    * @return hmac
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_HMAC, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreHMac getHmac() {
-    return hmac;
+        return hmac.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_HMAC, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setHmac(@jakarta.annotation.Nullable DatastoreHMac hmac) {
+
+  public JsonNullable<DatastoreHMac> getHmac_JsonNullable() {
+    return hmac;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_HMAC)
+  public void setHmac_JsonNullable(JsonNullable<DatastoreHMac> hmac) {
     this.hmac = hmac;
+  }
+
+  public void setHmac(@jakarta.annotation.Nullable DatastoreHMac hmac) {
+    this.hmac = JsonNullable.<DatastoreHMac>of(hmac);
   }
 
 
@@ -171,15 +196,26 @@ public class DatastoreVerifierConfig {
       return false;
     }
     DatastoreVerifierConfig datastoreVerifierConfig = (DatastoreVerifierConfig) o;
-    return Objects.equals(this.apiKey, datastoreVerifierConfig.apiKey) &&
-        Objects.equals(this.basicAuth, datastoreVerifierConfig.basicAuth) &&
-        Objects.equals(this.hmac, datastoreVerifierConfig.hmac) &&
+    return equalsNullable(this.apiKey, datastoreVerifierConfig.apiKey) &&
+        equalsNullable(this.basicAuth, datastoreVerifierConfig.basicAuth) &&
+        equalsNullable(this.hmac, datastoreVerifierConfig.hmac) &&
         Objects.equals(this.type, datastoreVerifierConfig.type);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(apiKey, basicAuth, hmac, type);
+    return Objects.hash(hashCodeNullable(apiKey), hashCodeNullable(basicAuth), hashCodeNullable(hmac), type);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

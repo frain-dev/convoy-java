@@ -32,6 +32,10 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
@@ -75,12 +79,10 @@ public class ModelsEndpointResponse {
   private Boolean advancedSignatures;
 
   public static final String JSON_PROPERTY_AUTHENTICATION = "authentication";
-  @jakarta.annotation.Nullable
-  private DatastoreEndpointAuthentication authentication;
+  private JsonNullable<DatastoreEndpointAuthentication> authentication = JsonNullable.<DatastoreEndpointAuthentication>undefined();
 
   public static final String JSON_PROPERTY_CB_STATE = "cb_state";
-  @jakarta.annotation.Nullable
-  private String cbState;
+  private JsonNullable<String> cbState = JsonNullable.<String>undefined();
 
   public static final String JSON_PROPERTY_CONTENT_TYPE = "content_type";
   @jakarta.annotation.Nullable
@@ -91,8 +93,7 @@ public class ModelsEndpointResponse {
   private String createdAt;
 
   public static final String JSON_PROPERTY_DELETED_AT = "deleted_at";
-  @jakarta.annotation.Nullable
-  private String deletedAt;
+  private JsonNullable<String> deletedAt = JsonNullable.<String>undefined();
 
   public static final String JSON_PROPERTY_DESCRIPTION = "description";
   @jakarta.annotation.Nullable
@@ -103,20 +104,17 @@ public class ModelsEndpointResponse {
   private Integer events;
 
   public static final String JSON_PROPERTY_FAILURE_COUNT = "failure_count";
-  @jakarta.annotation.Nullable
-  private Integer failureCount;
+  private JsonNullable<Integer> failureCount = JsonNullable.<Integer>undefined();
 
   public static final String JSON_PROPERTY_FAILURE_RATE = "failure_rate";
-  @jakarta.annotation.Nullable
-  private BigDecimal failureRate;
+  private JsonNullable<BigDecimal> failureRate = JsonNullable.<BigDecimal>undefined();
 
   public static final String JSON_PROPERTY_HTTP_TIMEOUT = "http_timeout";
   @jakarta.annotation.Nullable
   private Integer httpTimeout;
 
   public static final String JSON_PROPERTY_MTLS_CLIENT_CERT = "mtls_client_cert";
-  @jakarta.annotation.Nullable
-  private DatastoreMtlsClientCert mtlsClientCert;
+  private JsonNullable<DatastoreMtlsClientCert> mtlsClientCert = JsonNullable.<DatastoreMtlsClientCert>undefined();
 
   public static final String JSON_PROPERTY_NAME = "name";
   @jakarta.annotation.Nullable
@@ -127,8 +125,7 @@ public class ModelsEndpointResponse {
   private String ownerId;
 
   public static final String JSON_PROPERTY_PERIOD_FAILURE_RATE = "period_failure_rate";
-  @jakarta.annotation.Nullable
-  private BigDecimal periodFailureRate;
+  private JsonNullable<BigDecimal> periodFailureRate = JsonNullable.<BigDecimal>undefined();
 
   public static final String JSON_PROPERTY_PROJECT_ID = "project_id";
   @jakarta.annotation.Nullable
@@ -143,8 +140,7 @@ public class ModelsEndpointResponse {
   private Integer rateLimitDuration;
 
   public static final String JSON_PROPERTY_RETRY_COUNT = "retry_count";
-  @jakarta.annotation.Nullable
-  private Integer retryCount;
+  private JsonNullable<Integer> retryCount = JsonNullable.<Integer>undefined();
 
   public static final String JSON_PROPERTY_SECRETS = "secrets";
   @jakarta.annotation.Nullable
@@ -159,8 +155,7 @@ public class ModelsEndpointResponse {
   private DatastoreEndpointStatus status;
 
   public static final String JSON_PROPERTY_SUCCESS_COUNT = "success_count";
-  @jakarta.annotation.Nullable
-  private Integer successCount;
+  private JsonNullable<Integer> successCount = JsonNullable.<Integer>undefined();
 
   public static final String JSON_PROPERTY_SUPPORT_EMAIL = "support_email";
   @jakarta.annotation.Nullable
@@ -206,7 +201,7 @@ public class ModelsEndpointResponse {
 
 
   public ModelsEndpointResponse authentication(@jakarta.annotation.Nullable DatastoreEndpointAuthentication authentication) {
-    this.authentication = authentication;
+    this.authentication = JsonNullable.<DatastoreEndpointAuthentication>of(authentication);
     return this;
   }
 
@@ -215,22 +210,30 @@ public class ModelsEndpointResponse {
    * @return authentication
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_AUTHENTICATION, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreEndpointAuthentication getAuthentication() {
-    return authentication;
+        return authentication.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_AUTHENTICATION, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setAuthentication(@jakarta.annotation.Nullable DatastoreEndpointAuthentication authentication) {
+
+  public JsonNullable<DatastoreEndpointAuthentication> getAuthentication_JsonNullable() {
+    return authentication;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_AUTHENTICATION)
+  public void setAuthentication_JsonNullable(JsonNullable<DatastoreEndpointAuthentication> authentication) {
     this.authentication = authentication;
+  }
+
+  public void setAuthentication(@jakarta.annotation.Nullable DatastoreEndpointAuthentication authentication) {
+    this.authentication = JsonNullable.<DatastoreEndpointAuthentication>of(authentication);
   }
 
 
   public ModelsEndpointResponse cbState(@jakarta.annotation.Nullable String cbState) {
-    this.cbState = cbState;
+    this.cbState = JsonNullable.<String>of(cbState);
     return this;
   }
 
@@ -239,17 +242,25 @@ public class ModelsEndpointResponse {
    * @return cbState
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_CB_STATE, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public String getCbState() {
-    return cbState;
+        return cbState.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_CB_STATE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setCbState(@jakarta.annotation.Nullable String cbState) {
+
+  public JsonNullable<String> getCbState_JsonNullable() {
+    return cbState;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_CB_STATE)
+  public void setCbState_JsonNullable(JsonNullable<String> cbState) {
     this.cbState = cbState;
+  }
+
+  public void setCbState(@jakarta.annotation.Nullable String cbState) {
+    this.cbState = JsonNullable.<String>of(cbState);
   }
 
 
@@ -302,7 +313,7 @@ public class ModelsEndpointResponse {
 
 
   public ModelsEndpointResponse deletedAt(@jakarta.annotation.Nullable String deletedAt) {
-    this.deletedAt = deletedAt;
+    this.deletedAt = JsonNullable.<String>of(deletedAt);
     return this;
   }
 
@@ -311,17 +322,25 @@ public class ModelsEndpointResponse {
    * @return deletedAt
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_DELETED_AT, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public String getDeletedAt() {
-    return deletedAt;
+        return deletedAt.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_DELETED_AT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setDeletedAt(@jakarta.annotation.Nullable String deletedAt) {
+
+  public JsonNullable<String> getDeletedAt_JsonNullable() {
+    return deletedAt;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_DELETED_AT)
+  public void setDeletedAt_JsonNullable(JsonNullable<String> deletedAt) {
     this.deletedAt = deletedAt;
+  }
+
+  public void setDeletedAt(@jakarta.annotation.Nullable String deletedAt) {
+    this.deletedAt = JsonNullable.<String>of(deletedAt);
   }
 
 
@@ -374,7 +393,7 @@ public class ModelsEndpointResponse {
 
 
   public ModelsEndpointResponse failureCount(@jakarta.annotation.Nullable Integer failureCount) {
-    this.failureCount = failureCount;
+    this.failureCount = JsonNullable.<Integer>of(failureCount);
     return this;
   }
 
@@ -383,22 +402,30 @@ public class ModelsEndpointResponse {
    * @return failureCount
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_FAILURE_COUNT, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public Integer getFailureCount() {
-    return failureCount;
+        return failureCount.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_FAILURE_COUNT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setFailureCount(@jakarta.annotation.Nullable Integer failureCount) {
+
+  public JsonNullable<Integer> getFailureCount_JsonNullable() {
+    return failureCount;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_FAILURE_COUNT)
+  public void setFailureCount_JsonNullable(JsonNullable<Integer> failureCount) {
     this.failureCount = failureCount;
+  }
+
+  public void setFailureCount(@jakarta.annotation.Nullable Integer failureCount) {
+    this.failureCount = JsonNullable.<Integer>of(failureCount);
   }
 
 
   public ModelsEndpointResponse failureRate(@jakarta.annotation.Nullable BigDecimal failureRate) {
-    this.failureRate = failureRate;
+    this.failureRate = JsonNullable.<BigDecimal>of(failureRate);
     return this;
   }
 
@@ -407,17 +434,25 @@ public class ModelsEndpointResponse {
    * @return failureRate
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_FAILURE_RATE, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public BigDecimal getFailureRate() {
-    return failureRate;
+        return failureRate.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_FAILURE_RATE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setFailureRate(@jakarta.annotation.Nullable BigDecimal failureRate) {
+
+  public JsonNullable<BigDecimal> getFailureRate_JsonNullable() {
+    return failureRate;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_FAILURE_RATE)
+  public void setFailureRate_JsonNullable(JsonNullable<BigDecimal> failureRate) {
     this.failureRate = failureRate;
+  }
+
+  public void setFailureRate(@jakarta.annotation.Nullable BigDecimal failureRate) {
+    this.failureRate = JsonNullable.<BigDecimal>of(failureRate);
   }
 
 
@@ -446,7 +481,7 @@ public class ModelsEndpointResponse {
 
 
   public ModelsEndpointResponse mtlsClientCert(@jakarta.annotation.Nullable DatastoreMtlsClientCert mtlsClientCert) {
-    this.mtlsClientCert = mtlsClientCert;
+    this.mtlsClientCert = JsonNullable.<DatastoreMtlsClientCert>of(mtlsClientCert);
     return this;
   }
 
@@ -455,17 +490,25 @@ public class ModelsEndpointResponse {
    * @return mtlsClientCert
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_MTLS_CLIENT_CERT, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreMtlsClientCert getMtlsClientCert() {
-    return mtlsClientCert;
+        return mtlsClientCert.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_MTLS_CLIENT_CERT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setMtlsClientCert(@jakarta.annotation.Nullable DatastoreMtlsClientCert mtlsClientCert) {
+
+  public JsonNullable<DatastoreMtlsClientCert> getMtlsClientCert_JsonNullable() {
+    return mtlsClientCert;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_MTLS_CLIENT_CERT)
+  public void setMtlsClientCert_JsonNullable(JsonNullable<DatastoreMtlsClientCert> mtlsClientCert) {
     this.mtlsClientCert = mtlsClientCert;
+  }
+
+  public void setMtlsClientCert(@jakarta.annotation.Nullable DatastoreMtlsClientCert mtlsClientCert) {
+    this.mtlsClientCert = JsonNullable.<DatastoreMtlsClientCert>of(mtlsClientCert);
   }
 
 
@@ -518,7 +561,7 @@ public class ModelsEndpointResponse {
 
 
   public ModelsEndpointResponse periodFailureRate(@jakarta.annotation.Nullable BigDecimal periodFailureRate) {
-    this.periodFailureRate = periodFailureRate;
+    this.periodFailureRate = JsonNullable.<BigDecimal>of(periodFailureRate);
     return this;
   }
 
@@ -527,17 +570,25 @@ public class ModelsEndpointResponse {
    * @return periodFailureRate
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_PERIOD_FAILURE_RATE, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public BigDecimal getPeriodFailureRate() {
-    return periodFailureRate;
+        return periodFailureRate.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_PERIOD_FAILURE_RATE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setPeriodFailureRate(@jakarta.annotation.Nullable BigDecimal periodFailureRate) {
+
+  public JsonNullable<BigDecimal> getPeriodFailureRate_JsonNullable() {
+    return periodFailureRate;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_PERIOD_FAILURE_RATE)
+  public void setPeriodFailureRate_JsonNullable(JsonNullable<BigDecimal> periodFailureRate) {
     this.periodFailureRate = periodFailureRate;
+  }
+
+  public void setPeriodFailureRate(@jakarta.annotation.Nullable BigDecimal periodFailureRate) {
+    this.periodFailureRate = JsonNullable.<BigDecimal>of(periodFailureRate);
   }
 
 
@@ -614,7 +665,7 @@ public class ModelsEndpointResponse {
 
 
   public ModelsEndpointResponse retryCount(@jakarta.annotation.Nullable Integer retryCount) {
-    this.retryCount = retryCount;
+    this.retryCount = JsonNullable.<Integer>of(retryCount);
     return this;
   }
 
@@ -623,17 +674,25 @@ public class ModelsEndpointResponse {
    * @return retryCount
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_RETRY_COUNT, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public Integer getRetryCount() {
-    return retryCount;
+        return retryCount.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_RETRY_COUNT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setRetryCount(@jakarta.annotation.Nullable Integer retryCount) {
+
+  public JsonNullable<Integer> getRetryCount_JsonNullable() {
+    return retryCount;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_RETRY_COUNT)
+  public void setRetryCount_JsonNullable(JsonNullable<Integer> retryCount) {
     this.retryCount = retryCount;
+  }
+
+  public void setRetryCount(@jakarta.annotation.Nullable Integer retryCount) {
+    this.retryCount = JsonNullable.<Integer>of(retryCount);
   }
 
 
@@ -718,7 +777,7 @@ public class ModelsEndpointResponse {
 
 
   public ModelsEndpointResponse successCount(@jakarta.annotation.Nullable Integer successCount) {
-    this.successCount = successCount;
+    this.successCount = JsonNullable.<Integer>of(successCount);
     return this;
   }
 
@@ -727,17 +786,25 @@ public class ModelsEndpointResponse {
    * @return successCount
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_SUCCESS_COUNT, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public Integer getSuccessCount() {
-    return successCount;
+        return successCount.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_SUCCESS_COUNT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setSuccessCount(@jakarta.annotation.Nullable Integer successCount) {
+
+  public JsonNullable<Integer> getSuccessCount_JsonNullable() {
+    return successCount;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_SUCCESS_COUNT)
+  public void setSuccessCount_JsonNullable(JsonNullable<Integer> successCount) {
     this.successCount = successCount;
+  }
+
+  public void setSuccessCount(@jakarta.annotation.Nullable Integer successCount) {
+    this.successCount = JsonNullable.<Integer>of(successCount);
   }
 
 
@@ -850,37 +917,48 @@ public class ModelsEndpointResponse {
     }
     ModelsEndpointResponse modelsEndpointResponse = (ModelsEndpointResponse) o;
     return Objects.equals(this.advancedSignatures, modelsEndpointResponse.advancedSignatures) &&
-        Objects.equals(this.authentication, modelsEndpointResponse.authentication) &&
-        Objects.equals(this.cbState, modelsEndpointResponse.cbState) &&
+        equalsNullable(this.authentication, modelsEndpointResponse.authentication) &&
+        equalsNullable(this.cbState, modelsEndpointResponse.cbState) &&
         Objects.equals(this.contentType, modelsEndpointResponse.contentType) &&
         Objects.equals(this.createdAt, modelsEndpointResponse.createdAt) &&
-        Objects.equals(this.deletedAt, modelsEndpointResponse.deletedAt) &&
+        equalsNullable(this.deletedAt, modelsEndpointResponse.deletedAt) &&
         Objects.equals(this.description, modelsEndpointResponse.description) &&
         Objects.equals(this.events, modelsEndpointResponse.events) &&
-        Objects.equals(this.failureCount, modelsEndpointResponse.failureCount) &&
-        Objects.equals(this.failureRate, modelsEndpointResponse.failureRate) &&
+        equalsNullable(this.failureCount, modelsEndpointResponse.failureCount) &&
+        equalsNullable(this.failureRate, modelsEndpointResponse.failureRate) &&
         Objects.equals(this.httpTimeout, modelsEndpointResponse.httpTimeout) &&
-        Objects.equals(this.mtlsClientCert, modelsEndpointResponse.mtlsClientCert) &&
+        equalsNullable(this.mtlsClientCert, modelsEndpointResponse.mtlsClientCert) &&
         Objects.equals(this.name, modelsEndpointResponse.name) &&
         Objects.equals(this.ownerId, modelsEndpointResponse.ownerId) &&
-        Objects.equals(this.periodFailureRate, modelsEndpointResponse.periodFailureRate) &&
+        equalsNullable(this.periodFailureRate, modelsEndpointResponse.periodFailureRate) &&
         Objects.equals(this.projectId, modelsEndpointResponse.projectId) &&
         Objects.equals(this.rateLimit, modelsEndpointResponse.rateLimit) &&
         Objects.equals(this.rateLimitDuration, modelsEndpointResponse.rateLimitDuration) &&
-        Objects.equals(this.retryCount, modelsEndpointResponse.retryCount) &&
+        equalsNullable(this.retryCount, modelsEndpointResponse.retryCount) &&
         Objects.equals(this.secrets, modelsEndpointResponse.secrets) &&
         Objects.equals(this.slackWebhookUrl, modelsEndpointResponse.slackWebhookUrl) &&
         Objects.equals(this.status, modelsEndpointResponse.status) &&
-        Objects.equals(this.successCount, modelsEndpointResponse.successCount) &&
+        equalsNullable(this.successCount, modelsEndpointResponse.successCount) &&
         Objects.equals(this.supportEmail, modelsEndpointResponse.supportEmail) &&
         Objects.equals(this.uid, modelsEndpointResponse.uid) &&
         Objects.equals(this.updatedAt, modelsEndpointResponse.updatedAt) &&
         Objects.equals(this.url, modelsEndpointResponse.url);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
-    return Objects.hash(advancedSignatures, authentication, cbState, contentType, createdAt, deletedAt, description, events, failureCount, failureRate, httpTimeout, mtlsClientCert, name, ownerId, periodFailureRate, projectId, rateLimit, rateLimitDuration, retryCount, secrets, slackWebhookUrl, status, successCount, supportEmail, uid, updatedAt, url);
+    return Objects.hash(advancedSignatures, hashCodeNullable(authentication), hashCodeNullable(cbState), contentType, createdAt, hashCodeNullable(deletedAt), description, events, hashCodeNullable(failureCount), hashCodeNullable(failureRate), httpTimeout, hashCodeNullable(mtlsClientCert), name, ownerId, hashCodeNullable(periodFailureRate), projectId, rateLimit, rateLimitDuration, hashCodeNullable(retryCount), secrets, slackWebhookUrl, status, hashCodeNullable(successCount), supportEmail, uid, updatedAt, url);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

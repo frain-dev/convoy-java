@@ -26,6 +26,10 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.getconvoy.models.DatastoreDeviceStatus;
 import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
@@ -51,8 +55,7 @@ public class DatastoreDevice {
   private String createdAt;
 
   public static final String JSON_PROPERTY_DELETED_AT = "deleted_at";
-  @jakarta.annotation.Nullable
-  private String deletedAt;
+  private JsonNullable<String> deletedAt = JsonNullable.<String>undefined();
 
   public static final String JSON_PROPERTY_ENDPOINT_ID = "endpoint_id";
   @jakarta.annotation.Nullable
@@ -110,7 +113,7 @@ public class DatastoreDevice {
 
 
   public DatastoreDevice deletedAt(@jakarta.annotation.Nullable String deletedAt) {
-    this.deletedAt = deletedAt;
+    this.deletedAt = JsonNullable.<String>of(deletedAt);
     return this;
   }
 
@@ -119,17 +122,25 @@ public class DatastoreDevice {
    * @return deletedAt
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_DELETED_AT, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public String getDeletedAt() {
-    return deletedAt;
+        return deletedAt.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_DELETED_AT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setDeletedAt(@jakarta.annotation.Nullable String deletedAt) {
+
+  public JsonNullable<String> getDeletedAt_JsonNullable() {
+    return deletedAt;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_DELETED_AT)
+  public void setDeletedAt_JsonNullable(JsonNullable<String> deletedAt) {
     this.deletedAt = deletedAt;
+  }
+
+  public void setDeletedAt(@jakarta.annotation.Nullable String deletedAt) {
+    this.deletedAt = JsonNullable.<String>of(deletedAt);
   }
 
 
@@ -314,7 +325,7 @@ public class DatastoreDevice {
     }
     DatastoreDevice datastoreDevice = (DatastoreDevice) o;
     return Objects.equals(this.createdAt, datastoreDevice.createdAt) &&
-        Objects.equals(this.deletedAt, datastoreDevice.deletedAt) &&
+        equalsNullable(this.deletedAt, datastoreDevice.deletedAt) &&
         Objects.equals(this.endpointId, datastoreDevice.endpointId) &&
         Objects.equals(this.hostName, datastoreDevice.hostName) &&
         Objects.equals(this.lastSeenAt, datastoreDevice.lastSeenAt) &&
@@ -324,9 +335,20 @@ public class DatastoreDevice {
         Objects.equals(this.updatedAt, datastoreDevice.updatedAt);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
-    return Objects.hash(createdAt, deletedAt, endpointId, hostName, lastSeenAt, projectId, status, uid, updatedAt);
+    return Objects.hash(createdAt, hashCodeNullable(deletedAt), endpointId, hostName, lastSeenAt, projectId, status, uid, updatedAt);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

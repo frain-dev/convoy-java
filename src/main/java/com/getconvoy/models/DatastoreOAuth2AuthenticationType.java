@@ -32,7 +32,9 @@ public enum DatastoreOAuth2AuthenticationType {
   
   SharedSecretAuth("shared_secret"),
   
-  ClientAssertionAuth("client_assertion");
+  ClientAssertionAuth("client_assertion"),
+  
+  EMPTY("");
 
   private String value;
 

@@ -33,6 +33,10 @@ import com.getconvoy.models.DatastoreVerifierConfig;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
@@ -65,8 +69,7 @@ import com.getconvoy.client.ApiClient;
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.23.0")
 public class DatastoreSource {
   public static final String JSON_PROPERTY_BODY_FUNCTION = "body_function";
-  @jakarta.annotation.Nullable
-  private String bodyFunction;
+  private JsonNullable<String> bodyFunction = JsonNullable.<String>undefined();
 
   public static final String JSON_PROPERTY_CREATED_AT = "created_at";
   @jakarta.annotation.Nullable
@@ -77,8 +80,7 @@ public class DatastoreSource {
   private DatastoreCustomResponse customResponse;
 
   public static final String JSON_PROPERTY_DELETED_AT = "deleted_at";
-  @jakarta.annotation.Nullable
-  private String deletedAt;
+  private JsonNullable<String> deletedAt = JsonNullable.<String>undefined();
 
   public static final String JSON_PROPERTY_EVENT_TYPE_LOCATION = "event_type_location";
   @jakarta.annotation.Nullable
@@ -89,8 +91,7 @@ public class DatastoreSource {
   private List<String> forwardHeaders = new ArrayList<>();
 
   public static final String JSON_PROPERTY_HEADER_FUNCTION = "header_function";
-  @jakarta.annotation.Nullable
-  private String headerFunction;
+  private JsonNullable<String> headerFunction = JsonNullable.<String>undefined();
 
   public static final String JSON_PROPERTY_IDEMPOTENCY_KEYS = "idempotency_keys";
   @jakarta.annotation.Nullable
@@ -117,12 +118,10 @@ public class DatastoreSource {
   private DatastoreSourceProvider provider;
 
   public static final String JSON_PROPERTY_PROVIDER_CONFIG = "provider_config";
-  @jakarta.annotation.Nullable
-  private DatastoreProviderConfig providerConfig;
+  private JsonNullable<DatastoreProviderConfig> providerConfig = JsonNullable.<DatastoreProviderConfig>undefined();
 
   public static final String JSON_PROPERTY_PUB_SUB = "pub_sub";
-  @jakarta.annotation.Nullable
-  private DatastorePubSubConfig pubSub;
+  private JsonNullable<DatastorePubSubConfig> pubSub = JsonNullable.<DatastorePubSubConfig>undefined();
 
   public static final String JSON_PROPERTY_TYPE = "type";
   @jakarta.annotation.Nullable
@@ -141,14 +140,13 @@ public class DatastoreSource {
   private String url;
 
   public static final String JSON_PROPERTY_VERIFIER = "verifier";
-  @jakarta.annotation.Nullable
-  private DatastoreVerifierConfig verifier;
+  private JsonNullable<DatastoreVerifierConfig> verifier = JsonNullable.<DatastoreVerifierConfig>undefined();
 
   public DatastoreSource() { 
   }
 
   public DatastoreSource bodyFunction(@jakarta.annotation.Nullable String bodyFunction) {
-    this.bodyFunction = bodyFunction;
+    this.bodyFunction = JsonNullable.<String>of(bodyFunction);
     return this;
   }
 
@@ -157,17 +155,25 @@ public class DatastoreSource {
    * @return bodyFunction
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_BODY_FUNCTION, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public String getBodyFunction() {
-    return bodyFunction;
+        return bodyFunction.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_BODY_FUNCTION, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setBodyFunction(@jakarta.annotation.Nullable String bodyFunction) {
+
+  public JsonNullable<String> getBodyFunction_JsonNullable() {
+    return bodyFunction;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_BODY_FUNCTION)
+  public void setBodyFunction_JsonNullable(JsonNullable<String> bodyFunction) {
     this.bodyFunction = bodyFunction;
+  }
+
+  public void setBodyFunction(@jakarta.annotation.Nullable String bodyFunction) {
+    this.bodyFunction = JsonNullable.<String>of(bodyFunction);
   }
 
 
@@ -220,7 +226,7 @@ public class DatastoreSource {
 
 
   public DatastoreSource deletedAt(@jakarta.annotation.Nullable String deletedAt) {
-    this.deletedAt = deletedAt;
+    this.deletedAt = JsonNullable.<String>of(deletedAt);
     return this;
   }
 
@@ -229,17 +235,25 @@ public class DatastoreSource {
    * @return deletedAt
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_DELETED_AT, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public String getDeletedAt() {
-    return deletedAt;
+        return deletedAt.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_DELETED_AT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setDeletedAt(@jakarta.annotation.Nullable String deletedAt) {
+
+  public JsonNullable<String> getDeletedAt_JsonNullable() {
+    return deletedAt;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_DELETED_AT)
+  public void setDeletedAt_JsonNullable(JsonNullable<String> deletedAt) {
     this.deletedAt = deletedAt;
+  }
+
+  public void setDeletedAt(@jakarta.annotation.Nullable String deletedAt) {
+    this.deletedAt = JsonNullable.<String>of(deletedAt);
   }
 
 
@@ -300,7 +314,7 @@ public class DatastoreSource {
 
 
   public DatastoreSource headerFunction(@jakarta.annotation.Nullable String headerFunction) {
-    this.headerFunction = headerFunction;
+    this.headerFunction = JsonNullable.<String>of(headerFunction);
     return this;
   }
 
@@ -309,17 +323,25 @@ public class DatastoreSource {
    * @return headerFunction
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_HEADER_FUNCTION, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public String getHeaderFunction() {
-    return headerFunction;
+        return headerFunction.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_HEADER_FUNCTION, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setHeaderFunction(@jakarta.annotation.Nullable String headerFunction) {
+
+  public JsonNullable<String> getHeaderFunction_JsonNullable() {
+    return headerFunction;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_HEADER_FUNCTION)
+  public void setHeaderFunction_JsonNullable(JsonNullable<String> headerFunction) {
     this.headerFunction = headerFunction;
+  }
+
+  public void setHeaderFunction(@jakarta.annotation.Nullable String headerFunction) {
+    this.headerFunction = JsonNullable.<String>of(headerFunction);
   }
 
 
@@ -476,7 +498,7 @@ public class DatastoreSource {
 
 
   public DatastoreSource providerConfig(@jakarta.annotation.Nullable DatastoreProviderConfig providerConfig) {
-    this.providerConfig = providerConfig;
+    this.providerConfig = JsonNullable.<DatastoreProviderConfig>of(providerConfig);
     return this;
   }
 
@@ -485,22 +507,30 @@ public class DatastoreSource {
    * @return providerConfig
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_PROVIDER_CONFIG, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreProviderConfig getProviderConfig() {
-    return providerConfig;
+        return providerConfig.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_PROVIDER_CONFIG, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setProviderConfig(@jakarta.annotation.Nullable DatastoreProviderConfig providerConfig) {
+
+  public JsonNullable<DatastoreProviderConfig> getProviderConfig_JsonNullable() {
+    return providerConfig;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_PROVIDER_CONFIG)
+  public void setProviderConfig_JsonNullable(JsonNullable<DatastoreProviderConfig> providerConfig) {
     this.providerConfig = providerConfig;
+  }
+
+  public void setProviderConfig(@jakarta.annotation.Nullable DatastoreProviderConfig providerConfig) {
+    this.providerConfig = JsonNullable.<DatastoreProviderConfig>of(providerConfig);
   }
 
 
   public DatastoreSource pubSub(@jakarta.annotation.Nullable DatastorePubSubConfig pubSub) {
-    this.pubSub = pubSub;
+    this.pubSub = JsonNullable.<DatastorePubSubConfig>of(pubSub);
     return this;
   }
 
@@ -509,17 +539,25 @@ public class DatastoreSource {
    * @return pubSub
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_PUB_SUB, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastorePubSubConfig getPubSub() {
-    return pubSub;
+        return pubSub.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_PUB_SUB, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setPubSub(@jakarta.annotation.Nullable DatastorePubSubConfig pubSub) {
+
+  public JsonNullable<DatastorePubSubConfig> getPubSub_JsonNullable() {
+    return pubSub;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_PUB_SUB)
+  public void setPubSub_JsonNullable(JsonNullable<DatastorePubSubConfig> pubSub) {
     this.pubSub = pubSub;
+  }
+
+  public void setPubSub(@jakarta.annotation.Nullable DatastorePubSubConfig pubSub) {
+    this.pubSub = JsonNullable.<DatastorePubSubConfig>of(pubSub);
   }
 
 
@@ -620,7 +658,7 @@ public class DatastoreSource {
 
 
   public DatastoreSource verifier(@jakarta.annotation.Nullable DatastoreVerifierConfig verifier) {
-    this.verifier = verifier;
+    this.verifier = JsonNullable.<DatastoreVerifierConfig>of(verifier);
     return this;
   }
 
@@ -629,17 +667,25 @@ public class DatastoreSource {
    * @return verifier
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_VERIFIER, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public DatastoreVerifierConfig getVerifier() {
-    return verifier;
+        return verifier.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_VERIFIER, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setVerifier(@jakarta.annotation.Nullable DatastoreVerifierConfig verifier) {
+
+  public JsonNullable<DatastoreVerifierConfig> getVerifier_JsonNullable() {
+    return verifier;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_VERIFIER)
+  public void setVerifier_JsonNullable(JsonNullable<DatastoreVerifierConfig> verifier) {
     this.verifier = verifier;
+  }
+
+  public void setVerifier(@jakarta.annotation.Nullable DatastoreVerifierConfig verifier) {
+    this.verifier = JsonNullable.<DatastoreVerifierConfig>of(verifier);
   }
 
 
@@ -655,31 +701,42 @@ public class DatastoreSource {
       return false;
     }
     DatastoreSource datastoreSource = (DatastoreSource) o;
-    return Objects.equals(this.bodyFunction, datastoreSource.bodyFunction) &&
+    return equalsNullable(this.bodyFunction, datastoreSource.bodyFunction) &&
         Objects.equals(this.createdAt, datastoreSource.createdAt) &&
         Objects.equals(this.customResponse, datastoreSource.customResponse) &&
-        Objects.equals(this.deletedAt, datastoreSource.deletedAt) &&
+        equalsNullable(this.deletedAt, datastoreSource.deletedAt) &&
         Objects.equals(this.eventTypeLocation, datastoreSource.eventTypeLocation) &&
         Objects.equals(this.forwardHeaders, datastoreSource.forwardHeaders) &&
-        Objects.equals(this.headerFunction, datastoreSource.headerFunction) &&
+        equalsNullable(this.headerFunction, datastoreSource.headerFunction) &&
         Objects.equals(this.idempotencyKeys, datastoreSource.idempotencyKeys) &&
         Objects.equals(this.isDisabled, datastoreSource.isDisabled) &&
         Objects.equals(this.maskId, datastoreSource.maskId) &&
         Objects.equals(this.name, datastoreSource.name) &&
         Objects.equals(this.projectId, datastoreSource.projectId) &&
         Objects.equals(this.provider, datastoreSource.provider) &&
-        Objects.equals(this.providerConfig, datastoreSource.providerConfig) &&
-        Objects.equals(this.pubSub, datastoreSource.pubSub) &&
+        equalsNullable(this.providerConfig, datastoreSource.providerConfig) &&
+        equalsNullable(this.pubSub, datastoreSource.pubSub) &&
         Objects.equals(this.type, datastoreSource.type) &&
         Objects.equals(this.uid, datastoreSource.uid) &&
         Objects.equals(this.updatedAt, datastoreSource.updatedAt) &&
         Objects.equals(this.url, datastoreSource.url) &&
-        Objects.equals(this.verifier, datastoreSource.verifier);
+        equalsNullable(this.verifier, datastoreSource.verifier);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(bodyFunction, createdAt, customResponse, deletedAt, eventTypeLocation, forwardHeaders, headerFunction, idempotencyKeys, isDisabled, maskId, name, projectId, provider, providerConfig, pubSub, type, uid, updatedAt, url, verifier);
+    return Objects.hash(hashCodeNullable(bodyFunction), createdAt, customResponse, hashCodeNullable(deletedAt), eventTypeLocation, forwardHeaders, hashCodeNullable(headerFunction), idempotencyKeys, isDisabled, maskId, name, projectId, provider, hashCodeNullable(providerConfig), hashCodeNullable(pubSub), type, uid, updatedAt, url, hashCodeNullable(verifier));
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

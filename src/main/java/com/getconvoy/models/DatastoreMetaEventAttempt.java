@@ -27,6 +27,10 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import org.openapitools.jackson.nullable.JsonNullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
@@ -42,30 +46,32 @@ import com.getconvoy.client.ApiClient;
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.23.0")
 public class DatastoreMetaEventAttempt {
   public static final String JSON_PROPERTY_REQUEST_HTTP_HEADER = "request_http_header";
-  @jakarta.annotation.Nullable
-  private Map<String, String> requestHttpHeader = new HashMap<>();
+  private JsonNullable<Map<String, String>> requestHttpHeader = JsonNullable.<Map<String, String>>undefined();
 
   public static final String JSON_PROPERTY_RESPONSE_DATA = "response_data";
   @jakarta.annotation.Nullable
   private String responseData;
 
   public static final String JSON_PROPERTY_RESPONSE_HTTP_HEADER = "response_http_header";
-  @jakarta.annotation.Nullable
-  private Map<String, String> responseHttpHeader = new HashMap<>();
+  private JsonNullable<Map<String, String>> responseHttpHeader = JsonNullable.<Map<String, String>>undefined();
 
   public DatastoreMetaEventAttempt() { 
   }
 
   public DatastoreMetaEventAttempt requestHttpHeader(@jakarta.annotation.Nullable Map<String, String> requestHttpHeader) {
-    this.requestHttpHeader = requestHttpHeader;
+    this.requestHttpHeader = JsonNullable.<Map<String, String>>of(requestHttpHeader);
     return this;
   }
 
   public DatastoreMetaEventAttempt putRequestHttpHeaderItem(String key, String requestHttpHeaderItem) {
-    if (this.requestHttpHeader == null) {
-      this.requestHttpHeader = new HashMap<>();
+    if (this.requestHttpHeader == null || !this.requestHttpHeader.isPresent() || this.requestHttpHeader.get() == null) {
+      this.requestHttpHeader = JsonNullable.<Map<String, String>>of(new HashMap<>());
     }
-    this.requestHttpHeader.put(key, requestHttpHeaderItem);
+    try {
+      this.requestHttpHeader.get().put(key, requestHttpHeaderItem);
+    } catch (java.util.NoSuchElementException e) {
+      // this can never happen, as we make sure above that the value is present
+    }
     return this;
   }
 
@@ -74,17 +80,25 @@ public class DatastoreMetaEventAttempt {
    * @return requestHttpHeader
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_REQUEST_HTTP_HEADER, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public Map<String, String> getRequestHttpHeader() {
-    return requestHttpHeader;
+        return requestHttpHeader.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_REQUEST_HTTP_HEADER, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setRequestHttpHeader(@jakarta.annotation.Nullable Map<String, String> requestHttpHeader) {
+
+  public JsonNullable<Map<String, String>> getRequestHttpHeader_JsonNullable() {
+    return requestHttpHeader;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_REQUEST_HTTP_HEADER)
+  public void setRequestHttpHeader_JsonNullable(JsonNullable<Map<String, String>> requestHttpHeader) {
     this.requestHttpHeader = requestHttpHeader;
+  }
+
+  public void setRequestHttpHeader(@jakarta.annotation.Nullable Map<String, String> requestHttpHeader) {
+    this.requestHttpHeader = JsonNullable.<Map<String, String>>of(requestHttpHeader);
   }
 
 
@@ -113,15 +127,19 @@ public class DatastoreMetaEventAttempt {
 
 
   public DatastoreMetaEventAttempt responseHttpHeader(@jakarta.annotation.Nullable Map<String, String> responseHttpHeader) {
-    this.responseHttpHeader = responseHttpHeader;
+    this.responseHttpHeader = JsonNullable.<Map<String, String>>of(responseHttpHeader);
     return this;
   }
 
   public DatastoreMetaEventAttempt putResponseHttpHeaderItem(String key, String responseHttpHeaderItem) {
-    if (this.responseHttpHeader == null) {
-      this.responseHttpHeader = new HashMap<>();
+    if (this.responseHttpHeader == null || !this.responseHttpHeader.isPresent() || this.responseHttpHeader.get() == null) {
+      this.responseHttpHeader = JsonNullable.<Map<String, String>>of(new HashMap<>());
     }
-    this.responseHttpHeader.put(key, responseHttpHeaderItem);
+    try {
+      this.responseHttpHeader.get().put(key, responseHttpHeaderItem);
+    } catch (java.util.NoSuchElementException e) {
+      // this can never happen, as we make sure above that the value is present
+    }
     return this;
   }
 
@@ -130,17 +148,25 @@ public class DatastoreMetaEventAttempt {
    * @return responseHttpHeader
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_RESPONSE_HTTP_HEADER, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
   public Map<String, String> getResponseHttpHeader() {
-    return responseHttpHeader;
+        return responseHttpHeader.orElse(null);
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_RESPONSE_HTTP_HEADER, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setResponseHttpHeader(@jakarta.annotation.Nullable Map<String, String> responseHttpHeader) {
+
+  public JsonNullable<Map<String, String>> getResponseHttpHeader_JsonNullable() {
+    return responseHttpHeader;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_RESPONSE_HTTP_HEADER)
+  public void setResponseHttpHeader_JsonNullable(JsonNullable<Map<String, String>> responseHttpHeader) {
     this.responseHttpHeader = responseHttpHeader;
+  }
+
+  public void setResponseHttpHeader(@jakarta.annotation.Nullable Map<String, String> responseHttpHeader) {
+    this.responseHttpHeader = JsonNullable.<Map<String, String>>of(responseHttpHeader);
   }
 
 
@@ -156,14 +182,25 @@ public class DatastoreMetaEventAttempt {
       return false;
     }
     DatastoreMetaEventAttempt datastoreMetaEventAttempt = (DatastoreMetaEventAttempt) o;
-    return Objects.equals(this.requestHttpHeader, datastoreMetaEventAttempt.requestHttpHeader) &&
+    return equalsNullable(this.requestHttpHeader, datastoreMetaEventAttempt.requestHttpHeader) &&
         Objects.equals(this.responseData, datastoreMetaEventAttempt.responseData) &&
-        Objects.equals(this.responseHttpHeader, datastoreMetaEventAttempt.responseHttpHeader);
+        equalsNullable(this.responseHttpHeader, datastoreMetaEventAttempt.responseHttpHeader);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(requestHttpHeader, responseData, responseHttpHeader);
+    return Objects.hash(hashCodeNullable(requestHttpHeader), responseData, hashCodeNullable(responseHttpHeader));
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

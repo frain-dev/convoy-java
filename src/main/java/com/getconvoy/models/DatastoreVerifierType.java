@@ -36,7 +36,9 @@ public enum DatastoreVerifierType {
   
   BasicAuthVerifier("basic_auth"),
   
-  APIKeyVerifier("api_key");
+  APIKeyVerifier("api_key"),
+  
+  EMPTY("");
 
   private String value;
 

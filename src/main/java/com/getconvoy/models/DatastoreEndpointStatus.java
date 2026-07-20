@@ -34,7 +34,9 @@ public enum DatastoreEndpointStatus {
   
   InactiveEndpointStatus("inactive"),
   
-  PausedEndpointStatus("paused");
+  PausedEndpointStatus("paused"),
+  
+  EMPTY("");
 
   private String value;
 

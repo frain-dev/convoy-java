@@ -32,7 +32,9 @@ public enum DatastorePortalAuthType {
   
   PortalAuthTypeRefreshToken("refresh_token"),
   
-  PortalAuthTypeStaticToken("static_token");
+  PortalAuthTypeStaticToken("static_token"),
+  
+  EMPTY("");
 
   private String value;
 
