@@ -191,7 +191,7 @@ public class ModelsCreateEvent {
   }
 
   /**
-   * Specifies the endpoint to send this event to.
+   * Specifies the endpoint to send this event to. Required unless the deprecated app_id is provided.
    * @return endpointId
    */
   @jakarta.annotation.Nullable
