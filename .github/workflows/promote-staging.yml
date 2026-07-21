@@ -1,6 +1,6 @@
 # One-shot / recovery: promote OSSRH Staging API repositories that were
-# uploaded by Gradle but never transferred to the Central Publisher Portal.
-# Use after a publish job that only ran `./gradlew publish` (no promote step).
+# uploaded by Gradle but never transferred to the Central Publisher Portal,
+# and finish Portal deployments that are VALIDATED but not yet published.
 # Must use Portal user-token secrets (same as publish.yml).
 name: Promote Staging
 
@@ -14,73 +14,149 @@ jobs:
   promote:
     runs-on: ubuntu-latest
     steps:
-      - name: Promote open OSSRH staging repositories
+      - name: Promote staging / finish Portal deployments
         env:
           MAVEN_CENTRAL_USERNAME: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
           MAVEN_CENTRAL_PASSWORD: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
         run: |
           set -euo pipefail
           AUTH=$(printf '%s:%s' "$MAVEN_CENTRAL_USERNAME" "$MAVEN_CENTRAL_PASSWORD" | base64 | tr -d '\n')
-          curl -fsS \
+          export AUTH
+
+          curl -sS \
             -H "Authorization: Bearer ${AUTH}" \
             "https://ossrh-staging-api.central.sonatype.com/manual/search/repositories?ip=any" \
             -o repos.json
           echo "Staging repositories:"
           cat repos.json
-          export AUTH
+          echo
+
           python3 <<'PY'
-          import json, os, subprocess, sys, urllib.parse
+          import json, os, subprocess, sys, time, urllib.parse
+
+          auth = os.environ["AUTH"]
+          hdr = f"Authorization: Bearer {auth}"
+
+          def curl_json(method, url, fail_ok=False):
+              cmd = [
+                  "curl", "-sS", "-X", method,
+                  "-H", hdr,
+                  "-H", "Accept: application/json",
+                  "-w", "\n__HTTP_STATUS__%{http_code}",
+                  url,
+              ]
+              out = subprocess.check_output(cmd, text=True)
+              if "__HTTP_STATUS__" in out:
+                  body, _, code_s = out.rpartition("__HTTP_STATUS__")
+                  code = int(code_s.strip())
+              else:
+                  body, code = out, 0
+              body = body.strip()
+              print(f"{method} {url}")
+              print(f"http_status={code}")
+              if body:
+                  print(body)
+              if not fail_ok and code >= 400:
+                  print(f"::error::Request failed with HTTP {code}", file=sys.stderr)
+                  sys.exit(1)
+              return code, body
+
+          def portal_finish(deployment_id):
+              for attempt in range(30):
+                  code, body = curl_json(
+                      "POST",
+                      f"https://central.sonatype.com/api/v1/publisher/status?id={urllib.parse.quote(deployment_id, safe='')}",
+                      fail_ok=True,
+                  )
+                  if code >= 400:
+                      print(f"::error::Portal status failed HTTP {code}")
+                      sys.exit(1)
+                  try:
+                      st = json.loads(body) if body else {}
+                  except json.JSONDecodeError:
+                      st = {}
+                  deployment_state = st.get("deploymentState") or st.get("state") or ""
+                  print(f"deployment {deployment_id} state={deployment_state!r} (attempt {attempt+1})")
+                  if deployment_state == "FAILED":
+                      print("::error::Portal deployment FAILED")
+                      errs = st.get("errors") or st.get("deploymentErrors") or st
+                      print(json.dumps(errs, indent=2))
+                      sys.exit(1)
+                  if deployment_state in ("PUBLISHED", "PUBLISHING"):
+                      print(f"Deployment already {deployment_state}; nothing to do.")
+                      return
+                  if deployment_state == "VALIDATED":
+                      curl_json(
+                          "POST",
+                          f"https://central.sonatype.com/api/v1/publisher/deployment/{urllib.parse.quote(deployment_id, safe='')}",
+                      )
+                      print(f"Published deployment {deployment_id}")
+                      return
+                  time.sleep(10)
+              print("::error::Timed out waiting for Portal VALIDATED")
+              sys.exit(1)
+
           data = json.load(open("repos.json"))
           repos = data.get("repositories") or []
-          auth = os.environ["AUTH"]
+          promoted = 0
+          finished = 0
+
           if not repos:
               print("No staging repositories listed; trying defaultRepository...")
-              subprocess.check_call(
-                  [
-                      "curl", "-fsS", "-X", "POST",
-                      "-H", f"Authorization: Bearer {auth}",
-                      "https://ossrh-staging-api.central.sonatype.com/manual/upload/defaultRepository/io.github.frain-dev?publishing_type=automatic",
-                  ]
+              code, body = curl_json(
+                  "POST",
+                  "https://ossrh-staging-api.central.sonatype.com/manual/upload/defaultRepository/io.github.frain-dev?publishing_type=automatic",
+                  fail_ok=True,
               )
+              if code >= 400:
+                  print(f"::error::defaultRepository promote failed HTTP {code}")
+                  sys.exit(1)
               print("defaultRepository promote requested")
               sys.exit(0)
-          promoted = 0
+
           for repo in repos:
               key = repo.get("key")
               state = repo.get("state")
-              print(f"repo key={key!r} state={state!r}")
+              portal_id = repo.get("portal_deployment_id") or repo.get("portalDeploymentId")
+              print(f"repo key={key!r} state={state!r} portal_deployment_id={portal_id!r}")
+
+              # Already transferred to Portal — do not re-POST OSSRH upload
+              # (defaultRepository / upload/repository returns 400).
+              if portal_id:
+                  portal_finish(portal_id)
+                  finished += 1
+                  continue
+
               if not key:
                   continue
               if state not in (None, "open", "closed"):
                   print(f"  skip state={state}")
                   continue
+
               # Keep slashes in the key path (encoding them as %2F returns 400).
               url = (
                   "https://ossrh-staging-api.central.sonatype.com/manual/upload/repository/"
                   + urllib.parse.quote(key, safe="/")
                   + "?publishing_type=automatic"
               )
-              # Show HTTP body on failure (curl -f alone hides the Portal error).
-              subprocess.check_call(
-                  [
-                      "curl", "-sS", "-f", "-X", "POST",
-                      "-H", f"Authorization: Bearer {auth}",
-                      "-w", "\nhttp_status=%{http_code}\n",
-                      url,
-                  ]
-              )
+              code, body = curl_json("POST", url, fail_ok=True)
+              if code >= 400:
+                  print(f"::error::OSSRH promote failed HTTP {code} for key={key!r}")
+                  sys.exit(1)
               print("  promoted (automatic)")
               promoted += 1
-          if promoted == 0:
-              print("No open/closed repos to promote; trying defaultRepository...")
-              subprocess.check_call(
-                  [
-                      "curl", "-fsS", "-X", "POST",
-                      "-H", f"Authorization: Bearer {auth}",
-                      "https://ossrh-staging-api.central.sonatype.com/manual/upload/defaultRepository/io.github.frain-dev?publishing_type=automatic",
-                  ]
+
+          if promoted == 0 and finished == 0:
+              print("No repos to promote or finish; trying defaultRepository...")
+              code, body = curl_json(
+                  "POST",
+                  "https://ossrh-staging-api.central.sonatype.com/manual/upload/defaultRepository/io.github.frain-dev?publishing_type=automatic",
+                  fail_ok=True,
               )
+              if code >= 400:
+                  print(f"::error::defaultRepository promote failed HTTP {code}")
+                  sys.exit(1)
               print("defaultRepository promote requested")
           else:
-              print(f"Promoted {promoted} repository(ies)")
+              print(f"OSSRH promoted={promoted} Portal finished={finished}")
           PY
