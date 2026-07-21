@@ -188,7 +188,8 @@ jobs:
                   for repo in data2.get("repositories") or []:
                       pid = repo.get("portal_deployment_id") or repo.get("portalDeploymentId")
                       if pid and pid not in portal_ids:
-                          portal_finish(pid)
+                          portal_ids.append(pid)
+                          portal_results.append((pid, portal_finish(pid)))
 
           if not portal_ids and not need_ossrh_promote and repos:
               print("No open/closed staging without portal id, and no portal ids to finish.")
