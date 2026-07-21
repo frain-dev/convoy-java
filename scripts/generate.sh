@@ -40,7 +40,7 @@ java -jar "$GENERATOR_JAR" generate \
   -g java \
   --library native \
   -o "$tmp/gen" \
-  --additional-properties=groupId=com.getconvoy,artifactId=convoy,apiPackage=com.getconvoy.api,modelPackage=com.getconvoy.models,invokerPackage=com.getconvoy.client,useJakartaEe=true,hideGenerationTimestamp=true
+  --additional-properties=groupId=io.github.frain-dev,artifactId=convoy,apiPackage=com.getconvoy.api,modelPackage=com.getconvoy.models,invokerPackage=com.getconvoy.client,useJakartaEe=true,hideGenerationTimestamp=true
 
 # Mirror only the three generated packages. The hand-written verify package
 # (com/getconvoy/webhook) is a sibling and is never created or removed here.

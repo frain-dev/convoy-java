@@ -4,7 +4,7 @@ plugins {
     signing
 }
 
-group = "com.getconvoy"
+group = "io.github.frain-dev"
 version = "0.2.0"
 description = "Convoy SDK for Java: webhook signature verification and an OpenAPI-generated API client."
 

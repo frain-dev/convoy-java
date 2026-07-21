@@ -11,7 +11,7 @@ Gradle (Kotlin DSL):
 
 ```kotlin
 dependencies {
-    implementation("com.getconvoy:convoy:0.2.0")
+    implementation("io.github.frain-dev:convoy:0.2.0")
 }
 ```
 
@@ -19,7 +19,7 @@ Maven:
 
 ```xml
 <dependency>
-  <groupId>com.getconvoy</groupId>
+  <groupId>io.github.frain-dev</groupId>
   <artifactId>convoy</artifactId>
   <version>0.2.0</version>
 </dependency>
