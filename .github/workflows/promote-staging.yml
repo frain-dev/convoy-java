@@ -1,0 +1,83 @@
+# One-shot / recovery: promote OSSRH Staging API repositories that were
+# uploaded by Gradle but never transferred to the Central Publisher Portal.
+# Use after a publish job that only ran `./gradlew publish` (no promote step).
+# Must use Portal user-token secrets (same as publish.yml).
+name: Promote Staging
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Promote open OSSRH staging repositories
+        env:
+          MAVEN_CENTRAL_USERNAME: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          MAVEN_CENTRAL_PASSWORD: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+        run: |
+          set -euo pipefail
+          AUTH=$(printf '%s:%s' "$MAVEN_CENTRAL_USERNAME" "$MAVEN_CENTRAL_PASSWORD" | base64 | tr -d '\n')
+          curl -fsS \
+            -H "Authorization: Bearer ${AUTH}" \
+            "https://ossrh-staging-api.central.sonatype.com/manual/search/repositories?ip=any" \
+            -o repos.json
+          echo "Staging repositories:"
+          cat repos.json
+          export AUTH
+          python3 <<'PY'
+          import json, os, subprocess, sys, urllib.parse
+          data = json.load(open("repos.json"))
+          repos = data.get("repositories") or []
+          auth = os.environ["AUTH"]
+          if not repos:
+              print("No staging repositories listed; trying defaultRepository...")
+              subprocess.check_call(
+                  [
+                      "curl", "-fsS", "-X", "POST",
+                      "-H", f"Authorization: Bearer {auth}",
+                      "https://ossrh-staging-api.central.sonatype.com/manual/upload/defaultRepository/io.github.frain-dev?publishing_type=automatic",
+                  ]
+              )
+              print("defaultRepository promote requested")
+              sys.exit(0)
+          promoted = 0
+          for repo in repos:
+              key = repo.get("key")
+              state = repo.get("state")
+              print(f"repo key={key!r} state={state!r}")
+              if not key:
+                  continue
+              if state not in (None, "open", "closed"):
+                  print(f"  skip state={state}")
+                  continue
+              url = (
+                  "https://ossrh-staging-api.central.sonatype.com/manual/upload/repository/"
+                  + urllib.parse.quote(key, safe="")
+                  + "?publishing_type=automatic"
+              )
+              subprocess.check_call(
+                  [
+                      "curl", "-fsS", "-X", "POST",
+                      "-H", f"Authorization: Bearer {auth}",
+                      url,
+                  ]
+              )
+              print("  promoted (automatic)")
+              promoted += 1
+          if promoted == 0:
+              print("No open/closed repos to promote; trying defaultRepository...")
+              subprocess.check_call(
+                  [
+                      "curl", "-fsS", "-X", "POST",
+                      "-H", f"Authorization: Bearer {auth}",
+                      "https://ossrh-staging-api.central.sonatype.com/manual/upload/defaultRepository/io.github.frain-dev?publishing_type=automatic",
+                  ]
+              )
+              print("defaultRepository promote requested")
+          else:
+              print(f"Promoted {promoted} repository(ies)")
+          PY
