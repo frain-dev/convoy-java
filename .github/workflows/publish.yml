@@ -102,7 +102,7 @@ jobs:
                   )
                   if code >= 400:
                       print(f"::error::Portal status failed HTTP {code}")
-                      sys.exit(1)
+                      return "status_error"
                   try:
                       st = json.loads(body) if body else {}
                   except json.JSONDecodeError:
@@ -110,24 +110,31 @@ jobs:
                   deployment_state = st.get("deploymentState") or st.get("state") or ""
                   print(f"deployment {deployment_id} state={deployment_state!r} (attempt {attempt+1})")
                   if deployment_state == "FAILED":
-                      print("::error::Portal deployment FAILED")
+                      print("Portal deployment FAILED")
                       errs = st.get("errors") or st.get("deploymentErrors") or st
                       print(json.dumps(errs, indent=2))
-                      sys.exit(1)
+                      dcode, _ = curl_json(
+                          "DELETE",
+                          f"https://central.sonatype.com/api/v1/publisher/deployment/{urllib.parse.quote(deployment_id, safe='')}",
+                          fail_ok=True,
+                      )
+                      if dcode < 400:
+                          print(f"Dropped failed deployment {deployment_id}")
+                      return "failed"
                   if deployment_state in ("PUBLISHED", "PUBLISHING"):
                       print(f"Deployment already {deployment_state}; nothing to do.")
-                      return
+                      return deployment_state.lower()
                   if deployment_state == "VALIDATED":
-                      code, body = curl_json(
+                      curl_json(
                           "POST",
                           f"https://central.sonatype.com/api/v1/publisher/deployment/{urllib.parse.quote(deployment_id, safe='')}",
                       )
                       print(f"Published deployment {deployment_id}")
-                      return
+                      return "validated_published"
                   # PENDING / VALIDATING / etc.
                   time.sleep(10)
-              print("::error::Timed out waiting for Portal VALIDATED")
-              sys.exit(1)
+              print(f"::warning::Timed out waiting for Portal VALIDATED for {deployment_id}")
+              return "pending_timeout"
 
           data = json.load(open("repos.json"))
           repos = data.get("repositories") or []
@@ -146,8 +153,9 @@ jobs:
               if state in (None, "open", "closed"):
                   need_ossrh_promote = True
 
+          portal_results = []
           for pid in portal_ids:
-              portal_finish(pid)
+              portal_results.append((pid, portal_finish(pid)))
 
           if need_ossrh_promote or not repos:
               # Promote this runner's default staging (same IP as gradle publish).
@@ -184,4 +192,16 @@ jobs:
 
           if not portal_ids and not need_ossrh_promote and repos:
               print("No open/closed staging without portal id, and no portal ids to finish.")
+
+          ok = {"published", "publishing", "validated_published"}
+          print(f"portal_results={portal_results!r}")
+          if any(r in ok for _, r in portal_results):
+              sys.exit(0)
+          if any(r == "failed" for _, r in portal_results):
+              print(
+                  "::error::Portal deployment FAILED. Usual cause: signing public key not on "
+                  "keyserver.ubuntu.com / keys.openpgp.org / keys.mailvelope.com. "
+                  "Failed deployments were dropped when possible; re-run Publish after uploading the pubkey."
+              )
+              sys.exit(1)
           PY

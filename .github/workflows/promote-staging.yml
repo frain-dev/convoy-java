@@ -62,6 +62,7 @@ jobs:
               return code, body
 
           def portal_finish(deployment_id):
+              """Return one of: published, publishing, validated_published, failed, pending_timeout."""
               for attempt in range(30):
                   code, body = curl_json(
                       "POST",
@@ -69,8 +70,8 @@ jobs:
                       fail_ok=True,
                   )
                   if code >= 400:
-                      print(f"::error::Portal status failed HTTP {code}")
-                      sys.exit(1)
+                      print(f"::error::Portal status failed HTTP {code} for {deployment_id}")
+                      return "status_error"
                   try:
                       st = json.loads(body) if body else {}
                   except json.JSONDecodeError:
@@ -78,28 +79,41 @@ jobs:
                   deployment_state = st.get("deploymentState") or st.get("state") or ""
                   print(f"deployment {deployment_id} state={deployment_state!r} (attempt {attempt+1})")
                   if deployment_state == "FAILED":
-                      print("::error::Portal deployment FAILED")
+                      print("Portal deployment FAILED")
                       errs = st.get("errors") or st.get("deploymentErrors") or st
                       print(json.dumps(errs, indent=2))
-                      sys.exit(1)
-                  if deployment_state in ("PUBLISHED", "PUBLISHING"):
-                      print(f"Deployment already {deployment_state}; nothing to do.")
-                      return
+                      # Drop so a later Publish can re-upload cleanly.
+                      dcode, _ = curl_json(
+                          "DELETE",
+                          f"https://central.sonatype.com/api/v1/publisher/deployment/{urllib.parse.quote(deployment_id, safe='')}",
+                          fail_ok=True,
+                      )
+                      if dcode < 400:
+                          print(f"Dropped failed deployment {deployment_id}")
+                      else:
+                          print(f"Could not drop failed deployment {deployment_id} (HTTP {dcode})")
+                      return "failed"
+                  if deployment_state == "PUBLISHED":
+                      print(f"Deployment already PUBLISHED.")
+                      return "published"
+                  if deployment_state == "PUBLISHING":
+                      print(f"Deployment already PUBLISHING.")
+                      return "publishing"
                   if deployment_state == "VALIDATED":
                       curl_json(
                           "POST",
                           f"https://central.sonatype.com/api/v1/publisher/deployment/{urllib.parse.quote(deployment_id, safe='')}",
                       )
                       print(f"Published deployment {deployment_id}")
-                      return
+                      return "validated_published"
                   time.sleep(10)
-              print("::error::Timed out waiting for Portal VALIDATED")
-              sys.exit(1)
+              print(f"::warning::Timed out waiting for Portal VALIDATED for {deployment_id}")
+              return "pending_timeout"
 
           data = json.load(open("repos.json"))
           repos = data.get("repositories") or []
           promoted = 0
-          finished = 0
+          results = []
 
           if not repos:
               print("No staging repositories listed; trying defaultRepository...")
@@ -123,8 +137,7 @@ jobs:
               # Already transferred to Portal — do not re-POST OSSRH upload
               # (defaultRepository / upload/repository returns 400).
               if portal_id:
-                  portal_finish(portal_id)
-                  finished += 1
+                  results.append((portal_id, portal_finish(portal_id)))
                   continue
 
               if not key:
@@ -142,21 +155,27 @@ jobs:
               code, body = curl_json("POST", url, fail_ok=True)
               if code >= 400:
                   print(f"::error::OSSRH promote failed HTTP {code} for key={key!r}")
-                  sys.exit(1)
+                  results.append((key, "ossrh_promote_error"))
+                  continue
               print("  promoted (automatic)")
               promoted += 1
 
-          if promoted == 0 and finished == 0:
-              print("No repos to promote or finish; trying defaultRepository...")
-              code, body = curl_json(
-                  "POST",
-                  "https://ossrh-staging-api.central.sonatype.com/manual/upload/defaultRepository/io.github.frain-dev?publishing_type=automatic",
-                  fail_ok=True,
+          print(f"OSSRH promoted={promoted} portal_results={results!r}")
+          ok = {"published", "publishing", "validated_published"}
+          if any(r in ok for _, r in results):
+              print("At least one deployment is published or publishing.")
+              sys.exit(0)
+          if any(r == "failed" for _, r in results):
+              print(
+                  "::error::All Portal deployments FAILED (often missing PGP public key on "
+                  "keyserver.ubuntu.com / keys.openpgp.org / keys.mailvelope.com). "
+                  "Failed deployments were dropped when possible; re-run Publish after "
+                  "uploading the signing public key."
               )
-              if code >= 400:
-                  print(f"::error::defaultRepository promote failed HTTP {code}")
-                  sys.exit(1)
-              print("defaultRepository promote requested")
-          else:
-              print(f"OSSRH promoted={promoted} Portal finished={finished}")
+              sys.exit(1)
+          if promoted > 0:
+              print("OSSRH promote requested; re-run this workflow to finish Portal publish.")
+              sys.exit(0)
+          print("::error::Nothing promoted or finished")
+          sys.exit(1)
           PY
