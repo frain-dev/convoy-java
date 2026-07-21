@@ -54,15 +54,18 @@ jobs:
               if state not in (None, "open", "closed"):
                   print(f"  skip state={state}")
                   continue
+              # Keep slashes in the key path (encoding them as %2F returns 400).
               url = (
                   "https://ossrh-staging-api.central.sonatype.com/manual/upload/repository/"
-                  + urllib.parse.quote(key, safe="")
+                  + urllib.parse.quote(key, safe="/")
                   + "?publishing_type=automatic"
               )
+              # Show HTTP body on failure (curl -f alone hides the Portal error).
               subprocess.check_call(
                   [
-                      "curl", "-fsS", "-X", "POST",
+                      "curl", "-sS", "-f", "-X", "POST",
                       "-H", f"Authorization: Bearer {auth}",
+                      "-w", "\nhttp_status=%{http_code}\n",
                       url,
                   ]
               )
