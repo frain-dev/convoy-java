@@ -56,7 +56,8 @@ import com.getconvoy.client.ApiClient;
   DatastoreProjectConfig.JSON_PROPERTY_SEARCH_POLICY,
   DatastoreProjectConfig.JSON_PROPERTY_SIGNATURE,
   DatastoreProjectConfig.JSON_PROPERTY_SSL,
-  DatastoreProjectConfig.JSON_PROPERTY_STRATEGY
+  DatastoreProjectConfig.JSON_PROPERTY_STRATEGY,
+  DatastoreProjectConfig.JSON_PROPERTY_SYNC_DYNAMIC_EVENT_ACK
 })
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.23.0")
 public class DatastoreProjectConfig {
@@ -105,6 +106,10 @@ public class DatastoreProjectConfig {
 
   public static final String JSON_PROPERTY_STRATEGY = "strategy";
   private JsonNullable<DatastoreStrategyConfiguration> strategy = JsonNullable.<DatastoreStrategyConfiguration>undefined();
+
+  public static final String JSON_PROPERTY_SYNC_DYNAMIC_EVENT_ACK = "sync_dynamic_event_ack";
+  @jakarta.annotation.Nullable
+  private Boolean syncDynamicEventAck;
 
   public DatastoreProjectConfig() { 
   }
@@ -469,6 +474,30 @@ public class DatastoreProjectConfig {
   }
 
 
+  public DatastoreProjectConfig syncDynamicEventAck(@jakarta.annotation.Nullable Boolean syncDynamicEventAck) {
+    this.syncDynamicEventAck = syncDynamicEventAck;
+    return this;
+  }
+
+  /**
+   * SyncDynamicEventAck waits for endpoint/subscription resolve before returning 2xx from POST /events/dynamic. Default false keeps 201-on-queue.
+   * @return syncDynamicEventAck
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_SYNC_DYNAMIC_EVENT_ACK, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Boolean getSyncDynamicEventAck() {
+    return syncDynamicEventAck;
+  }
+
+
+  @JsonProperty(value = JSON_PROPERTY_SYNC_DYNAMIC_EVENT_ACK, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setSyncDynamicEventAck(@jakarta.annotation.Nullable Boolean syncDynamicEventAck) {
+    this.syncDynamicEventAck = syncDynamicEventAck;
+  }
+
+
   /**
    * Return true if this datastore.ProjectConfig object is equal to o.
    */
@@ -493,7 +522,8 @@ public class DatastoreProjectConfig {
         Objects.equals(this.searchPolicy, datastoreProjectConfig.searchPolicy) &&
         equalsNullable(this.signature, datastoreProjectConfig.signature) &&
         equalsNullable(this.ssl, datastoreProjectConfig.ssl) &&
-        equalsNullable(this.strategy, datastoreProjectConfig.strategy);
+        equalsNullable(this.strategy, datastoreProjectConfig.strategy) &&
+        Objects.equals(this.syncDynamicEventAck, datastoreProjectConfig.syncDynamicEventAck);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -502,7 +532,7 @@ public class DatastoreProjectConfig {
 
   @Override
   public int hashCode() {
-    return Objects.hash(addEventIdTraceHeaders, hashCodeNullable(circuitBreaker), disableEndpoint, maxPayloadReadSize, hashCodeNullable(metaEvent), multipleEndpointSubscriptions, hashCodeNullable(ratelimit), replayAttacksPreventionEnabled, requestIdHeader, searchPolicy, hashCodeNullable(signature), hashCodeNullable(ssl), hashCodeNullable(strategy));
+    return Objects.hash(addEventIdTraceHeaders, hashCodeNullable(circuitBreaker), disableEndpoint, maxPayloadReadSize, hashCodeNullable(metaEvent), multipleEndpointSubscriptions, hashCodeNullable(ratelimit), replayAttacksPreventionEnabled, requestIdHeader, searchPolicy, hashCodeNullable(signature), hashCodeNullable(ssl), hashCodeNullable(strategy), syncDynamicEventAck);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -529,6 +559,7 @@ public class DatastoreProjectConfig {
     sb.append("    signature: ").append(toIndentedString(signature)).append("\n");
     sb.append("    ssl: ").append(toIndentedString(ssl)).append("\n");
     sb.append("    strategy: ").append(toIndentedString(strategy)).append("\n");
+    sb.append("    syncDynamicEventAck: ").append(toIndentedString(syncDynamicEventAck)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -636,6 +667,11 @@ public class DatastoreProjectConfig {
     // add `strategy` to the URL query string
     if (getStrategy() != null) {
       joiner.add(getStrategy().toUrlQueryString(prefix + "strategy" + suffix));
+    }
+
+    // add `sync_dynamic_event_ack` to the URL query string
+    if (getSyncDynamicEventAck() != null) {
+      joiner.add(String.format(java.util.Locale.ROOT, "%ssync_dynamic_event_ack%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getSyncDynamicEventAck()))));
     }
 
     return joiner.toString();
