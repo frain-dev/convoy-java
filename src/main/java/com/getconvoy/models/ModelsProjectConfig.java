@@ -52,7 +52,8 @@ import com.getconvoy.client.ApiClient;
   ModelsProjectConfig.JSON_PROPERTY_SEARCH_POLICY,
   ModelsProjectConfig.JSON_PROPERTY_SIGNATURE,
   ModelsProjectConfig.JSON_PROPERTY_SSL,
-  ModelsProjectConfig.JSON_PROPERTY_STRATEGY
+  ModelsProjectConfig.JSON_PROPERTY_STRATEGY,
+  ModelsProjectConfig.JSON_PROPERTY_SYNC_DYNAMIC_EVENT_ACK
 })
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.23.0")
 public class ModelsProjectConfig {
@@ -107,6 +108,10 @@ public class ModelsProjectConfig {
   public static final String JSON_PROPERTY_STRATEGY = "strategy";
   @jakarta.annotation.Nullable
   private ModelsStrategyConfiguration strategy;
+
+  public static final String JSON_PROPERTY_SYNC_DYNAMIC_EVENT_ACK = "sync_dynamic_event_ack";
+  @jakarta.annotation.Nullable
+  private Boolean syncDynamicEventAck;
 
   public ModelsProjectConfig() { 
   }
@@ -423,6 +428,30 @@ public class ModelsProjectConfig {
   }
 
 
+  public ModelsProjectConfig syncDynamicEventAck(@jakarta.annotation.Nullable Boolean syncDynamicEventAck) {
+    this.syncDynamicEventAck = syncDynamicEventAck;
+    return this;
+  }
+
+  /**
+   * SyncDynamicEventAck waits for dynamic endpoint/subscription resolve before acknowledging POST /events/dynamic. When false, the handler returns 201 after enqueue.
+   * @return syncDynamicEventAck
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_SYNC_DYNAMIC_EVENT_ACK, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Boolean getSyncDynamicEventAck() {
+    return syncDynamicEventAck;
+  }
+
+
+  @JsonProperty(value = JSON_PROPERTY_SYNC_DYNAMIC_EVENT_ACK, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setSyncDynamicEventAck(@jakarta.annotation.Nullable Boolean syncDynamicEventAck) {
+    this.syncDynamicEventAck = syncDynamicEventAck;
+  }
+
+
   /**
    * Return true if this models.ProjectConfig object is equal to o.
    */
@@ -447,12 +476,13 @@ public class ModelsProjectConfig {
         Objects.equals(this.searchPolicy, modelsProjectConfig.searchPolicy) &&
         Objects.equals(this.signature, modelsProjectConfig.signature) &&
         Objects.equals(this.ssl, modelsProjectConfig.ssl) &&
-        Objects.equals(this.strategy, modelsProjectConfig.strategy);
+        Objects.equals(this.strategy, modelsProjectConfig.strategy) &&
+        Objects.equals(this.syncDynamicEventAck, modelsProjectConfig.syncDynamicEventAck);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(addEventIdTraceHeaders, circuitBreaker, disableEndpoint, maxPayloadReadSize, metaEvent, multipleEndpointSubscriptions, ratelimit, replayAttacksPreventionEnabled, requestIdHeader, searchPolicy, signature, ssl, strategy);
+    return Objects.hash(addEventIdTraceHeaders, circuitBreaker, disableEndpoint, maxPayloadReadSize, metaEvent, multipleEndpointSubscriptions, ratelimit, replayAttacksPreventionEnabled, requestIdHeader, searchPolicy, signature, ssl, strategy, syncDynamicEventAck);
   }
 
   @Override
@@ -472,6 +502,7 @@ public class ModelsProjectConfig {
     sb.append("    signature: ").append(toIndentedString(signature)).append("\n");
     sb.append("    ssl: ").append(toIndentedString(ssl)).append("\n");
     sb.append("    strategy: ").append(toIndentedString(strategy)).append("\n");
+    sb.append("    syncDynamicEventAck: ").append(toIndentedString(syncDynamicEventAck)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -579,6 +610,11 @@ public class ModelsProjectConfig {
     // add `strategy` to the URL query string
     if (getStrategy() != null) {
       joiner.add(getStrategy().toUrlQueryString(prefix + "strategy" + suffix));
+    }
+
+    // add `sync_dynamic_event_ack` to the URL query string
+    if (getSyncDynamicEventAck() != null) {
+      joiner.add(String.format(java.util.Locale.ROOT, "%ssync_dynamic_event_ack%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getSyncDynamicEventAck()))));
     }
 
     return joiner.toString();
