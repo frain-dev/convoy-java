@@ -52,10 +52,10 @@ import com.getconvoy.client.ApiClient;
   ModelsEventResponse.JSON_PROPERTY_ENDPOINT_METADATA,
   ModelsEventResponse.JSON_PROPERTY_ENDPOINTS,
   ModelsEventResponse.JSON_PROPERTY_EVENT_TYPE,
+  ModelsEventResponse.JSON_PROPERTY_FAILURE_REASON,
   ModelsEventResponse.JSON_PROPERTY_HEADERS,
   ModelsEventResponse.JSON_PROPERTY_IDEMPOTENCY_KEY,
   ModelsEventResponse.JSON_PROPERTY_IS_DUPLICATE_EVENT,
-  ModelsEventResponse.JSON_PROPERTY_METADATA,
   ModelsEventResponse.JSON_PROPERTY_PROJECT_ID,
   ModelsEventResponse.JSON_PROPERTY_RAW,
   ModelsEventResponse.JSON_PROPERTY_SOURCE_ID,
@@ -97,6 +97,10 @@ public class ModelsEventResponse {
   @jakarta.annotation.Nullable
   private String eventType;
 
+  public static final String JSON_PROPERTY_FAILURE_REASON = "failure_reason";
+  @jakarta.annotation.Nullable
+  private String failureReason;
+
   public static final String JSON_PROPERTY_HEADERS = "headers";
   private JsonNullable<Map<String, List<String>>> headers = JsonNullable.<Map<String, List<String>>>undefined();
 
@@ -107,10 +111,6 @@ public class ModelsEventResponse {
   public static final String JSON_PROPERTY_IS_DUPLICATE_EVENT = "is_duplicate_event";
   @jakarta.annotation.Nullable
   private Boolean isDuplicateEvent;
-
-  public static final String JSON_PROPERTY_METADATA = "metadata";
-  @jakarta.annotation.Nullable
-  private String metadata;
 
   public static final String JSON_PROPERTY_PROJECT_ID = "project_id";
   @jakarta.annotation.Nullable
@@ -394,6 +394,30 @@ public class ModelsEventResponse {
   }
 
 
+  public ModelsEventResponse failureReason(@jakarta.annotation.Nullable String failureReason) {
+    this.failureReason = failureReason;
+    return this;
+  }
+
+  /**
+   * FailureReason explains a Failure status to whoever is looking at the dashboard. It carries operator facing text only, never endpoint credentials, headers, or payload content.
+   * @return failureReason
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_FAILURE_REASON, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public String getFailureReason() {
+    return failureReason;
+  }
+
+
+  @JsonProperty(value = JSON_PROPERTY_FAILURE_REASON, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setFailureReason(@jakarta.annotation.Nullable String failureReason) {
+    this.failureReason = failureReason;
+  }
+
+
   public ModelsEventResponse headers(@jakarta.annotation.Nullable Map<String, List<String>> headers) {
     this.headers = JsonNullable.<Map<String, List<String>>>of(headers);
     return this;
@@ -483,30 +507,6 @@ public class ModelsEventResponse {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setIsDuplicateEvent(@jakarta.annotation.Nullable Boolean isDuplicateEvent) {
     this.isDuplicateEvent = isDuplicateEvent;
-  }
-
-
-  public ModelsEventResponse metadata(@jakarta.annotation.Nullable String metadata) {
-    this.metadata = metadata;
-    return this;
-  }
-
-  /**
-   * Get metadata
-   * @return metadata
-   */
-  @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_METADATA, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public String getMetadata() {
-    return metadata;
-  }
-
-
-  @JsonProperty(value = JSON_PROPERTY_METADATA, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setMetadata(@jakarta.annotation.Nullable String metadata) {
-    this.metadata = metadata;
   }
 
 
@@ -754,10 +754,10 @@ public class ModelsEventResponse {
         Objects.equals(this.endpointMetadata, modelsEventResponse.endpointMetadata) &&
         Objects.equals(this.endpoints, modelsEventResponse.endpoints) &&
         Objects.equals(this.eventType, modelsEventResponse.eventType) &&
+        Objects.equals(this.failureReason, modelsEventResponse.failureReason) &&
         equalsNullable(this.headers, modelsEventResponse.headers) &&
         Objects.equals(this.idempotencyKey, modelsEventResponse.idempotencyKey) &&
         Objects.equals(this.isDuplicateEvent, modelsEventResponse.isDuplicateEvent) &&
-        Objects.equals(this.metadata, modelsEventResponse.metadata) &&
         Objects.equals(this.projectId, modelsEventResponse.projectId) &&
         Objects.equals(this.raw, modelsEventResponse.raw) &&
         Objects.equals(this.sourceId, modelsEventResponse.sourceId) &&
@@ -775,7 +775,7 @@ public class ModelsEventResponse {
 
   @Override
   public int hashCode() {
-    return Objects.hash(hashCodeNullable(acknowledgedAt), appId, createdAt, hashCodeNullable(data), hashCodeNullable(deletedAt), endpointMetadata, endpoints, eventType, hashCodeNullable(headers), idempotencyKey, isDuplicateEvent, metadata, projectId, raw, sourceId, hashCodeNullable(sourceMetadata), status, uid, updatedAt, urlPath, urlQueryParams);
+    return Objects.hash(hashCodeNullable(acknowledgedAt), appId, createdAt, hashCodeNullable(data), hashCodeNullable(deletedAt), endpointMetadata, endpoints, eventType, failureReason, hashCodeNullable(headers), idempotencyKey, isDuplicateEvent, projectId, raw, sourceId, hashCodeNullable(sourceMetadata), status, uid, updatedAt, urlPath, urlQueryParams);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -797,10 +797,10 @@ public class ModelsEventResponse {
     sb.append("    endpointMetadata: ").append(toIndentedString(endpointMetadata)).append("\n");
     sb.append("    endpoints: ").append(toIndentedString(endpoints)).append("\n");
     sb.append("    eventType: ").append(toIndentedString(eventType)).append("\n");
+    sb.append("    failureReason: ").append(toIndentedString(failureReason)).append("\n");
     sb.append("    headers: ").append(toIndentedString(headers)).append("\n");
     sb.append("    idempotencyKey: ").append(toIndentedString(idempotencyKey)).append("\n");
     sb.append("    isDuplicateEvent: ").append(toIndentedString(isDuplicateEvent)).append("\n");
-    sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
     sb.append("    projectId: ").append(toIndentedString(projectId)).append("\n");
     sb.append("    raw: ").append(toIndentedString(raw)).append("\n");
     sb.append("    sourceId: ").append(toIndentedString(sourceId)).append("\n");
@@ -907,6 +907,11 @@ public class ModelsEventResponse {
       joiner.add(String.format(java.util.Locale.ROOT, "%sevent_type%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getEventType()))));
     }
 
+    // add `failure_reason` to the URL query string
+    if (getFailureReason() != null) {
+      joiner.add(String.format(java.util.Locale.ROOT, "%sfailure_reason%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getFailureReason()))));
+    }
+
     // add `headers` to the URL query string
     if (getHeaders() != null) {
       for (String _key : getHeaders().keySet()) {
@@ -924,11 +929,6 @@ public class ModelsEventResponse {
     // add `is_duplicate_event` to the URL query string
     if (getIsDuplicateEvent() != null) {
       joiner.add(String.format(java.util.Locale.ROOT, "%sis_duplicate_event%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getIsDuplicateEvent()))));
-    }
-
-    // add `metadata` to the URL query string
-    if (getMetadata() != null) {
-      joiner.add(String.format(java.util.Locale.ROOT, "%smetadata%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getMetadata()))));
     }
 
     // add `project_id` to the URL query string
