@@ -45,6 +45,7 @@ import com.getconvoy.client.ApiClient;
  */
 @JsonPropertyOrder({
   DatastoreProjectConfig.JSON_PROPERTY_ADD_EVENT_ID_TRACE_HEADERS,
+  DatastoreProjectConfig.JSON_PROPERTY_ALLOW_UNMATCHED_DYNAMIC_URLS,
   DatastoreProjectConfig.JSON_PROPERTY_CIRCUIT_BREAKER,
   DatastoreProjectConfig.JSON_PROPERTY_DISABLE_ENDPOINT,
   DatastoreProjectConfig.JSON_PROPERTY_MAX_PAYLOAD_READ_SIZE,
@@ -57,13 +58,17 @@ import com.getconvoy.client.ApiClient;
   DatastoreProjectConfig.JSON_PROPERTY_SIGNATURE,
   DatastoreProjectConfig.JSON_PROPERTY_SSL,
   DatastoreProjectConfig.JSON_PROPERTY_STRATEGY,
-  DatastoreProjectConfig.JSON_PROPERTY_SYNC_DYNAMIC_EVENT_ACK
+  DatastoreProjectConfig.JSON_PROPERTY_VERIFY_DYNAMIC_EVENTS
 })
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.23.0")
 public class DatastoreProjectConfig {
   public static final String JSON_PROPERTY_ADD_EVENT_ID_TRACE_HEADERS = "add_event_id_trace_headers";
   @jakarta.annotation.Nullable
   private Boolean addEventIdTraceHeaders;
+
+  public static final String JSON_PROPERTY_ALLOW_UNMATCHED_DYNAMIC_URLS = "allow_unmatched_dynamic_urls";
+  @jakarta.annotation.Nullable
+  private Boolean allowUnmatchedDynamicUrls;
 
   public static final String JSON_PROPERTY_CIRCUIT_BREAKER = "circuit_breaker";
   private JsonNullable<DatastoreCircuitBreakerConfiguration> circuitBreaker = JsonNullable.<DatastoreCircuitBreakerConfiguration>undefined();
@@ -107,9 +112,9 @@ public class DatastoreProjectConfig {
   public static final String JSON_PROPERTY_STRATEGY = "strategy";
   private JsonNullable<DatastoreStrategyConfiguration> strategy = JsonNullable.<DatastoreStrategyConfiguration>undefined();
 
-  public static final String JSON_PROPERTY_SYNC_DYNAMIC_EVENT_ACK = "sync_dynamic_event_ack";
+  public static final String JSON_PROPERTY_VERIFY_DYNAMIC_EVENTS = "verify_dynamic_events";
   @jakarta.annotation.Nullable
-  private Boolean syncDynamicEventAck;
+  private Boolean verifyDynamicEvents;
 
   public DatastoreProjectConfig() { 
   }
@@ -135,6 +140,30 @@ public class DatastoreProjectConfig {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAddEventIdTraceHeaders(@jakarta.annotation.Nullable Boolean addEventIdTraceHeaders) {
     this.addEventIdTraceHeaders = addEventIdTraceHeaders;
+  }
+
+
+  public DatastoreProjectConfig allowUnmatchedDynamicUrls(@jakarta.annotation.Nullable Boolean allowUnmatchedDynamicUrls) {
+    this.allowUnmatchedDynamicUrls = allowUnmatchedDynamicUrls;
+    return this;
+  }
+
+  /**
+   * AllowUnmatchedDynamicURLs lets a dynamic event URL that matches none of the project&#39;s endpoint URL templates auto-create an endpoint. Default false rejects unmatched URLs.
+   * @return allowUnmatchedDynamicUrls
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_ALLOW_UNMATCHED_DYNAMIC_URLS, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Boolean getAllowUnmatchedDynamicUrls() {
+    return allowUnmatchedDynamicUrls;
+  }
+
+
+  @JsonProperty(value = JSON_PROPERTY_ALLOW_UNMATCHED_DYNAMIC_URLS, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setAllowUnmatchedDynamicUrls(@jakarta.annotation.Nullable Boolean allowUnmatchedDynamicUrls) {
+    this.allowUnmatchedDynamicUrls = allowUnmatchedDynamicUrls;
   }
 
 
@@ -474,27 +503,27 @@ public class DatastoreProjectConfig {
   }
 
 
-  public DatastoreProjectConfig syncDynamicEventAck(@jakarta.annotation.Nullable Boolean syncDynamicEventAck) {
-    this.syncDynamicEventAck = syncDynamicEventAck;
+  public DatastoreProjectConfig verifyDynamicEvents(@jakarta.annotation.Nullable Boolean verifyDynamicEvents) {
+    this.verifyDynamicEvents = verifyDynamicEvents;
     return this;
   }
 
   /**
-   * SyncDynamicEventAck waits for endpoint/subscription resolve before returning 2xx from POST /events/dynamic. Default false keeps 201-on-queue.
-   * @return syncDynamicEventAck
+   * VerifyDynamicEvents waits for endpoint/subscription resolve before returning 2xx from POST /events/dynamic. Default false keeps 201-on-queue.
+   * @return verifyDynamicEvents
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_SYNC_DYNAMIC_EVENT_ACK, required = false)
+  @JsonProperty(value = JSON_PROPERTY_VERIFY_DYNAMIC_EVENTS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public Boolean getSyncDynamicEventAck() {
-    return syncDynamicEventAck;
+  public Boolean getVerifyDynamicEvents() {
+    return verifyDynamicEvents;
   }
 
 
-  @JsonProperty(value = JSON_PROPERTY_SYNC_DYNAMIC_EVENT_ACK, required = false)
+  @JsonProperty(value = JSON_PROPERTY_VERIFY_DYNAMIC_EVENTS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setSyncDynamicEventAck(@jakarta.annotation.Nullable Boolean syncDynamicEventAck) {
-    this.syncDynamicEventAck = syncDynamicEventAck;
+  public void setVerifyDynamicEvents(@jakarta.annotation.Nullable Boolean verifyDynamicEvents) {
+    this.verifyDynamicEvents = verifyDynamicEvents;
   }
 
 
@@ -511,6 +540,7 @@ public class DatastoreProjectConfig {
     }
     DatastoreProjectConfig datastoreProjectConfig = (DatastoreProjectConfig) o;
     return Objects.equals(this.addEventIdTraceHeaders, datastoreProjectConfig.addEventIdTraceHeaders) &&
+        Objects.equals(this.allowUnmatchedDynamicUrls, datastoreProjectConfig.allowUnmatchedDynamicUrls) &&
         equalsNullable(this.circuitBreaker, datastoreProjectConfig.circuitBreaker) &&
         Objects.equals(this.disableEndpoint, datastoreProjectConfig.disableEndpoint) &&
         Objects.equals(this.maxPayloadReadSize, datastoreProjectConfig.maxPayloadReadSize) &&
@@ -523,7 +553,7 @@ public class DatastoreProjectConfig {
         equalsNullable(this.signature, datastoreProjectConfig.signature) &&
         equalsNullable(this.ssl, datastoreProjectConfig.ssl) &&
         equalsNullable(this.strategy, datastoreProjectConfig.strategy) &&
-        Objects.equals(this.syncDynamicEventAck, datastoreProjectConfig.syncDynamicEventAck);
+        Objects.equals(this.verifyDynamicEvents, datastoreProjectConfig.verifyDynamicEvents);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -532,7 +562,7 @@ public class DatastoreProjectConfig {
 
   @Override
   public int hashCode() {
-    return Objects.hash(addEventIdTraceHeaders, hashCodeNullable(circuitBreaker), disableEndpoint, maxPayloadReadSize, hashCodeNullable(metaEvent), multipleEndpointSubscriptions, hashCodeNullable(ratelimit), replayAttacksPreventionEnabled, requestIdHeader, searchPolicy, hashCodeNullable(signature), hashCodeNullable(ssl), hashCodeNullable(strategy), syncDynamicEventAck);
+    return Objects.hash(addEventIdTraceHeaders, allowUnmatchedDynamicUrls, hashCodeNullable(circuitBreaker), disableEndpoint, maxPayloadReadSize, hashCodeNullable(metaEvent), multipleEndpointSubscriptions, hashCodeNullable(ratelimit), replayAttacksPreventionEnabled, requestIdHeader, searchPolicy, hashCodeNullable(signature), hashCodeNullable(ssl), hashCodeNullable(strategy), verifyDynamicEvents);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -547,6 +577,7 @@ public class DatastoreProjectConfig {
     StringBuilder sb = new StringBuilder();
     sb.append("class DatastoreProjectConfig {\n");
     sb.append("    addEventIdTraceHeaders: ").append(toIndentedString(addEventIdTraceHeaders)).append("\n");
+    sb.append("    allowUnmatchedDynamicUrls: ").append(toIndentedString(allowUnmatchedDynamicUrls)).append("\n");
     sb.append("    circuitBreaker: ").append(toIndentedString(circuitBreaker)).append("\n");
     sb.append("    disableEndpoint: ").append(toIndentedString(disableEndpoint)).append("\n");
     sb.append("    maxPayloadReadSize: ").append(toIndentedString(maxPayloadReadSize)).append("\n");
@@ -559,7 +590,7 @@ public class DatastoreProjectConfig {
     sb.append("    signature: ").append(toIndentedString(signature)).append("\n");
     sb.append("    ssl: ").append(toIndentedString(ssl)).append("\n");
     sb.append("    strategy: ").append(toIndentedString(strategy)).append("\n");
-    sb.append("    syncDynamicEventAck: ").append(toIndentedString(syncDynamicEventAck)).append("\n");
+    sb.append("    verifyDynamicEvents: ").append(toIndentedString(verifyDynamicEvents)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -607,6 +638,11 @@ public class DatastoreProjectConfig {
     // add `add_event_id_trace_headers` to the URL query string
     if (getAddEventIdTraceHeaders() != null) {
       joiner.add(String.format(java.util.Locale.ROOT, "%sadd_event_id_trace_headers%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getAddEventIdTraceHeaders()))));
+    }
+
+    // add `allow_unmatched_dynamic_urls` to the URL query string
+    if (getAllowUnmatchedDynamicUrls() != null) {
+      joiner.add(String.format(java.util.Locale.ROOT, "%sallow_unmatched_dynamic_urls%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getAllowUnmatchedDynamicUrls()))));
     }
 
     // add `circuit_breaker` to the URL query string
@@ -669,9 +705,9 @@ public class DatastoreProjectConfig {
       joiner.add(getStrategy().toUrlQueryString(prefix + "strategy" + suffix));
     }
 
-    // add `sync_dynamic_event_ack` to the URL query string
-    if (getSyncDynamicEventAck() != null) {
-      joiner.add(String.format(java.util.Locale.ROOT, "%ssync_dynamic_event_ack%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getSyncDynamicEventAck()))));
+    // add `verify_dynamic_events` to the URL query string
+    if (getVerifyDynamicEvents() != null) {
+      joiner.add(String.format(java.util.Locale.ROOT, "%sverify_dynamic_events%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getVerifyDynamicEvents()))));
     }
 
     return joiner.toString();
