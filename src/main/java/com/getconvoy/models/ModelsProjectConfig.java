@@ -41,6 +41,7 @@ import com.getconvoy.client.ApiClient;
  */
 @JsonPropertyOrder({
   ModelsProjectConfig.JSON_PROPERTY_ADD_EVENT_ID_TRACE_HEADERS,
+  ModelsProjectConfig.JSON_PROPERTY_ALLOW_UNMATCHED_DYNAMIC_URLS,
   ModelsProjectConfig.JSON_PROPERTY_CIRCUIT_BREAKER,
   ModelsProjectConfig.JSON_PROPERTY_DISABLE_ENDPOINT,
   ModelsProjectConfig.JSON_PROPERTY_MAX_PAYLOAD_READ_SIZE,
@@ -53,13 +54,17 @@ import com.getconvoy.client.ApiClient;
   ModelsProjectConfig.JSON_PROPERTY_SIGNATURE,
   ModelsProjectConfig.JSON_PROPERTY_SSL,
   ModelsProjectConfig.JSON_PROPERTY_STRATEGY,
-  ModelsProjectConfig.JSON_PROPERTY_SYNC_DYNAMIC_EVENT_ACK
+  ModelsProjectConfig.JSON_PROPERTY_VERIFY_DYNAMIC_EVENTS
 })
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.23.0")
 public class ModelsProjectConfig {
   public static final String JSON_PROPERTY_ADD_EVENT_ID_TRACE_HEADERS = "add_event_id_trace_headers";
   @jakarta.annotation.Nullable
   private Boolean addEventIdTraceHeaders;
+
+  public static final String JSON_PROPERTY_ALLOW_UNMATCHED_DYNAMIC_URLS = "allow_unmatched_dynamic_urls";
+  @jakarta.annotation.Nullable
+  private Boolean allowUnmatchedDynamicUrls;
 
   public static final String JSON_PROPERTY_CIRCUIT_BREAKER = "circuit_breaker";
   @jakarta.annotation.Nullable
@@ -109,9 +114,9 @@ public class ModelsProjectConfig {
   @jakarta.annotation.Nullable
   private ModelsStrategyConfiguration strategy;
 
-  public static final String JSON_PROPERTY_SYNC_DYNAMIC_EVENT_ACK = "sync_dynamic_event_ack";
+  public static final String JSON_PROPERTY_VERIFY_DYNAMIC_EVENTS = "verify_dynamic_events";
   @jakarta.annotation.Nullable
-  private Boolean syncDynamicEventAck;
+  private Boolean verifyDynamicEvents;
 
   public ModelsProjectConfig() { 
   }
@@ -137,6 +142,30 @@ public class ModelsProjectConfig {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAddEventIdTraceHeaders(@jakarta.annotation.Nullable Boolean addEventIdTraceHeaders) {
     this.addEventIdTraceHeaders = addEventIdTraceHeaders;
+  }
+
+
+  public ModelsProjectConfig allowUnmatchedDynamicUrls(@jakarta.annotation.Nullable Boolean allowUnmatchedDynamicUrls) {
+    this.allowUnmatchedDynamicUrls = allowUnmatchedDynamicUrls;
+    return this;
+  }
+
+  /**
+   * AllowUnmatchedDynamicURLs lets a dynamic event URL that matches none of the project&#39;s endpoint URL templates auto-create an endpoint instead of failing. When false (the default), a project with templates configured rejects unmatched URLs.
+   * @return allowUnmatchedDynamicUrls
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_ALLOW_UNMATCHED_DYNAMIC_URLS, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Boolean getAllowUnmatchedDynamicUrls() {
+    return allowUnmatchedDynamicUrls;
+  }
+
+
+  @JsonProperty(value = JSON_PROPERTY_ALLOW_UNMATCHED_DYNAMIC_URLS, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setAllowUnmatchedDynamicUrls(@jakarta.annotation.Nullable Boolean allowUnmatchedDynamicUrls) {
+    this.allowUnmatchedDynamicUrls = allowUnmatchedDynamicUrls;
   }
 
 
@@ -428,27 +457,27 @@ public class ModelsProjectConfig {
   }
 
 
-  public ModelsProjectConfig syncDynamicEventAck(@jakarta.annotation.Nullable Boolean syncDynamicEventAck) {
-    this.syncDynamicEventAck = syncDynamicEventAck;
+  public ModelsProjectConfig verifyDynamicEvents(@jakarta.annotation.Nullable Boolean verifyDynamicEvents) {
+    this.verifyDynamicEvents = verifyDynamicEvents;
     return this;
   }
 
   /**
-   * SyncDynamicEventAck waits for dynamic endpoint/subscription resolve before acknowledging POST /events/dynamic. When false, the handler returns 201 after enqueue.
-   * @return syncDynamicEventAck
+   * VerifyDynamicEvents waits for dynamic endpoint/subscription resolve before acknowledging POST /events/dynamic. When false, the handler returns 201 after enqueue.
+   * @return verifyDynamicEvents
    */
   @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_SYNC_DYNAMIC_EVENT_ACK, required = false)
+  @JsonProperty(value = JSON_PROPERTY_VERIFY_DYNAMIC_EVENTS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public Boolean getSyncDynamicEventAck() {
-    return syncDynamicEventAck;
+  public Boolean getVerifyDynamicEvents() {
+    return verifyDynamicEvents;
   }
 
 
-  @JsonProperty(value = JSON_PROPERTY_SYNC_DYNAMIC_EVENT_ACK, required = false)
+  @JsonProperty(value = JSON_PROPERTY_VERIFY_DYNAMIC_EVENTS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setSyncDynamicEventAck(@jakarta.annotation.Nullable Boolean syncDynamicEventAck) {
-    this.syncDynamicEventAck = syncDynamicEventAck;
+  public void setVerifyDynamicEvents(@jakarta.annotation.Nullable Boolean verifyDynamicEvents) {
+    this.verifyDynamicEvents = verifyDynamicEvents;
   }
 
 
@@ -465,6 +494,7 @@ public class ModelsProjectConfig {
     }
     ModelsProjectConfig modelsProjectConfig = (ModelsProjectConfig) o;
     return Objects.equals(this.addEventIdTraceHeaders, modelsProjectConfig.addEventIdTraceHeaders) &&
+        Objects.equals(this.allowUnmatchedDynamicUrls, modelsProjectConfig.allowUnmatchedDynamicUrls) &&
         Objects.equals(this.circuitBreaker, modelsProjectConfig.circuitBreaker) &&
         Objects.equals(this.disableEndpoint, modelsProjectConfig.disableEndpoint) &&
         Objects.equals(this.maxPayloadReadSize, modelsProjectConfig.maxPayloadReadSize) &&
@@ -477,12 +507,12 @@ public class ModelsProjectConfig {
         Objects.equals(this.signature, modelsProjectConfig.signature) &&
         Objects.equals(this.ssl, modelsProjectConfig.ssl) &&
         Objects.equals(this.strategy, modelsProjectConfig.strategy) &&
-        Objects.equals(this.syncDynamicEventAck, modelsProjectConfig.syncDynamicEventAck);
+        Objects.equals(this.verifyDynamicEvents, modelsProjectConfig.verifyDynamicEvents);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(addEventIdTraceHeaders, circuitBreaker, disableEndpoint, maxPayloadReadSize, metaEvent, multipleEndpointSubscriptions, ratelimit, replayAttacksPreventionEnabled, requestIdHeader, searchPolicy, signature, ssl, strategy, syncDynamicEventAck);
+    return Objects.hash(addEventIdTraceHeaders, allowUnmatchedDynamicUrls, circuitBreaker, disableEndpoint, maxPayloadReadSize, metaEvent, multipleEndpointSubscriptions, ratelimit, replayAttacksPreventionEnabled, requestIdHeader, searchPolicy, signature, ssl, strategy, verifyDynamicEvents);
   }
 
   @Override
@@ -490,6 +520,7 @@ public class ModelsProjectConfig {
     StringBuilder sb = new StringBuilder();
     sb.append("class ModelsProjectConfig {\n");
     sb.append("    addEventIdTraceHeaders: ").append(toIndentedString(addEventIdTraceHeaders)).append("\n");
+    sb.append("    allowUnmatchedDynamicUrls: ").append(toIndentedString(allowUnmatchedDynamicUrls)).append("\n");
     sb.append("    circuitBreaker: ").append(toIndentedString(circuitBreaker)).append("\n");
     sb.append("    disableEndpoint: ").append(toIndentedString(disableEndpoint)).append("\n");
     sb.append("    maxPayloadReadSize: ").append(toIndentedString(maxPayloadReadSize)).append("\n");
@@ -502,7 +533,7 @@ public class ModelsProjectConfig {
     sb.append("    signature: ").append(toIndentedString(signature)).append("\n");
     sb.append("    ssl: ").append(toIndentedString(ssl)).append("\n");
     sb.append("    strategy: ").append(toIndentedString(strategy)).append("\n");
-    sb.append("    syncDynamicEventAck: ").append(toIndentedString(syncDynamicEventAck)).append("\n");
+    sb.append("    verifyDynamicEvents: ").append(toIndentedString(verifyDynamicEvents)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -550,6 +581,11 @@ public class ModelsProjectConfig {
     // add `add_event_id_trace_headers` to the URL query string
     if (getAddEventIdTraceHeaders() != null) {
       joiner.add(String.format(java.util.Locale.ROOT, "%sadd_event_id_trace_headers%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getAddEventIdTraceHeaders()))));
+    }
+
+    // add `allow_unmatched_dynamic_urls` to the URL query string
+    if (getAllowUnmatchedDynamicUrls() != null) {
+      joiner.add(String.format(java.util.Locale.ROOT, "%sallow_unmatched_dynamic_urls%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getAllowUnmatchedDynamicUrls()))));
     }
 
     // add `circuit_breaker` to the URL query string
@@ -612,9 +648,9 @@ public class ModelsProjectConfig {
       joiner.add(getStrategy().toUrlQueryString(prefix + "strategy" + suffix));
     }
 
-    // add `sync_dynamic_event_ack` to the URL query string
-    if (getSyncDynamicEventAck() != null) {
-      joiner.add(String.format(java.util.Locale.ROOT, "%ssync_dynamic_event_ack%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getSyncDynamicEventAck()))));
+    // add `verify_dynamic_events` to the URL query string
+    if (getVerifyDynamicEvents() != null) {
+      joiner.add(String.format(java.util.Locale.ROOT, "%sverify_dynamic_events%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getVerifyDynamicEvents()))));
     }
 
     return joiner.toString();
