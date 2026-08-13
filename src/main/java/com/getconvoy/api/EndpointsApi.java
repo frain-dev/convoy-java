@@ -19,6 +19,7 @@ import com.getconvoy.client.Configuration;
 import com.getconvoy.client.Pair;
 
 import com.getconvoy.models.CreateEndpoint201Response;
+import com.getconvoy.models.GetEndpointPeriodFailureRates200Response;
 import com.getconvoy.models.GetEndpoints200Response;
 import com.getconvoy.models.GetProjects400Response;
 import com.getconvoy.models.ModelsCreateEndpoint;
@@ -808,6 +809,155 @@ public class EndpointsApi {
         .replace("{endpointID}", ApiClient.urlEncode(endpointID.toString()));
 
     localVarRequestBuilder.uri(URI.create(memberVarBaseUri + localVarPath));
+
+    localVarRequestBuilder.header("Accept", "application/json");
+
+    localVarRequestBuilder.method("GET", HttpRequest.BodyPublishers.noBody());
+    if (memberVarReadTimeout != null) {
+      localVarRequestBuilder.timeout(memberVarReadTimeout);
+    }
+    // Add custom headers if provided
+    localVarRequestBuilder = HttpRequestBuilderExtensions.withAdditionalHeaders(localVarRequestBuilder, headers);
+    if (memberVarInterceptor != null) {
+      memberVarInterceptor.accept(localVarRequestBuilder);
+    }
+    return localVarRequestBuilder;
+  }
+
+  /**
+   * Endpoint period failure rates
+   * Display-only delivery rates for the given endpoint ids over a date range (default last 7 days). Independent of the list so a slow COUNT cannot delay the table.
+   * @param projectID Project ID (required)
+   * @param endpointId Endpoint IDs (optional)
+   * @param startDate Start date (optional)
+   * @param endDate End date (optional)
+   * @return GetEndpointPeriodFailureRates200Response
+   * @throws ApiException if fails to make API call
+   */
+  public GetEndpointPeriodFailureRates200Response getEndpointPeriodFailureRates(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable List<String> endpointId, @jakarta.annotation.Nullable String startDate, @jakarta.annotation.Nullable String endDate) throws ApiException {
+    return getEndpointPeriodFailureRates(projectID, endpointId, startDate, endDate, null);
+  }
+
+  /**
+   * Endpoint period failure rates
+   * Display-only delivery rates for the given endpoint ids over a date range (default last 7 days). Independent of the list so a slow COUNT cannot delay the table.
+   * @param projectID Project ID (required)
+   * @param endpointId Endpoint IDs (optional)
+   * @param startDate Start date (optional)
+   * @param endDate End date (optional)
+   * @param headers Optional headers to include in the request
+   * @return GetEndpointPeriodFailureRates200Response
+   * @throws ApiException if fails to make API call
+   */
+  public GetEndpointPeriodFailureRates200Response getEndpointPeriodFailureRates(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable List<String> endpointId, @jakarta.annotation.Nullable String startDate, @jakarta.annotation.Nullable String endDate, Map<String, String> headers) throws ApiException {
+    ApiResponse<GetEndpointPeriodFailureRates200Response> localVarResponse = getEndpointPeriodFailureRatesWithHttpInfo(projectID, endpointId, startDate, endDate, headers);
+    return localVarResponse.getData();
+  }
+
+  /**
+   * Endpoint period failure rates
+   * Display-only delivery rates for the given endpoint ids over a date range (default last 7 days). Independent of the list so a slow COUNT cannot delay the table.
+   * @param projectID Project ID (required)
+   * @param endpointId Endpoint IDs (optional)
+   * @param startDate Start date (optional)
+   * @param endDate End date (optional)
+   * @return ApiResponse&lt;GetEndpointPeriodFailureRates200Response&gt;
+   * @throws ApiException if fails to make API call
+   */
+  public ApiResponse<GetEndpointPeriodFailureRates200Response> getEndpointPeriodFailureRatesWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable List<String> endpointId, @jakarta.annotation.Nullable String startDate, @jakarta.annotation.Nullable String endDate) throws ApiException {
+    return getEndpointPeriodFailureRatesWithHttpInfo(projectID, endpointId, startDate, endDate, null);
+  }
+
+  /**
+   * Endpoint period failure rates
+   * Display-only delivery rates for the given endpoint ids over a date range (default last 7 days). Independent of the list so a slow COUNT cannot delay the table.
+   * @param projectID Project ID (required)
+   * @param endpointId Endpoint IDs (optional)
+   * @param startDate Start date (optional)
+   * @param endDate End date (optional)
+   * @param headers Optional headers to include in the request
+   * @return ApiResponse&lt;GetEndpointPeriodFailureRates200Response&gt;
+   * @throws ApiException if fails to make API call
+   */
+  public ApiResponse<GetEndpointPeriodFailureRates200Response> getEndpointPeriodFailureRatesWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable List<String> endpointId, @jakarta.annotation.Nullable String startDate, @jakarta.annotation.Nullable String endDate, Map<String, String> headers) throws ApiException {
+    HttpRequest.Builder localVarRequestBuilder = getEndpointPeriodFailureRatesRequestBuilder(projectID, endpointId, startDate, endDate, headers);
+    try {
+      HttpResponse<InputStream> localVarResponse = memberVarHttpClient.send(
+          localVarRequestBuilder.build(),
+          HttpResponse.BodyHandlers.ofInputStream());
+      if (memberVarResponseInterceptor != null) {
+        memberVarResponseInterceptor.accept(localVarResponse);
+      }
+      InputStream localVarResponseBody = null;
+      try {
+        if (localVarResponse.statusCode()/ 100 != 2) {
+          throw getApiException("getEndpointPeriodFailureRates", localVarResponse);
+        }
+        localVarResponseBody = ApiClient.getResponseBody(localVarResponse);
+        if (localVarResponseBody == null) {
+          return new ApiResponse<GetEndpointPeriodFailureRates200Response>(
+              localVarResponse.statusCode(),
+              localVarResponse.headers().map(),
+              null
+          );
+        }
+
+        
+        
+        String responseBody = new String(localVarResponseBody.readAllBytes());
+        GetEndpointPeriodFailureRates200Response responseValue = responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<GetEndpointPeriodFailureRates200Response>() {});
+        
+
+        return new ApiResponse<GetEndpointPeriodFailureRates200Response>(
+            localVarResponse.statusCode(),
+            localVarResponse.headers().map(),
+            responseValue
+        );
+      } finally {
+        if (localVarResponseBody != null) {
+          localVarResponseBody.close();
+        }
+      }
+    } catch (IOException e) {
+      throw new ApiException(e);
+    }
+    catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
+      throw new ApiException(e);
+    }
+  }
+
+  private HttpRequest.Builder getEndpointPeriodFailureRatesRequestBuilder(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable List<String> endpointId, @jakarta.annotation.Nullable String startDate, @jakarta.annotation.Nullable String endDate, Map<String, String> headers) throws ApiException {
+    // verify the required parameter 'projectID' is set
+    if (projectID == null) {
+      throw new ApiException(400, "Missing the required parameter 'projectID' when calling getEndpointPeriodFailureRates");
+    }
+
+    HttpRequest.Builder localVarRequestBuilder = HttpRequest.newBuilder();
+
+    String localVarPath = "/v1/projects/{projectID}/endpoints/period-failure-rates"
+        .replace("{projectID}", ApiClient.urlEncode(projectID.toString()));
+
+    List<Pair> localVarQueryParams = new ArrayList<>();
+    StringJoiner localVarQueryStringJoiner = new StringJoiner("&");
+    String localVarQueryParameterBaseName;
+    localVarQueryParameterBaseName = "endpointId";
+    localVarQueryParams.addAll(ApiClient.parameterToPairs("multi", "endpointId", endpointId));
+    localVarQueryParameterBaseName = "startDate";
+    localVarQueryParams.addAll(ApiClient.parameterToPairs("startDate", startDate));
+    localVarQueryParameterBaseName = "endDate";
+    localVarQueryParams.addAll(ApiClient.parameterToPairs("endDate", endDate));
+
+    if (!localVarQueryParams.isEmpty() || localVarQueryStringJoiner.length() != 0) {
+      StringJoiner queryJoiner = new StringJoiner("&");
+      localVarQueryParams.forEach(p -> queryJoiner.add(p.getName() + '=' + p.getValue()));
+      if (localVarQueryStringJoiner.length() != 0) {
+        queryJoiner.add(localVarQueryStringJoiner.toString());
+      }
+      localVarRequestBuilder.uri(URI.create(memberVarBaseUri + localVarPath + '?' + queryJoiner.toString()));
+    } else {
+      localVarRequestBuilder.uri(URI.create(memberVarBaseUri + localVarPath));
+    }
 
     localVarRequestBuilder.header("Accept", "application/json");
 
