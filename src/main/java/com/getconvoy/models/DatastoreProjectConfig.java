@@ -389,7 +389,7 @@ public class DatastoreProjectConfig {
   }
 
   /**
-   * Get searchPolicy
+   * SearchPolicy is an optional Go duration (e.g. \&quot;24h\&quot;) shown in project settings. When set, the dashboard explains that payload/JSON search is additionally clamped to this lookback intersected with the Events log date picker. Empty means opt-out.
    * @return searchPolicy
    */
   @jakarta.annotation.Nullable
