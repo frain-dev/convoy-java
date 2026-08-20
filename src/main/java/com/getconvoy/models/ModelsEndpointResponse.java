@@ -68,6 +68,7 @@ import com.getconvoy.client.ApiClient;
   ModelsEndpointResponse.JSON_PROPERTY_STATUS,
   ModelsEndpointResponse.JSON_PROPERTY_SUCCESS_COUNT,
   ModelsEndpointResponse.JSON_PROPERTY_SUPPORT_EMAIL,
+  ModelsEndpointResponse.JSON_PROPERTY_TEAMS_WEBHOOK_URL,
   ModelsEndpointResponse.JSON_PROPERTY_UID,
   ModelsEndpointResponse.JSON_PROPERTY_UPDATED_AT,
   ModelsEndpointResponse.JSON_PROPERTY_URL
@@ -160,6 +161,10 @@ public class ModelsEndpointResponse {
   public static final String JSON_PROPERTY_SUPPORT_EMAIL = "support_email";
   @jakarta.annotation.Nullable
   private String supportEmail;
+
+  public static final String JSON_PROPERTY_TEAMS_WEBHOOK_URL = "teams_webhook_url";
+  @jakarta.annotation.Nullable
+  private String teamsWebhookUrl;
 
   public static final String JSON_PROPERTY_UID = "uid";
   @jakarta.annotation.Nullable
@@ -832,6 +837,30 @@ public class ModelsEndpointResponse {
   }
 
 
+  public ModelsEndpointResponse teamsWebhookUrl(@jakarta.annotation.Nullable String teamsWebhookUrl) {
+    this.teamsWebhookUrl = teamsWebhookUrl;
+    return this;
+  }
+
+  /**
+   * Get teamsWebhookUrl
+   * @return teamsWebhookUrl
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_TEAMS_WEBHOOK_URL, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public String getTeamsWebhookUrl() {
+    return teamsWebhookUrl;
+  }
+
+
+  @JsonProperty(value = JSON_PROPERTY_TEAMS_WEBHOOK_URL, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setTeamsWebhookUrl(@jakarta.annotation.Nullable String teamsWebhookUrl) {
+    this.teamsWebhookUrl = teamsWebhookUrl;
+  }
+
+
   public ModelsEndpointResponse uid(@jakarta.annotation.Nullable String uid) {
     this.uid = uid;
     return this;
@@ -940,6 +969,7 @@ public class ModelsEndpointResponse {
         Objects.equals(this.status, modelsEndpointResponse.status) &&
         equalsNullable(this.successCount, modelsEndpointResponse.successCount) &&
         Objects.equals(this.supportEmail, modelsEndpointResponse.supportEmail) &&
+        Objects.equals(this.teamsWebhookUrl, modelsEndpointResponse.teamsWebhookUrl) &&
         Objects.equals(this.uid, modelsEndpointResponse.uid) &&
         Objects.equals(this.updatedAt, modelsEndpointResponse.updatedAt) &&
         Objects.equals(this.url, modelsEndpointResponse.url);
@@ -951,7 +981,7 @@ public class ModelsEndpointResponse {
 
   @Override
   public int hashCode() {
-    return Objects.hash(advancedSignatures, hashCodeNullable(authentication), hashCodeNullable(cbState), contentType, createdAt, hashCodeNullable(deletedAt), description, events, hashCodeNullable(failureCount), hashCodeNullable(failureRate), httpTimeout, hashCodeNullable(mtlsClientCert), name, ownerId, hashCodeNullable(periodFailureRate), projectId, rateLimit, rateLimitDuration, hashCodeNullable(retryCount), secrets, slackWebhookUrl, status, hashCodeNullable(successCount), supportEmail, uid, updatedAt, url);
+    return Objects.hash(advancedSignatures, hashCodeNullable(authentication), hashCodeNullable(cbState), contentType, createdAt, hashCodeNullable(deletedAt), description, events, hashCodeNullable(failureCount), hashCodeNullable(failureRate), httpTimeout, hashCodeNullable(mtlsClientCert), name, ownerId, hashCodeNullable(periodFailureRate), projectId, rateLimit, rateLimitDuration, hashCodeNullable(retryCount), secrets, slackWebhookUrl, status, hashCodeNullable(successCount), supportEmail, teamsWebhookUrl, uid, updatedAt, url);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -989,6 +1019,7 @@ public class ModelsEndpointResponse {
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    successCount: ").append(toIndentedString(successCount)).append("\n");
     sb.append("    supportEmail: ").append(toIndentedString(supportEmail)).append("\n");
+    sb.append("    teamsWebhookUrl: ").append(toIndentedString(teamsWebhookUrl)).append("\n");
     sb.append("    uid: ").append(toIndentedString(uid)).append("\n");
     sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");
     sb.append("    url: ").append(toIndentedString(url)).append("\n");
@@ -1159,6 +1190,11 @@ public class ModelsEndpointResponse {
     // add `support_email` to the URL query string
     if (getSupportEmail() != null) {
       joiner.add(String.format(java.util.Locale.ROOT, "%ssupport_email%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getSupportEmail()))));
+    }
+
+    // add `teams_webhook_url` to the URL query string
+    if (getTeamsWebhookUrl() != null) {
+      joiner.add(String.format(java.util.Locale.ROOT, "%steams_webhook_url%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getTeamsWebhookUrl()))));
     }
 
     // add `uid` to the URL query string

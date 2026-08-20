@@ -49,6 +49,7 @@ import com.getconvoy.client.ApiClient;
   ModelsUpdateEndpoint.JSON_PROPERTY_SECRET,
   ModelsUpdateEndpoint.JSON_PROPERTY_SLACK_WEBHOOK_URL,
   ModelsUpdateEndpoint.JSON_PROPERTY_SUPPORT_EMAIL,
+  ModelsUpdateEndpoint.JSON_PROPERTY_TEAMS_WEBHOOK_URL,
   ModelsUpdateEndpoint.JSON_PROPERTY_URL
 })
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.23.0")
@@ -108,6 +109,10 @@ public class ModelsUpdateEndpoint {
   public static final String JSON_PROPERTY_SUPPORT_EMAIL = "support_email";
   @jakarta.annotation.Nullable
   private String supportEmail;
+
+  public static final String JSON_PROPERTY_TEAMS_WEBHOOK_URL = "teams_webhook_url";
+  @jakarta.annotation.Nullable
+  private String teamsWebhookUrl;
 
   public static final String JSON_PROPERTY_URL = "url";
   @jakarta.annotation.Nullable
@@ -452,6 +457,30 @@ public class ModelsUpdateEndpoint {
   }
 
 
+  public ModelsUpdateEndpoint teamsWebhookUrl(@jakarta.annotation.Nullable String teamsWebhookUrl) {
+    this.teamsWebhookUrl = teamsWebhookUrl;
+    return this;
+  }
+
+  /**
+   * Microsoft Teams webhook URL is an alternative method to support email where endpoint developers can receive failure notifications in a Teams channel. Use a Workflows (Power Automate) webhook URL; retired Office 365 connector URLs no longer deliver.
+   * @return teamsWebhookUrl
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_TEAMS_WEBHOOK_URL, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public String getTeamsWebhookUrl() {
+    return teamsWebhookUrl;
+  }
+
+
+  @JsonProperty(value = JSON_PROPERTY_TEAMS_WEBHOOK_URL, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setTeamsWebhookUrl(@jakarta.annotation.Nullable String teamsWebhookUrl) {
+    this.teamsWebhookUrl = teamsWebhookUrl;
+  }
+
+
   public ModelsUpdateEndpoint url(@jakarta.annotation.Nullable String url) {
     this.url = url;
     return this;
@@ -502,12 +531,13 @@ public class ModelsUpdateEndpoint {
         Objects.equals(this.secret, modelsUpdateEndpoint.secret) &&
         Objects.equals(this.slackWebhookUrl, modelsUpdateEndpoint.slackWebhookUrl) &&
         Objects.equals(this.supportEmail, modelsUpdateEndpoint.supportEmail) &&
+        Objects.equals(this.teamsWebhookUrl, modelsUpdateEndpoint.teamsWebhookUrl) &&
         Objects.equals(this.url, modelsUpdateEndpoint.url);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(advancedSignatures, authentication, contentType, description, httpTimeout, isDisabled, mtlsClientCert, name, ownerId, rateLimit, rateLimitDuration, secret, slackWebhookUrl, supportEmail, url);
+    return Objects.hash(advancedSignatures, authentication, contentType, description, httpTimeout, isDisabled, mtlsClientCert, name, ownerId, rateLimit, rateLimitDuration, secret, slackWebhookUrl, supportEmail, teamsWebhookUrl, url);
   }
 
   @Override
@@ -528,6 +558,7 @@ public class ModelsUpdateEndpoint {
     sb.append("    secret: ").append(toIndentedString(secret)).append("\n");
     sb.append("    slackWebhookUrl: ").append(toIndentedString(slackWebhookUrl)).append("\n");
     sb.append("    supportEmail: ").append(toIndentedString(supportEmail)).append("\n");
+    sb.append("    teamsWebhookUrl: ").append(toIndentedString(teamsWebhookUrl)).append("\n");
     sb.append("    url: ").append(toIndentedString(url)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -641,6 +672,11 @@ public class ModelsUpdateEndpoint {
     // add `support_email` to the URL query string
     if (getSupportEmail() != null) {
       joiner.add(String.format(java.util.Locale.ROOT, "%ssupport_email%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getSupportEmail()))));
+    }
+
+    // add `teams_webhook_url` to the URL query string
+    if (getTeamsWebhookUrl() != null) {
+      joiner.add(String.format(java.util.Locale.ROOT, "%steams_webhook_url%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getTeamsWebhookUrl()))));
     }
 
     // add `url` to the URL query string
