@@ -20,7 +20,8 @@ import com.getconvoy.client.Pair;
 
 import com.getconvoy.models.BatchReplayEvents200Response;
 import com.getconvoy.models.CountAffectedEvents200Response;
-import com.getconvoy.models.CreateBroadcastEvent201Response;
+import com.getconvoy.models.CreateEndpointEvent201Response;
+import com.getconvoy.models.GetEndpointEvent200Response;
 import com.getconvoy.models.GetEventsPaged200Response;
 import com.getconvoy.models.GetProjects400Response;
 import com.getconvoy.models.ModelsBroadcastEvent;
@@ -578,52 +579,52 @@ public class EventsApi {
 
   /**
    * Create a broadcast event
-   * This endpoint creates a event that is broadcast to every endpoint whose subscription matches the given event type.
+   * This endpoint creates a event that is broadcast to every endpoint whose subscription matches the given event type. The 201 body includes uid (the event id). Use GET /events/{eventID} or GET /eventdeliveries?eventId&#x3D; to follow the send.
    * @param projectID Project ID (required)
    * @param modelsBroadcastEvent Broadcast Event Details (required)
-   * @return CreateBroadcastEvent201Response
+   * @return CreateEndpointEvent201Response
    * @throws ApiException if fails to make API call
    */
-  public CreateBroadcastEvent201Response createBroadcastEvent(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull ModelsBroadcastEvent modelsBroadcastEvent) throws ApiException {
+  public CreateEndpointEvent201Response createBroadcastEvent(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull ModelsBroadcastEvent modelsBroadcastEvent) throws ApiException {
     return createBroadcastEvent(projectID, modelsBroadcastEvent, null);
   }
 
   /**
    * Create a broadcast event
-   * This endpoint creates a event that is broadcast to every endpoint whose subscription matches the given event type.
+   * This endpoint creates a event that is broadcast to every endpoint whose subscription matches the given event type. The 201 body includes uid (the event id). Use GET /events/{eventID} or GET /eventdeliveries?eventId&#x3D; to follow the send.
    * @param projectID Project ID (required)
    * @param modelsBroadcastEvent Broadcast Event Details (required)
    * @param headers Optional headers to include in the request
-   * @return CreateBroadcastEvent201Response
+   * @return CreateEndpointEvent201Response
    * @throws ApiException if fails to make API call
    */
-  public CreateBroadcastEvent201Response createBroadcastEvent(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull ModelsBroadcastEvent modelsBroadcastEvent, Map<String, String> headers) throws ApiException {
-    ApiResponse<CreateBroadcastEvent201Response> localVarResponse = createBroadcastEventWithHttpInfo(projectID, modelsBroadcastEvent, headers);
+  public CreateEndpointEvent201Response createBroadcastEvent(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull ModelsBroadcastEvent modelsBroadcastEvent, Map<String, String> headers) throws ApiException {
+    ApiResponse<CreateEndpointEvent201Response> localVarResponse = createBroadcastEventWithHttpInfo(projectID, modelsBroadcastEvent, headers);
     return localVarResponse.getData();
   }
 
   /**
    * Create a broadcast event
-   * This endpoint creates a event that is broadcast to every endpoint whose subscription matches the given event type.
+   * This endpoint creates a event that is broadcast to every endpoint whose subscription matches the given event type. The 201 body includes uid (the event id). Use GET /events/{eventID} or GET /eventdeliveries?eventId&#x3D; to follow the send.
    * @param projectID Project ID (required)
    * @param modelsBroadcastEvent Broadcast Event Details (required)
-   * @return ApiResponse&lt;CreateBroadcastEvent201Response&gt;
+   * @return ApiResponse&lt;CreateEndpointEvent201Response&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<CreateBroadcastEvent201Response> createBroadcastEventWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull ModelsBroadcastEvent modelsBroadcastEvent) throws ApiException {
+  public ApiResponse<CreateEndpointEvent201Response> createBroadcastEventWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull ModelsBroadcastEvent modelsBroadcastEvent) throws ApiException {
     return createBroadcastEventWithHttpInfo(projectID, modelsBroadcastEvent, null);
   }
 
   /**
    * Create a broadcast event
-   * This endpoint creates a event that is broadcast to every endpoint whose subscription matches the given event type.
+   * This endpoint creates a event that is broadcast to every endpoint whose subscription matches the given event type. The 201 body includes uid (the event id). Use GET /events/{eventID} or GET /eventdeliveries?eventId&#x3D; to follow the send.
    * @param projectID Project ID (required)
    * @param modelsBroadcastEvent Broadcast Event Details (required)
    * @param headers Optional headers to include in the request
-   * @return ApiResponse&lt;CreateBroadcastEvent201Response&gt;
+   * @return ApiResponse&lt;CreateEndpointEvent201Response&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<CreateBroadcastEvent201Response> createBroadcastEventWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull ModelsBroadcastEvent modelsBroadcastEvent, Map<String, String> headers) throws ApiException {
+  public ApiResponse<CreateEndpointEvent201Response> createBroadcastEventWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull ModelsBroadcastEvent modelsBroadcastEvent, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = createBroadcastEventRequestBuilder(projectID, modelsBroadcastEvent, headers);
     try {
       HttpResponse<InputStream> localVarResponse = memberVarHttpClient.send(
@@ -639,7 +640,7 @@ public class EventsApi {
         }
         localVarResponseBody = ApiClient.getResponseBody(localVarResponse);
         if (localVarResponseBody == null) {
-          return new ApiResponse<CreateBroadcastEvent201Response>(
+          return new ApiResponse<CreateEndpointEvent201Response>(
               localVarResponse.statusCode(),
               localVarResponse.headers().map(),
               null
@@ -649,10 +650,10 @@ public class EventsApi {
         
         
         String responseBody = new String(localVarResponseBody.readAllBytes());
-        CreateBroadcastEvent201Response responseValue = responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<CreateBroadcastEvent201Response>() {});
+        CreateEndpointEvent201Response responseValue = responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<CreateEndpointEvent201Response>() {});
         
 
-        return new ApiResponse<CreateBroadcastEvent201Response>(
+        return new ApiResponse<CreateEndpointEvent201Response>(
             localVarResponse.statusCode(),
             localVarResponse.headers().map(),
             responseValue
@@ -710,52 +711,52 @@ public class EventsApi {
 
   /**
    * Dynamic Events
-   * This endpoint does not require creating endpoint and subscriptions ahead of time. Instead, you supply the endpoint and the payload, and Convoy delivers the events
+   * This endpoint creates a dynamic event without creating the endpoint and subscription ahead of time. The 201 body includes uid (the event id). Use GET /events/{eventID} or GET /eventdeliveries?eventId&#x3D; to follow the send.
    * @param projectID Project ID (required)
    * @param modelsDynamicEvent Event Details (required)
-   * @return GetProjects400Response
+   * @return CreateEndpointEvent201Response
    * @throws ApiException if fails to make API call
    */
-  public GetProjects400Response createDynamicEvent(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull ModelsDynamicEvent modelsDynamicEvent) throws ApiException {
+  public CreateEndpointEvent201Response createDynamicEvent(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull ModelsDynamicEvent modelsDynamicEvent) throws ApiException {
     return createDynamicEvent(projectID, modelsDynamicEvent, null);
   }
 
   /**
    * Dynamic Events
-   * This endpoint does not require creating endpoint and subscriptions ahead of time. Instead, you supply the endpoint and the payload, and Convoy delivers the events
+   * This endpoint creates a dynamic event without creating the endpoint and subscription ahead of time. The 201 body includes uid (the event id). Use GET /events/{eventID} or GET /eventdeliveries?eventId&#x3D; to follow the send.
    * @param projectID Project ID (required)
    * @param modelsDynamicEvent Event Details (required)
    * @param headers Optional headers to include in the request
-   * @return GetProjects400Response
+   * @return CreateEndpointEvent201Response
    * @throws ApiException if fails to make API call
    */
-  public GetProjects400Response createDynamicEvent(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull ModelsDynamicEvent modelsDynamicEvent, Map<String, String> headers) throws ApiException {
-    ApiResponse<GetProjects400Response> localVarResponse = createDynamicEventWithHttpInfo(projectID, modelsDynamicEvent, headers);
+  public CreateEndpointEvent201Response createDynamicEvent(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull ModelsDynamicEvent modelsDynamicEvent, Map<String, String> headers) throws ApiException {
+    ApiResponse<CreateEndpointEvent201Response> localVarResponse = createDynamicEventWithHttpInfo(projectID, modelsDynamicEvent, headers);
     return localVarResponse.getData();
   }
 
   /**
    * Dynamic Events
-   * This endpoint does not require creating endpoint and subscriptions ahead of time. Instead, you supply the endpoint and the payload, and Convoy delivers the events
+   * This endpoint creates a dynamic event without creating the endpoint and subscription ahead of time. The 201 body includes uid (the event id). Use GET /events/{eventID} or GET /eventdeliveries?eventId&#x3D; to follow the send.
    * @param projectID Project ID (required)
    * @param modelsDynamicEvent Event Details (required)
-   * @return ApiResponse&lt;GetProjects400Response&gt;
+   * @return ApiResponse&lt;CreateEndpointEvent201Response&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<GetProjects400Response> createDynamicEventWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull ModelsDynamicEvent modelsDynamicEvent) throws ApiException {
+  public ApiResponse<CreateEndpointEvent201Response> createDynamicEventWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull ModelsDynamicEvent modelsDynamicEvent) throws ApiException {
     return createDynamicEventWithHttpInfo(projectID, modelsDynamicEvent, null);
   }
 
   /**
    * Dynamic Events
-   * This endpoint does not require creating endpoint and subscriptions ahead of time. Instead, you supply the endpoint and the payload, and Convoy delivers the events
+   * This endpoint creates a dynamic event without creating the endpoint and subscription ahead of time. The 201 body includes uid (the event id). Use GET /events/{eventID} or GET /eventdeliveries?eventId&#x3D; to follow the send.
    * @param projectID Project ID (required)
    * @param modelsDynamicEvent Event Details (required)
    * @param headers Optional headers to include in the request
-   * @return ApiResponse&lt;GetProjects400Response&gt;
+   * @return ApiResponse&lt;CreateEndpointEvent201Response&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<GetProjects400Response> createDynamicEventWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull ModelsDynamicEvent modelsDynamicEvent, Map<String, String> headers) throws ApiException {
+  public ApiResponse<CreateEndpointEvent201Response> createDynamicEventWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull ModelsDynamicEvent modelsDynamicEvent, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = createDynamicEventRequestBuilder(projectID, modelsDynamicEvent, headers);
     try {
       HttpResponse<InputStream> localVarResponse = memberVarHttpClient.send(
@@ -771,7 +772,7 @@ public class EventsApi {
         }
         localVarResponseBody = ApiClient.getResponseBody(localVarResponse);
         if (localVarResponseBody == null) {
-          return new ApiResponse<GetProjects400Response>(
+          return new ApiResponse<CreateEndpointEvent201Response>(
               localVarResponse.statusCode(),
               localVarResponse.headers().map(),
               null
@@ -781,10 +782,10 @@ public class EventsApi {
         
         
         String responseBody = new String(localVarResponseBody.readAllBytes());
-        GetProjects400Response responseValue = responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<GetProjects400Response>() {});
+        CreateEndpointEvent201Response responseValue = responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<CreateEndpointEvent201Response>() {});
         
 
-        return new ApiResponse<GetProjects400Response>(
+        return new ApiResponse<CreateEndpointEvent201Response>(
             localVarResponse.statusCode(),
             localVarResponse.headers().map(),
             responseValue
@@ -842,52 +843,52 @@ public class EventsApi {
 
   /**
    * Create an event
-   * This endpoint creates an endpoint event
+   * This endpoint creates an endpoint event The 201 body includes uid (the event id). Use GET /events/{eventID} or GET /eventdeliveries?eventId&#x3D; to follow the send.
    * @param projectID Project ID (required)
    * @param modelsCreateEvent Event Details (required)
-   * @return GetProjects400Response
+   * @return CreateEndpointEvent201Response
    * @throws ApiException if fails to make API call
    */
-  public GetProjects400Response createEndpointEvent(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull ModelsCreateEvent modelsCreateEvent) throws ApiException {
+  public CreateEndpointEvent201Response createEndpointEvent(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull ModelsCreateEvent modelsCreateEvent) throws ApiException {
     return createEndpointEvent(projectID, modelsCreateEvent, null);
   }
 
   /**
    * Create an event
-   * This endpoint creates an endpoint event
+   * This endpoint creates an endpoint event The 201 body includes uid (the event id). Use GET /events/{eventID} or GET /eventdeliveries?eventId&#x3D; to follow the send.
    * @param projectID Project ID (required)
    * @param modelsCreateEvent Event Details (required)
    * @param headers Optional headers to include in the request
-   * @return GetProjects400Response
+   * @return CreateEndpointEvent201Response
    * @throws ApiException if fails to make API call
    */
-  public GetProjects400Response createEndpointEvent(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull ModelsCreateEvent modelsCreateEvent, Map<String, String> headers) throws ApiException {
-    ApiResponse<GetProjects400Response> localVarResponse = createEndpointEventWithHttpInfo(projectID, modelsCreateEvent, headers);
+  public CreateEndpointEvent201Response createEndpointEvent(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull ModelsCreateEvent modelsCreateEvent, Map<String, String> headers) throws ApiException {
+    ApiResponse<CreateEndpointEvent201Response> localVarResponse = createEndpointEventWithHttpInfo(projectID, modelsCreateEvent, headers);
     return localVarResponse.getData();
   }
 
   /**
    * Create an event
-   * This endpoint creates an endpoint event
+   * This endpoint creates an endpoint event The 201 body includes uid (the event id). Use GET /events/{eventID} or GET /eventdeliveries?eventId&#x3D; to follow the send.
    * @param projectID Project ID (required)
    * @param modelsCreateEvent Event Details (required)
-   * @return ApiResponse&lt;GetProjects400Response&gt;
+   * @return ApiResponse&lt;CreateEndpointEvent201Response&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<GetProjects400Response> createEndpointEventWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull ModelsCreateEvent modelsCreateEvent) throws ApiException {
+  public ApiResponse<CreateEndpointEvent201Response> createEndpointEventWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull ModelsCreateEvent modelsCreateEvent) throws ApiException {
     return createEndpointEventWithHttpInfo(projectID, modelsCreateEvent, null);
   }
 
   /**
    * Create an event
-   * This endpoint creates an endpoint event
+   * This endpoint creates an endpoint event The 201 body includes uid (the event id). Use GET /events/{eventID} or GET /eventdeliveries?eventId&#x3D; to follow the send.
    * @param projectID Project ID (required)
    * @param modelsCreateEvent Event Details (required)
    * @param headers Optional headers to include in the request
-   * @return ApiResponse&lt;GetProjects400Response&gt;
+   * @return ApiResponse&lt;CreateEndpointEvent201Response&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<GetProjects400Response> createEndpointEventWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull ModelsCreateEvent modelsCreateEvent, Map<String, String> headers) throws ApiException {
+  public ApiResponse<CreateEndpointEvent201Response> createEndpointEventWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull ModelsCreateEvent modelsCreateEvent, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = createEndpointEventRequestBuilder(projectID, modelsCreateEvent, headers);
     try {
       HttpResponse<InputStream> localVarResponse = memberVarHttpClient.send(
@@ -903,7 +904,7 @@ public class EventsApi {
         }
         localVarResponseBody = ApiClient.getResponseBody(localVarResponse);
         if (localVarResponseBody == null) {
-          return new ApiResponse<GetProjects400Response>(
+          return new ApiResponse<CreateEndpointEvent201Response>(
               localVarResponse.statusCode(),
               localVarResponse.headers().map(),
               null
@@ -913,10 +914,10 @@ public class EventsApi {
         
         
         String responseBody = new String(localVarResponseBody.readAllBytes());
-        GetProjects400Response responseValue = responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<GetProjects400Response>() {});
+        CreateEndpointEvent201Response responseValue = responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<CreateEndpointEvent201Response>() {});
         
 
-        return new ApiResponse<GetProjects400Response>(
+        return new ApiResponse<CreateEndpointEvent201Response>(
             localVarResponse.statusCode(),
             localVarResponse.headers().map(),
             responseValue
@@ -974,52 +975,52 @@ public class EventsApi {
 
   /**
    * Fan out an event
-   * This endpoint uses the owner_id to fan out an event to multiple endpoints.
+   * This endpoint uses the owner_id to fan out an event to multiple endpoints. The 201 body includes uid (the event id). Use GET /events/{eventID} or GET /eventdeliveries?eventId&#x3D; to follow the send.
    * @param projectID Project ID (required)
    * @param modelsFanoutEvent Event Details (required)
-   * @return GetProjects400Response
+   * @return CreateEndpointEvent201Response
    * @throws ApiException if fails to make API call
    */
-  public GetProjects400Response createEndpointFanoutEvent(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull ModelsFanoutEvent modelsFanoutEvent) throws ApiException {
+  public CreateEndpointEvent201Response createEndpointFanoutEvent(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull ModelsFanoutEvent modelsFanoutEvent) throws ApiException {
     return createEndpointFanoutEvent(projectID, modelsFanoutEvent, null);
   }
 
   /**
    * Fan out an event
-   * This endpoint uses the owner_id to fan out an event to multiple endpoints.
+   * This endpoint uses the owner_id to fan out an event to multiple endpoints. The 201 body includes uid (the event id). Use GET /events/{eventID} or GET /eventdeliveries?eventId&#x3D; to follow the send.
    * @param projectID Project ID (required)
    * @param modelsFanoutEvent Event Details (required)
    * @param headers Optional headers to include in the request
-   * @return GetProjects400Response
+   * @return CreateEndpointEvent201Response
    * @throws ApiException if fails to make API call
    */
-  public GetProjects400Response createEndpointFanoutEvent(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull ModelsFanoutEvent modelsFanoutEvent, Map<String, String> headers) throws ApiException {
-    ApiResponse<GetProjects400Response> localVarResponse = createEndpointFanoutEventWithHttpInfo(projectID, modelsFanoutEvent, headers);
+  public CreateEndpointEvent201Response createEndpointFanoutEvent(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull ModelsFanoutEvent modelsFanoutEvent, Map<String, String> headers) throws ApiException {
+    ApiResponse<CreateEndpointEvent201Response> localVarResponse = createEndpointFanoutEventWithHttpInfo(projectID, modelsFanoutEvent, headers);
     return localVarResponse.getData();
   }
 
   /**
    * Fan out an event
-   * This endpoint uses the owner_id to fan out an event to multiple endpoints.
+   * This endpoint uses the owner_id to fan out an event to multiple endpoints. The 201 body includes uid (the event id). Use GET /events/{eventID} or GET /eventdeliveries?eventId&#x3D; to follow the send.
    * @param projectID Project ID (required)
    * @param modelsFanoutEvent Event Details (required)
-   * @return ApiResponse&lt;GetProjects400Response&gt;
+   * @return ApiResponse&lt;CreateEndpointEvent201Response&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<GetProjects400Response> createEndpointFanoutEventWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull ModelsFanoutEvent modelsFanoutEvent) throws ApiException {
+  public ApiResponse<CreateEndpointEvent201Response> createEndpointFanoutEventWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull ModelsFanoutEvent modelsFanoutEvent) throws ApiException {
     return createEndpointFanoutEventWithHttpInfo(projectID, modelsFanoutEvent, null);
   }
 
   /**
    * Fan out an event
-   * This endpoint uses the owner_id to fan out an event to multiple endpoints.
+   * This endpoint uses the owner_id to fan out an event to multiple endpoints. The 201 body includes uid (the event id). Use GET /events/{eventID} or GET /eventdeliveries?eventId&#x3D; to follow the send.
    * @param projectID Project ID (required)
    * @param modelsFanoutEvent Event Details (required)
    * @param headers Optional headers to include in the request
-   * @return ApiResponse&lt;GetProjects400Response&gt;
+   * @return ApiResponse&lt;CreateEndpointEvent201Response&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<GetProjects400Response> createEndpointFanoutEventWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull ModelsFanoutEvent modelsFanoutEvent, Map<String, String> headers) throws ApiException {
+  public ApiResponse<CreateEndpointEvent201Response> createEndpointFanoutEventWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull ModelsFanoutEvent modelsFanoutEvent, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = createEndpointFanoutEventRequestBuilder(projectID, modelsFanoutEvent, headers);
     try {
       HttpResponse<InputStream> localVarResponse = memberVarHttpClient.send(
@@ -1035,7 +1036,7 @@ public class EventsApi {
         }
         localVarResponseBody = ApiClient.getResponseBody(localVarResponse);
         if (localVarResponseBody == null) {
-          return new ApiResponse<GetProjects400Response>(
+          return new ApiResponse<CreateEndpointEvent201Response>(
               localVarResponse.statusCode(),
               localVarResponse.headers().map(),
               null
@@ -1045,10 +1046,10 @@ public class EventsApi {
         
         
         String responseBody = new String(localVarResponseBody.readAllBytes());
-        GetProjects400Response responseValue = responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<GetProjects400Response>() {});
+        CreateEndpointEvent201Response responseValue = responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<CreateEndpointEvent201Response>() {});
         
 
-        return new ApiResponse<GetProjects400Response>(
+        return new ApiResponse<CreateEndpointEvent201Response>(
             localVarResponse.statusCode(),
             localVarResponse.headers().map(),
             responseValue
@@ -1109,10 +1110,10 @@ public class EventsApi {
    * This endpoint retrieves an event
    * @param projectID Project ID (required)
    * @param eventID event id (required)
-   * @return CreateBroadcastEvent201Response
+   * @return GetEndpointEvent200Response
    * @throws ApiException if fails to make API call
    */
-  public CreateBroadcastEvent201Response getEndpointEvent(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull String eventID) throws ApiException {
+  public GetEndpointEvent200Response getEndpointEvent(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull String eventID) throws ApiException {
     return getEndpointEvent(projectID, eventID, null);
   }
 
@@ -1122,11 +1123,11 @@ public class EventsApi {
    * @param projectID Project ID (required)
    * @param eventID event id (required)
    * @param headers Optional headers to include in the request
-   * @return CreateBroadcastEvent201Response
+   * @return GetEndpointEvent200Response
    * @throws ApiException if fails to make API call
    */
-  public CreateBroadcastEvent201Response getEndpointEvent(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull String eventID, Map<String, String> headers) throws ApiException {
-    ApiResponse<CreateBroadcastEvent201Response> localVarResponse = getEndpointEventWithHttpInfo(projectID, eventID, headers);
+  public GetEndpointEvent200Response getEndpointEvent(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull String eventID, Map<String, String> headers) throws ApiException {
+    ApiResponse<GetEndpointEvent200Response> localVarResponse = getEndpointEventWithHttpInfo(projectID, eventID, headers);
     return localVarResponse.getData();
   }
 
@@ -1135,10 +1136,10 @@ public class EventsApi {
    * This endpoint retrieves an event
    * @param projectID Project ID (required)
    * @param eventID event id (required)
-   * @return ApiResponse&lt;CreateBroadcastEvent201Response&gt;
+   * @return ApiResponse&lt;GetEndpointEvent200Response&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<CreateBroadcastEvent201Response> getEndpointEventWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull String eventID) throws ApiException {
+  public ApiResponse<GetEndpointEvent200Response> getEndpointEventWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull String eventID) throws ApiException {
     return getEndpointEventWithHttpInfo(projectID, eventID, null);
   }
 
@@ -1148,10 +1149,10 @@ public class EventsApi {
    * @param projectID Project ID (required)
    * @param eventID event id (required)
    * @param headers Optional headers to include in the request
-   * @return ApiResponse&lt;CreateBroadcastEvent201Response&gt;
+   * @return ApiResponse&lt;GetEndpointEvent200Response&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<CreateBroadcastEvent201Response> getEndpointEventWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull String eventID, Map<String, String> headers) throws ApiException {
+  public ApiResponse<GetEndpointEvent200Response> getEndpointEventWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull String eventID, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = getEndpointEventRequestBuilder(projectID, eventID, headers);
     try {
       HttpResponse<InputStream> localVarResponse = memberVarHttpClient.send(
@@ -1167,7 +1168,7 @@ public class EventsApi {
         }
         localVarResponseBody = ApiClient.getResponseBody(localVarResponse);
         if (localVarResponseBody == null) {
-          return new ApiResponse<CreateBroadcastEvent201Response>(
+          return new ApiResponse<GetEndpointEvent200Response>(
               localVarResponse.statusCode(),
               localVarResponse.headers().map(),
               null
@@ -1177,10 +1178,10 @@ public class EventsApi {
         
         
         String responseBody = new String(localVarResponseBody.readAllBytes());
-        CreateBroadcastEvent201Response responseValue = responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<CreateBroadcastEvent201Response>() {});
+        GetEndpointEvent200Response responseValue = responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<GetEndpointEvent200Response>() {});
         
 
-        return new ApiResponse<CreateBroadcastEvent201Response>(
+        return new ApiResponse<GetEndpointEvent200Response>(
             localVarResponse.statusCode(),
             localVarResponse.headers().map(),
             responseValue
@@ -1439,10 +1440,10 @@ public class EventsApi {
    * This endpoint replays an event afresh assuming it is a new event.
    * @param projectID Project ID (required)
    * @param eventID event id (required)
-   * @return CreateBroadcastEvent201Response
+   * @return GetEndpointEvent200Response
    * @throws ApiException if fails to make API call
    */
-  public CreateBroadcastEvent201Response replayEndpointEvent(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull String eventID) throws ApiException {
+  public GetEndpointEvent200Response replayEndpointEvent(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull String eventID) throws ApiException {
     return replayEndpointEvent(projectID, eventID, null);
   }
 
@@ -1452,11 +1453,11 @@ public class EventsApi {
    * @param projectID Project ID (required)
    * @param eventID event id (required)
    * @param headers Optional headers to include in the request
-   * @return CreateBroadcastEvent201Response
+   * @return GetEndpointEvent200Response
    * @throws ApiException if fails to make API call
    */
-  public CreateBroadcastEvent201Response replayEndpointEvent(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull String eventID, Map<String, String> headers) throws ApiException {
-    ApiResponse<CreateBroadcastEvent201Response> localVarResponse = replayEndpointEventWithHttpInfo(projectID, eventID, headers);
+  public GetEndpointEvent200Response replayEndpointEvent(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull String eventID, Map<String, String> headers) throws ApiException {
+    ApiResponse<GetEndpointEvent200Response> localVarResponse = replayEndpointEventWithHttpInfo(projectID, eventID, headers);
     return localVarResponse.getData();
   }
 
@@ -1465,10 +1466,10 @@ public class EventsApi {
    * This endpoint replays an event afresh assuming it is a new event.
    * @param projectID Project ID (required)
    * @param eventID event id (required)
-   * @return ApiResponse&lt;CreateBroadcastEvent201Response&gt;
+   * @return ApiResponse&lt;GetEndpointEvent200Response&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<CreateBroadcastEvent201Response> replayEndpointEventWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull String eventID) throws ApiException {
+  public ApiResponse<GetEndpointEvent200Response> replayEndpointEventWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull String eventID) throws ApiException {
     return replayEndpointEventWithHttpInfo(projectID, eventID, null);
   }
 
@@ -1478,10 +1479,10 @@ public class EventsApi {
    * @param projectID Project ID (required)
    * @param eventID event id (required)
    * @param headers Optional headers to include in the request
-   * @return ApiResponse&lt;CreateBroadcastEvent201Response&gt;
+   * @return ApiResponse&lt;GetEndpointEvent200Response&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<CreateBroadcastEvent201Response> replayEndpointEventWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull String eventID, Map<String, String> headers) throws ApiException {
+  public ApiResponse<GetEndpointEvent200Response> replayEndpointEventWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull String eventID, Map<String, String> headers) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = replayEndpointEventRequestBuilder(projectID, eventID, headers);
     try {
       HttpResponse<InputStream> localVarResponse = memberVarHttpClient.send(
@@ -1497,7 +1498,7 @@ public class EventsApi {
         }
         localVarResponseBody = ApiClient.getResponseBody(localVarResponse);
         if (localVarResponseBody == null) {
-          return new ApiResponse<CreateBroadcastEvent201Response>(
+          return new ApiResponse<GetEndpointEvent200Response>(
               localVarResponse.statusCode(),
               localVarResponse.headers().map(),
               null
@@ -1507,10 +1508,10 @@ public class EventsApi {
         
         
         String responseBody = new String(localVarResponseBody.readAllBytes());
-        CreateBroadcastEvent201Response responseValue = responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<CreateBroadcastEvent201Response>() {});
+        GetEndpointEvent200Response responseValue = responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<GetEndpointEvent200Response>() {});
         
 
-        return new ApiResponse<CreateBroadcastEvent201Response>(
+        return new ApiResponse<GetEndpointEvent200Response>(
             localVarResponse.statusCode(),
             localVarResponse.headers().map(),
             responseValue
