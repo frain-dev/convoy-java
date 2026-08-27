@@ -24,22 +24,22 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
-import com.getconvoy.models.ModelsEventResponse;
+import com.getconvoy.models.ModelsEventQueuedResponse;
 import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
 import com.getconvoy.client.ApiClient;
 /**
- * CreateBroadcastEvent201Response
+ * CreateEndpointEvent201Response
  */
 @JsonPropertyOrder({
-  CreateBroadcastEvent201Response.JSON_PROPERTY_MESSAGE,
-  CreateBroadcastEvent201Response.JSON_PROPERTY_STATUS,
-  CreateBroadcastEvent201Response.JSON_PROPERTY_DATA
+  CreateEndpointEvent201Response.JSON_PROPERTY_MESSAGE,
+  CreateEndpointEvent201Response.JSON_PROPERTY_STATUS,
+  CreateEndpointEvent201Response.JSON_PROPERTY_DATA
 })
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.23.0")
-public class CreateBroadcastEvent201Response {
+public class CreateEndpointEvent201Response {
   public static final String JSON_PROPERTY_MESSAGE = "message";
   @jakarta.annotation.Nullable
   private String message;
@@ -50,12 +50,12 @@ public class CreateBroadcastEvent201Response {
 
   public static final String JSON_PROPERTY_DATA = "data";
   @jakarta.annotation.Nullable
-  private ModelsEventResponse data;
+  private ModelsEventQueuedResponse data;
 
-  public CreateBroadcastEvent201Response() { 
+  public CreateEndpointEvent201Response() { 
   }
 
-  public CreateBroadcastEvent201Response message(@jakarta.annotation.Nullable String message) {
+  public CreateEndpointEvent201Response message(@jakarta.annotation.Nullable String message) {
     this.message = message;
     return this;
   }
@@ -79,7 +79,7 @@ public class CreateBroadcastEvent201Response {
   }
 
 
-  public CreateBroadcastEvent201Response status(@jakarta.annotation.Nullable Boolean status) {
+  public CreateEndpointEvent201Response status(@jakarta.annotation.Nullable Boolean status) {
     this.status = status;
     return this;
   }
@@ -103,7 +103,7 @@ public class CreateBroadcastEvent201Response {
   }
 
 
-  public CreateBroadcastEvent201Response data(@jakarta.annotation.Nullable ModelsEventResponse data) {
+  public CreateEndpointEvent201Response data(@jakarta.annotation.Nullable ModelsEventQueuedResponse data) {
     this.data = data;
     return this;
   }
@@ -115,20 +115,20 @@ public class CreateBroadcastEvent201Response {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_DATA, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public ModelsEventResponse getData() {
+  public ModelsEventQueuedResponse getData() {
     return data;
   }
 
 
   @JsonProperty(value = JSON_PROPERTY_DATA, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setData(@jakarta.annotation.Nullable ModelsEventResponse data) {
+  public void setData(@jakarta.annotation.Nullable ModelsEventQueuedResponse data) {
     this.data = data;
   }
 
 
   /**
-   * Return true if this CreateBroadcastEvent_201_response object is equal to o.
+   * Return true if this CreateEndpointEvent_201_response object is equal to o.
    */
   @Override
   public boolean equals(Object o) {
@@ -138,10 +138,10 @@ public class CreateBroadcastEvent201Response {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CreateBroadcastEvent201Response createBroadcastEvent201Response = (CreateBroadcastEvent201Response) o;
-    return Objects.equals(this.message, createBroadcastEvent201Response.message) &&
-        Objects.equals(this.status, createBroadcastEvent201Response.status) &&
-        Objects.equals(this.data, createBroadcastEvent201Response.data);
+    CreateEndpointEvent201Response createEndpointEvent201Response = (CreateEndpointEvent201Response) o;
+    return Objects.equals(this.message, createEndpointEvent201Response.message) &&
+        Objects.equals(this.status, createEndpointEvent201Response.status) &&
+        Objects.equals(this.data, createEndpointEvent201Response.data);
   }
 
   @Override
@@ -152,7 +152,7 @@ public class CreateBroadcastEvent201Response {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CreateBroadcastEvent201Response {\n");
+    sb.append("class CreateEndpointEvent201Response {\n");
     sb.append("    message: ").append(toIndentedString(message)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    data: ").append(toIndentedString(data)).append("\n");
