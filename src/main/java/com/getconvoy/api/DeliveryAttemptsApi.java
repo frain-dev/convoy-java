@@ -302,53 +302,61 @@ public class DeliveryAttemptsApi {
 
   /**
    * List delivery attempts
-   * This endpoint fetches an app message&#39;s delivery attempts
+   * This endpoint fetches an app message&#39;s delivery attempts Default: latest ten attempts as an array. With paginated&#x3D;true: content and next_cursor. Pass next_cursor as before for older history; empty means last page. Pages are oldest first.
    * @param projectID Project ID (required)
    * @param eventDeliveryID event delivery id (required)
+   * @param paginated Return a page of ten attempts and next_cursor (optional)
+   * @param before Exclusive attempt cursor from next_cursor; requires paginated&#x3D;true (optional)
    * @return GetDeliveryAttempts200Response
    * @throws ApiException if fails to make API call
    */
-  public GetDeliveryAttempts200Response getDeliveryAttempts(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull String eventDeliveryID) throws ApiException {
-    return getDeliveryAttempts(projectID, eventDeliveryID, null);
+  public GetDeliveryAttempts200Response getDeliveryAttempts(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull String eventDeliveryID, @jakarta.annotation.Nullable Boolean paginated, @jakarta.annotation.Nullable String before) throws ApiException {
+    return getDeliveryAttempts(projectID, eventDeliveryID, paginated, before, null);
   }
 
   /**
    * List delivery attempts
-   * This endpoint fetches an app message&#39;s delivery attempts
+   * This endpoint fetches an app message&#39;s delivery attempts Default: latest ten attempts as an array. With paginated&#x3D;true: content and next_cursor. Pass next_cursor as before for older history; empty means last page. Pages are oldest first.
    * @param projectID Project ID (required)
    * @param eventDeliveryID event delivery id (required)
+   * @param paginated Return a page of ten attempts and next_cursor (optional)
+   * @param before Exclusive attempt cursor from next_cursor; requires paginated&#x3D;true (optional)
    * @param headers Optional headers to include in the request
    * @return GetDeliveryAttempts200Response
    * @throws ApiException if fails to make API call
    */
-  public GetDeliveryAttempts200Response getDeliveryAttempts(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull String eventDeliveryID, Map<String, String> headers) throws ApiException {
-    ApiResponse<GetDeliveryAttempts200Response> localVarResponse = getDeliveryAttemptsWithHttpInfo(projectID, eventDeliveryID, headers);
+  public GetDeliveryAttempts200Response getDeliveryAttempts(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull String eventDeliveryID, @jakarta.annotation.Nullable Boolean paginated, @jakarta.annotation.Nullable String before, Map<String, String> headers) throws ApiException {
+    ApiResponse<GetDeliveryAttempts200Response> localVarResponse = getDeliveryAttemptsWithHttpInfo(projectID, eventDeliveryID, paginated, before, headers);
     return localVarResponse.getData();
   }
 
   /**
    * List delivery attempts
-   * This endpoint fetches an app message&#39;s delivery attempts
+   * This endpoint fetches an app message&#39;s delivery attempts Default: latest ten attempts as an array. With paginated&#x3D;true: content and next_cursor. Pass next_cursor as before for older history; empty means last page. Pages are oldest first.
    * @param projectID Project ID (required)
    * @param eventDeliveryID event delivery id (required)
+   * @param paginated Return a page of ten attempts and next_cursor (optional)
+   * @param before Exclusive attempt cursor from next_cursor; requires paginated&#x3D;true (optional)
    * @return ApiResponse&lt;GetDeliveryAttempts200Response&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<GetDeliveryAttempts200Response> getDeliveryAttemptsWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull String eventDeliveryID) throws ApiException {
-    return getDeliveryAttemptsWithHttpInfo(projectID, eventDeliveryID, null);
+  public ApiResponse<GetDeliveryAttempts200Response> getDeliveryAttemptsWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull String eventDeliveryID, @jakarta.annotation.Nullable Boolean paginated, @jakarta.annotation.Nullable String before) throws ApiException {
+    return getDeliveryAttemptsWithHttpInfo(projectID, eventDeliveryID, paginated, before, null);
   }
 
   /**
    * List delivery attempts
-   * This endpoint fetches an app message&#39;s delivery attempts
+   * This endpoint fetches an app message&#39;s delivery attempts Default: latest ten attempts as an array. With paginated&#x3D;true: content and next_cursor. Pass next_cursor as before for older history; empty means last page. Pages are oldest first.
    * @param projectID Project ID (required)
    * @param eventDeliveryID event delivery id (required)
+   * @param paginated Return a page of ten attempts and next_cursor (optional)
+   * @param before Exclusive attempt cursor from next_cursor; requires paginated&#x3D;true (optional)
    * @param headers Optional headers to include in the request
    * @return ApiResponse&lt;GetDeliveryAttempts200Response&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<GetDeliveryAttempts200Response> getDeliveryAttemptsWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull String eventDeliveryID, Map<String, String> headers) throws ApiException {
-    HttpRequest.Builder localVarRequestBuilder = getDeliveryAttemptsRequestBuilder(projectID, eventDeliveryID, headers);
+  public ApiResponse<GetDeliveryAttempts200Response> getDeliveryAttemptsWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull String eventDeliveryID, @jakarta.annotation.Nullable Boolean paginated, @jakarta.annotation.Nullable String before, Map<String, String> headers) throws ApiException {
+    HttpRequest.Builder localVarRequestBuilder = getDeliveryAttemptsRequestBuilder(projectID, eventDeliveryID, paginated, before, headers);
     try {
       HttpResponse<InputStream> localVarResponse = memberVarHttpClient.send(
           localVarRequestBuilder.build(),
@@ -395,7 +403,7 @@ public class DeliveryAttemptsApi {
     }
   }
 
-  private HttpRequest.Builder getDeliveryAttemptsRequestBuilder(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull String eventDeliveryID, Map<String, String> headers) throws ApiException {
+  private HttpRequest.Builder getDeliveryAttemptsRequestBuilder(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nonnull String eventDeliveryID, @jakarta.annotation.Nullable Boolean paginated, @jakarta.annotation.Nullable String before, Map<String, String> headers) throws ApiException {
     // verify the required parameter 'projectID' is set
     if (projectID == null) {
       throw new ApiException(400, "Missing the required parameter 'projectID' when calling getDeliveryAttempts");
@@ -411,7 +419,24 @@ public class DeliveryAttemptsApi {
         .replace("{projectID}", ApiClient.urlEncode(projectID.toString()))
         .replace("{eventDeliveryID}", ApiClient.urlEncode(eventDeliveryID.toString()));
 
-    localVarRequestBuilder.uri(URI.create(memberVarBaseUri + localVarPath));
+    List<Pair> localVarQueryParams = new ArrayList<>();
+    StringJoiner localVarQueryStringJoiner = new StringJoiner("&");
+    String localVarQueryParameterBaseName;
+    localVarQueryParameterBaseName = "paginated";
+    localVarQueryParams.addAll(ApiClient.parameterToPairs("paginated", paginated));
+    localVarQueryParameterBaseName = "before";
+    localVarQueryParams.addAll(ApiClient.parameterToPairs("before", before));
+
+    if (!localVarQueryParams.isEmpty() || localVarQueryStringJoiner.length() != 0) {
+      StringJoiner queryJoiner = new StringJoiner("&");
+      localVarQueryParams.forEach(p -> queryJoiner.add(p.getName() + '=' + p.getValue()));
+      if (localVarQueryStringJoiner.length() != 0) {
+        queryJoiner.add(localVarQueryStringJoiner.toString());
+      }
+      localVarRequestBuilder.uri(URI.create(memberVarBaseUri + localVarPath + '?' + queryJoiner.toString()));
+    } else {
+      localVarRequestBuilder.uri(URI.create(memberVarBaseUri + localVarPath));
+    }
 
     localVarRequestBuilder.header("Accept", "application/json");
 
