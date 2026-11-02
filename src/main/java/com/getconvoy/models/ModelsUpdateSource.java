@@ -24,6 +24,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.getconvoy.models.DatastoreSourceProvider;
 import com.getconvoy.models.DatastoreSourceType;
 import com.getconvoy.models.ModelsPubSubConfig;
 import com.getconvoy.models.ModelsUpdateCustomResponse;
@@ -47,6 +48,7 @@ import com.getconvoy.client.ApiClient;
   ModelsUpdateSource.JSON_PROPERTY_IDEMPOTENCY_KEYS,
   ModelsUpdateSource.JSON_PROPERTY_IS_DISABLED,
   ModelsUpdateSource.JSON_PROPERTY_NAME,
+  ModelsUpdateSource.JSON_PROPERTY_PROVIDER,
   ModelsUpdateSource.JSON_PROPERTY_PUB_SUB,
   ModelsUpdateSource.JSON_PROPERTY_TYPE,
   ModelsUpdateSource.JSON_PROPERTY_VERIFIER
@@ -84,6 +86,10 @@ public class ModelsUpdateSource {
   public static final String JSON_PROPERTY_NAME = "name";
   @jakarta.annotation.Nullable
   private String name;
+
+  public static final String JSON_PROPERTY_PROVIDER = "provider";
+  @jakarta.annotation.Nullable
+  private DatastoreSourceProvider provider;
 
   public static final String JSON_PROPERTY_PUB_SUB = "pub_sub";
   @jakarta.annotation.Nullable
@@ -308,6 +314,30 @@ public class ModelsUpdateSource {
   }
 
 
+  public ModelsUpdateSource provider(@jakarta.annotation.Nullable DatastoreSourceProvider provider) {
+    this.provider = provider;
+    return this;
+  }
+
+  /**
+   * Use this to specify one of our predefined source types.
+   * @return provider
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_PROVIDER, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public DatastoreSourceProvider getProvider() {
+    return provider;
+  }
+
+
+  @JsonProperty(value = JSON_PROPERTY_PROVIDER, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setProvider(@jakarta.annotation.Nullable DatastoreSourceProvider provider) {
+    this.provider = provider;
+  }
+
+
   public ModelsUpdateSource pubSub(@jakarta.annotation.Nullable ModelsPubSubConfig pubSub) {
     this.pubSub = pubSub;
     return this;
@@ -400,6 +430,7 @@ public class ModelsUpdateSource {
         Objects.equals(this.idempotencyKeys, modelsUpdateSource.idempotencyKeys) &&
         Objects.equals(this.isDisabled, modelsUpdateSource.isDisabled) &&
         Objects.equals(this.name, modelsUpdateSource.name) &&
+        Objects.equals(this.provider, modelsUpdateSource.provider) &&
         Objects.equals(this.pubSub, modelsUpdateSource.pubSub) &&
         Objects.equals(this.type, modelsUpdateSource.type) &&
         Objects.equals(this.verifier, modelsUpdateSource.verifier);
@@ -407,7 +438,7 @@ public class ModelsUpdateSource {
 
   @Override
   public int hashCode() {
-    return Objects.hash(bodyFunction, customResponse, eventTypeLocation, forwardHeaders, headerFunction, idempotencyKeys, isDisabled, name, pubSub, type, verifier);
+    return Objects.hash(bodyFunction, customResponse, eventTypeLocation, forwardHeaders, headerFunction, idempotencyKeys, isDisabled, name, provider, pubSub, type, verifier);
   }
 
   @Override
@@ -422,6 +453,7 @@ public class ModelsUpdateSource {
     sb.append("    idempotencyKeys: ").append(toIndentedString(idempotencyKeys)).append("\n");
     sb.append("    isDisabled: ").append(toIndentedString(isDisabled)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    provider: ").append(toIndentedString(provider)).append("\n");
     sb.append("    pubSub: ").append(toIndentedString(pubSub)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    verifier: ").append(toIndentedString(verifier)).append("\n");
@@ -515,6 +547,11 @@ public class ModelsUpdateSource {
     // add `name` to the URL query string
     if (getName() != null) {
       joiner.add(String.format(java.util.Locale.ROOT, "%sname%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getName()))));
+    }
+
+    // add `provider` to the URL query string
+    if (getProvider() != null) {
+      joiner.add(String.format(java.util.Locale.ROOT, "%sprovider%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getProvider()))));
     }
 
     // add `pub_sub` to the URL query string
