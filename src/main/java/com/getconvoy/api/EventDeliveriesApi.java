@@ -175,19 +175,22 @@ public class EventDeliveriesApi {
    * @param eventId Event ID to filter by (optional)
    * @param eventType EventType to filter by (optional)
    * @param idempotencyKey IdempotencyKey to filter by (optional)
+   * @param idempotencyValue Raw value of a source&#39;s single idempotency key location, e.g. a provider delivery ID. Matches deliveries of events ingested with it. Not combinable with idempotencyKey. (optional)
+   * @param minTrials Only return deliveries with at least this many attempts; 2 or more means retried. Requires idempotencyValue, eventId, or endpointId. (optional)
    * @param nextPageCursor A pagination cursor to fetch the next page of a list (optional)
    * @param perPage The number of items to return per page (optional)
    * @param prevPageCursor A pagination cursor to fetch the previous page of a list (optional)
    * @param query Matches delivery id, event id, event type prefix, and endpoint name. (optional)
    * @param sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
+   * @param sourceId Limits idempotencyValue matching to these source IDs. (optional)
    * @param startDate The start date (optional)
    * @param status A list of event delivery statuses to filter by (optional)
    * @param subscriptionId SubscriptionID to filter by (optional)
    * @return GetProjects400Response
    * @throws ApiException if fails to make API call
    */
-  public GetProjects400Response batchRetryEventDelivery(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable String direction, @jakarta.annotation.Nullable String endDate, @jakarta.annotation.Nullable List<String> endpointId, @jakarta.annotation.Nullable String eventId, @jakarta.annotation.Nullable String eventType, @jakarta.annotation.Nullable String idempotencyKey, @jakarta.annotation.Nullable String nextPageCursor, @jakarta.annotation.Nullable Integer perPage, @jakarta.annotation.Nullable String prevPageCursor, @jakarta.annotation.Nullable String query, @jakarta.annotation.Nullable String sort, @jakarta.annotation.Nullable String startDate, @jakarta.annotation.Nullable List<String> status, @jakarta.annotation.Nullable String subscriptionId) throws ApiException {
-    return batchRetryEventDelivery(projectID, direction, endDate, endpointId, eventId, eventType, idempotencyKey, nextPageCursor, perPage, prevPageCursor, query, sort, startDate, status, subscriptionId, null);
+  public GetProjects400Response batchRetryEventDelivery(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable String direction, @jakarta.annotation.Nullable String endDate, @jakarta.annotation.Nullable List<String> endpointId, @jakarta.annotation.Nullable String eventId, @jakarta.annotation.Nullable String eventType, @jakarta.annotation.Nullable String idempotencyKey, @jakarta.annotation.Nullable String idempotencyValue, @jakarta.annotation.Nullable Integer minTrials, @jakarta.annotation.Nullable String nextPageCursor, @jakarta.annotation.Nullable Integer perPage, @jakarta.annotation.Nullable String prevPageCursor, @jakarta.annotation.Nullable String query, @jakarta.annotation.Nullable String sort, @jakarta.annotation.Nullable List<String> sourceId, @jakarta.annotation.Nullable String startDate, @jakarta.annotation.Nullable List<String> status, @jakarta.annotation.Nullable String subscriptionId) throws ApiException {
+    return batchRetryEventDelivery(projectID, direction, endDate, endpointId, eventId, eventType, idempotencyKey, idempotencyValue, minTrials, nextPageCursor, perPage, prevPageCursor, query, sort, sourceId, startDate, status, subscriptionId, null);
   }
 
   /**
@@ -200,11 +203,14 @@ public class EventDeliveriesApi {
    * @param eventId Event ID to filter by (optional)
    * @param eventType EventType to filter by (optional)
    * @param idempotencyKey IdempotencyKey to filter by (optional)
+   * @param idempotencyValue Raw value of a source&#39;s single idempotency key location, e.g. a provider delivery ID. Matches deliveries of events ingested with it. Not combinable with idempotencyKey. (optional)
+   * @param minTrials Only return deliveries with at least this many attempts; 2 or more means retried. Requires idempotencyValue, eventId, or endpointId. (optional)
    * @param nextPageCursor A pagination cursor to fetch the next page of a list (optional)
    * @param perPage The number of items to return per page (optional)
    * @param prevPageCursor A pagination cursor to fetch the previous page of a list (optional)
    * @param query Matches delivery id, event id, event type prefix, and endpoint name. (optional)
    * @param sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
+   * @param sourceId Limits idempotencyValue matching to these source IDs. (optional)
    * @param startDate The start date (optional)
    * @param status A list of event delivery statuses to filter by (optional)
    * @param subscriptionId SubscriptionID to filter by (optional)
@@ -212,8 +218,8 @@ public class EventDeliveriesApi {
    * @return GetProjects400Response
    * @throws ApiException if fails to make API call
    */
-  public GetProjects400Response batchRetryEventDelivery(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable String direction, @jakarta.annotation.Nullable String endDate, @jakarta.annotation.Nullable List<String> endpointId, @jakarta.annotation.Nullable String eventId, @jakarta.annotation.Nullable String eventType, @jakarta.annotation.Nullable String idempotencyKey, @jakarta.annotation.Nullable String nextPageCursor, @jakarta.annotation.Nullable Integer perPage, @jakarta.annotation.Nullable String prevPageCursor, @jakarta.annotation.Nullable String query, @jakarta.annotation.Nullable String sort, @jakarta.annotation.Nullable String startDate, @jakarta.annotation.Nullable List<String> status, @jakarta.annotation.Nullable String subscriptionId, Map<String, String> headers) throws ApiException {
-    ApiResponse<GetProjects400Response> localVarResponse = batchRetryEventDeliveryWithHttpInfo(projectID, direction, endDate, endpointId, eventId, eventType, idempotencyKey, nextPageCursor, perPage, prevPageCursor, query, sort, startDate, status, subscriptionId, headers);
+  public GetProjects400Response batchRetryEventDelivery(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable String direction, @jakarta.annotation.Nullable String endDate, @jakarta.annotation.Nullable List<String> endpointId, @jakarta.annotation.Nullable String eventId, @jakarta.annotation.Nullable String eventType, @jakarta.annotation.Nullable String idempotencyKey, @jakarta.annotation.Nullable String idempotencyValue, @jakarta.annotation.Nullable Integer minTrials, @jakarta.annotation.Nullable String nextPageCursor, @jakarta.annotation.Nullable Integer perPage, @jakarta.annotation.Nullable String prevPageCursor, @jakarta.annotation.Nullable String query, @jakarta.annotation.Nullable String sort, @jakarta.annotation.Nullable List<String> sourceId, @jakarta.annotation.Nullable String startDate, @jakarta.annotation.Nullable List<String> status, @jakarta.annotation.Nullable String subscriptionId, Map<String, String> headers) throws ApiException {
+    ApiResponse<GetProjects400Response> localVarResponse = batchRetryEventDeliveryWithHttpInfo(projectID, direction, endDate, endpointId, eventId, eventType, idempotencyKey, idempotencyValue, minTrials, nextPageCursor, perPage, prevPageCursor, query, sort, sourceId, startDate, status, subscriptionId, headers);
     return localVarResponse.getData();
   }
 
@@ -227,19 +233,22 @@ public class EventDeliveriesApi {
    * @param eventId Event ID to filter by (optional)
    * @param eventType EventType to filter by (optional)
    * @param idempotencyKey IdempotencyKey to filter by (optional)
+   * @param idempotencyValue Raw value of a source&#39;s single idempotency key location, e.g. a provider delivery ID. Matches deliveries of events ingested with it. Not combinable with idempotencyKey. (optional)
+   * @param minTrials Only return deliveries with at least this many attempts; 2 or more means retried. Requires idempotencyValue, eventId, or endpointId. (optional)
    * @param nextPageCursor A pagination cursor to fetch the next page of a list (optional)
    * @param perPage The number of items to return per page (optional)
    * @param prevPageCursor A pagination cursor to fetch the previous page of a list (optional)
    * @param query Matches delivery id, event id, event type prefix, and endpoint name. (optional)
    * @param sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
+   * @param sourceId Limits idempotencyValue matching to these source IDs. (optional)
    * @param startDate The start date (optional)
    * @param status A list of event delivery statuses to filter by (optional)
    * @param subscriptionId SubscriptionID to filter by (optional)
    * @return ApiResponse&lt;GetProjects400Response&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<GetProjects400Response> batchRetryEventDeliveryWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable String direction, @jakarta.annotation.Nullable String endDate, @jakarta.annotation.Nullable List<String> endpointId, @jakarta.annotation.Nullable String eventId, @jakarta.annotation.Nullable String eventType, @jakarta.annotation.Nullable String idempotencyKey, @jakarta.annotation.Nullable String nextPageCursor, @jakarta.annotation.Nullable Integer perPage, @jakarta.annotation.Nullable String prevPageCursor, @jakarta.annotation.Nullable String query, @jakarta.annotation.Nullable String sort, @jakarta.annotation.Nullable String startDate, @jakarta.annotation.Nullable List<String> status, @jakarta.annotation.Nullable String subscriptionId) throws ApiException {
-    return batchRetryEventDeliveryWithHttpInfo(projectID, direction, endDate, endpointId, eventId, eventType, idempotencyKey, nextPageCursor, perPage, prevPageCursor, query, sort, startDate, status, subscriptionId, null);
+  public ApiResponse<GetProjects400Response> batchRetryEventDeliveryWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable String direction, @jakarta.annotation.Nullable String endDate, @jakarta.annotation.Nullable List<String> endpointId, @jakarta.annotation.Nullable String eventId, @jakarta.annotation.Nullable String eventType, @jakarta.annotation.Nullable String idempotencyKey, @jakarta.annotation.Nullable String idempotencyValue, @jakarta.annotation.Nullable Integer minTrials, @jakarta.annotation.Nullable String nextPageCursor, @jakarta.annotation.Nullable Integer perPage, @jakarta.annotation.Nullable String prevPageCursor, @jakarta.annotation.Nullable String query, @jakarta.annotation.Nullable String sort, @jakarta.annotation.Nullable List<String> sourceId, @jakarta.annotation.Nullable String startDate, @jakarta.annotation.Nullable List<String> status, @jakarta.annotation.Nullable String subscriptionId) throws ApiException {
+    return batchRetryEventDeliveryWithHttpInfo(projectID, direction, endDate, endpointId, eventId, eventType, idempotencyKey, idempotencyValue, minTrials, nextPageCursor, perPage, prevPageCursor, query, sort, sourceId, startDate, status, subscriptionId, null);
   }
 
   /**
@@ -252,11 +261,14 @@ public class EventDeliveriesApi {
    * @param eventId Event ID to filter by (optional)
    * @param eventType EventType to filter by (optional)
    * @param idempotencyKey IdempotencyKey to filter by (optional)
+   * @param idempotencyValue Raw value of a source&#39;s single idempotency key location, e.g. a provider delivery ID. Matches deliveries of events ingested with it. Not combinable with idempotencyKey. (optional)
+   * @param minTrials Only return deliveries with at least this many attempts; 2 or more means retried. Requires idempotencyValue, eventId, or endpointId. (optional)
    * @param nextPageCursor A pagination cursor to fetch the next page of a list (optional)
    * @param perPage The number of items to return per page (optional)
    * @param prevPageCursor A pagination cursor to fetch the previous page of a list (optional)
    * @param query Matches delivery id, event id, event type prefix, and endpoint name. (optional)
    * @param sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
+   * @param sourceId Limits idempotencyValue matching to these source IDs. (optional)
    * @param startDate The start date (optional)
    * @param status A list of event delivery statuses to filter by (optional)
    * @param subscriptionId SubscriptionID to filter by (optional)
@@ -264,8 +276,8 @@ public class EventDeliveriesApi {
    * @return ApiResponse&lt;GetProjects400Response&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<GetProjects400Response> batchRetryEventDeliveryWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable String direction, @jakarta.annotation.Nullable String endDate, @jakarta.annotation.Nullable List<String> endpointId, @jakarta.annotation.Nullable String eventId, @jakarta.annotation.Nullable String eventType, @jakarta.annotation.Nullable String idempotencyKey, @jakarta.annotation.Nullable String nextPageCursor, @jakarta.annotation.Nullable Integer perPage, @jakarta.annotation.Nullable String prevPageCursor, @jakarta.annotation.Nullable String query, @jakarta.annotation.Nullable String sort, @jakarta.annotation.Nullable String startDate, @jakarta.annotation.Nullable List<String> status, @jakarta.annotation.Nullable String subscriptionId, Map<String, String> headers) throws ApiException {
-    HttpRequest.Builder localVarRequestBuilder = batchRetryEventDeliveryRequestBuilder(projectID, direction, endDate, endpointId, eventId, eventType, idempotencyKey, nextPageCursor, perPage, prevPageCursor, query, sort, startDate, status, subscriptionId, headers);
+  public ApiResponse<GetProjects400Response> batchRetryEventDeliveryWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable String direction, @jakarta.annotation.Nullable String endDate, @jakarta.annotation.Nullable List<String> endpointId, @jakarta.annotation.Nullable String eventId, @jakarta.annotation.Nullable String eventType, @jakarta.annotation.Nullable String idempotencyKey, @jakarta.annotation.Nullable String idempotencyValue, @jakarta.annotation.Nullable Integer minTrials, @jakarta.annotation.Nullable String nextPageCursor, @jakarta.annotation.Nullable Integer perPage, @jakarta.annotation.Nullable String prevPageCursor, @jakarta.annotation.Nullable String query, @jakarta.annotation.Nullable String sort, @jakarta.annotation.Nullable List<String> sourceId, @jakarta.annotation.Nullable String startDate, @jakarta.annotation.Nullable List<String> status, @jakarta.annotation.Nullable String subscriptionId, Map<String, String> headers) throws ApiException {
+    HttpRequest.Builder localVarRequestBuilder = batchRetryEventDeliveryRequestBuilder(projectID, direction, endDate, endpointId, eventId, eventType, idempotencyKey, idempotencyValue, minTrials, nextPageCursor, perPage, prevPageCursor, query, sort, sourceId, startDate, status, subscriptionId, headers);
     try {
       HttpResponse<InputStream> localVarResponse = memberVarHttpClient.send(
           localVarRequestBuilder.build(),
@@ -312,7 +324,7 @@ public class EventDeliveriesApi {
     }
   }
 
-  private HttpRequest.Builder batchRetryEventDeliveryRequestBuilder(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable String direction, @jakarta.annotation.Nullable String endDate, @jakarta.annotation.Nullable List<String> endpointId, @jakarta.annotation.Nullable String eventId, @jakarta.annotation.Nullable String eventType, @jakarta.annotation.Nullable String idempotencyKey, @jakarta.annotation.Nullable String nextPageCursor, @jakarta.annotation.Nullable Integer perPage, @jakarta.annotation.Nullable String prevPageCursor, @jakarta.annotation.Nullable String query, @jakarta.annotation.Nullable String sort, @jakarta.annotation.Nullable String startDate, @jakarta.annotation.Nullable List<String> status, @jakarta.annotation.Nullable String subscriptionId, Map<String, String> headers) throws ApiException {
+  private HttpRequest.Builder batchRetryEventDeliveryRequestBuilder(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable String direction, @jakarta.annotation.Nullable String endDate, @jakarta.annotation.Nullable List<String> endpointId, @jakarta.annotation.Nullable String eventId, @jakarta.annotation.Nullable String eventType, @jakarta.annotation.Nullable String idempotencyKey, @jakarta.annotation.Nullable String idempotencyValue, @jakarta.annotation.Nullable Integer minTrials, @jakarta.annotation.Nullable String nextPageCursor, @jakarta.annotation.Nullable Integer perPage, @jakarta.annotation.Nullable String prevPageCursor, @jakarta.annotation.Nullable String query, @jakarta.annotation.Nullable String sort, @jakarta.annotation.Nullable List<String> sourceId, @jakarta.annotation.Nullable String startDate, @jakarta.annotation.Nullable List<String> status, @jakarta.annotation.Nullable String subscriptionId, Map<String, String> headers) throws ApiException {
     // verify the required parameter 'projectID' is set
     if (projectID == null) {
       throw new ApiException(400, "Missing the required parameter 'projectID' when calling batchRetryEventDelivery");
@@ -334,10 +346,14 @@ public class EventDeliveriesApi {
     localVarQueryParams.addAll(ApiClient.parameterToPairs("multi", "endpointId", endpointId));
     localVarQueryParameterBaseName = "eventId";
     localVarQueryParams.addAll(ApiClient.parameterToPairs("eventId", eventId));
-    localVarQueryParameterBaseName = "event_type";
-    localVarQueryParams.addAll(ApiClient.parameterToPairs("event_type", eventType));
+    localVarQueryParameterBaseName = "eventType";
+    localVarQueryParams.addAll(ApiClient.parameterToPairs("eventType", eventType));
     localVarQueryParameterBaseName = "idempotencyKey";
     localVarQueryParams.addAll(ApiClient.parameterToPairs("idempotencyKey", idempotencyKey));
+    localVarQueryParameterBaseName = "idempotencyValue";
+    localVarQueryParams.addAll(ApiClient.parameterToPairs("idempotencyValue", idempotencyValue));
+    localVarQueryParameterBaseName = "minTrials";
+    localVarQueryParams.addAll(ApiClient.parameterToPairs("minTrials", minTrials));
     localVarQueryParameterBaseName = "next_page_cursor";
     localVarQueryParams.addAll(ApiClient.parameterToPairs("next_page_cursor", nextPageCursor));
     localVarQueryParameterBaseName = "perPage";
@@ -348,6 +364,8 @@ public class EventDeliveriesApi {
     localVarQueryParams.addAll(ApiClient.parameterToPairs("query", query));
     localVarQueryParameterBaseName = "sort";
     localVarQueryParams.addAll(ApiClient.parameterToPairs("sort", sort));
+    localVarQueryParameterBaseName = "sourceId";
+    localVarQueryParams.addAll(ApiClient.parameterToPairs("multi", "sourceId", sourceId));
     localVarQueryParameterBaseName = "startDate";
     localVarQueryParams.addAll(ApiClient.parameterToPairs("startDate", startDate));
     localVarQueryParameterBaseName = "status";
@@ -522,19 +540,22 @@ public class EventDeliveriesApi {
    * @param eventId Event ID to filter by (optional)
    * @param eventType EventType to filter by (optional)
    * @param idempotencyKey IdempotencyKey to filter by (optional)
+   * @param idempotencyValue Raw value of a source&#39;s single idempotency key location, e.g. a provider delivery ID. Matches deliveries of events ingested with it. Not combinable with idempotencyKey. (optional)
+   * @param minTrials Only return deliveries with at least this many attempts; 2 or more means retried. Requires idempotencyValue, eventId, or endpointId. (optional)
    * @param nextPageCursor A pagination cursor to fetch the next page of a list (optional)
    * @param perPage The number of items to return per page (optional)
    * @param prevPageCursor A pagination cursor to fetch the previous page of a list (optional)
    * @param query Matches delivery id, event id, event type prefix, and endpoint name. (optional)
    * @param sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
+   * @param sourceId Limits idempotencyValue matching to these source IDs. (optional)
    * @param startDate The start date (optional)
    * @param status A list of event delivery statuses to filter by (optional)
    * @param subscriptionId SubscriptionID to filter by (optional)
    * @return GetEventDeliveriesPaged200Response
    * @throws ApiException if fails to make API call
    */
-  public GetEventDeliveriesPaged200Response getEventDeliveriesPaged(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable String direction, @jakarta.annotation.Nullable String endDate, @jakarta.annotation.Nullable List<String> endpointId, @jakarta.annotation.Nullable String eventId, @jakarta.annotation.Nullable String eventType, @jakarta.annotation.Nullable String idempotencyKey, @jakarta.annotation.Nullable String nextPageCursor, @jakarta.annotation.Nullable Integer perPage, @jakarta.annotation.Nullable String prevPageCursor, @jakarta.annotation.Nullable String query, @jakarta.annotation.Nullable String sort, @jakarta.annotation.Nullable String startDate, @jakarta.annotation.Nullable List<String> status, @jakarta.annotation.Nullable String subscriptionId) throws ApiException {
-    return getEventDeliveriesPaged(projectID, direction, endDate, endpointId, eventId, eventType, idempotencyKey, nextPageCursor, perPage, prevPageCursor, query, sort, startDate, status, subscriptionId, null);
+  public GetEventDeliveriesPaged200Response getEventDeliveriesPaged(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable String direction, @jakarta.annotation.Nullable String endDate, @jakarta.annotation.Nullable List<String> endpointId, @jakarta.annotation.Nullable String eventId, @jakarta.annotation.Nullable String eventType, @jakarta.annotation.Nullable String idempotencyKey, @jakarta.annotation.Nullable String idempotencyValue, @jakarta.annotation.Nullable Integer minTrials, @jakarta.annotation.Nullable String nextPageCursor, @jakarta.annotation.Nullable Integer perPage, @jakarta.annotation.Nullable String prevPageCursor, @jakarta.annotation.Nullable String query, @jakarta.annotation.Nullable String sort, @jakarta.annotation.Nullable List<String> sourceId, @jakarta.annotation.Nullable String startDate, @jakarta.annotation.Nullable List<String> status, @jakarta.annotation.Nullable String subscriptionId) throws ApiException {
+    return getEventDeliveriesPaged(projectID, direction, endDate, endpointId, eventId, eventType, idempotencyKey, idempotencyValue, minTrials, nextPageCursor, perPage, prevPageCursor, query, sort, sourceId, startDate, status, subscriptionId, null);
   }
 
   /**
@@ -547,11 +568,14 @@ public class EventDeliveriesApi {
    * @param eventId Event ID to filter by (optional)
    * @param eventType EventType to filter by (optional)
    * @param idempotencyKey IdempotencyKey to filter by (optional)
+   * @param idempotencyValue Raw value of a source&#39;s single idempotency key location, e.g. a provider delivery ID. Matches deliveries of events ingested with it. Not combinable with idempotencyKey. (optional)
+   * @param minTrials Only return deliveries with at least this many attempts; 2 or more means retried. Requires idempotencyValue, eventId, or endpointId. (optional)
    * @param nextPageCursor A pagination cursor to fetch the next page of a list (optional)
    * @param perPage The number of items to return per page (optional)
    * @param prevPageCursor A pagination cursor to fetch the previous page of a list (optional)
    * @param query Matches delivery id, event id, event type prefix, and endpoint name. (optional)
    * @param sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
+   * @param sourceId Limits idempotencyValue matching to these source IDs. (optional)
    * @param startDate The start date (optional)
    * @param status A list of event delivery statuses to filter by (optional)
    * @param subscriptionId SubscriptionID to filter by (optional)
@@ -559,8 +583,8 @@ public class EventDeliveriesApi {
    * @return GetEventDeliveriesPaged200Response
    * @throws ApiException if fails to make API call
    */
-  public GetEventDeliveriesPaged200Response getEventDeliveriesPaged(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable String direction, @jakarta.annotation.Nullable String endDate, @jakarta.annotation.Nullable List<String> endpointId, @jakarta.annotation.Nullable String eventId, @jakarta.annotation.Nullable String eventType, @jakarta.annotation.Nullable String idempotencyKey, @jakarta.annotation.Nullable String nextPageCursor, @jakarta.annotation.Nullable Integer perPage, @jakarta.annotation.Nullable String prevPageCursor, @jakarta.annotation.Nullable String query, @jakarta.annotation.Nullable String sort, @jakarta.annotation.Nullable String startDate, @jakarta.annotation.Nullable List<String> status, @jakarta.annotation.Nullable String subscriptionId, Map<String, String> headers) throws ApiException {
-    ApiResponse<GetEventDeliveriesPaged200Response> localVarResponse = getEventDeliveriesPagedWithHttpInfo(projectID, direction, endDate, endpointId, eventId, eventType, idempotencyKey, nextPageCursor, perPage, prevPageCursor, query, sort, startDate, status, subscriptionId, headers);
+  public GetEventDeliveriesPaged200Response getEventDeliveriesPaged(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable String direction, @jakarta.annotation.Nullable String endDate, @jakarta.annotation.Nullable List<String> endpointId, @jakarta.annotation.Nullable String eventId, @jakarta.annotation.Nullable String eventType, @jakarta.annotation.Nullable String idempotencyKey, @jakarta.annotation.Nullable String idempotencyValue, @jakarta.annotation.Nullable Integer minTrials, @jakarta.annotation.Nullable String nextPageCursor, @jakarta.annotation.Nullable Integer perPage, @jakarta.annotation.Nullable String prevPageCursor, @jakarta.annotation.Nullable String query, @jakarta.annotation.Nullable String sort, @jakarta.annotation.Nullable List<String> sourceId, @jakarta.annotation.Nullable String startDate, @jakarta.annotation.Nullable List<String> status, @jakarta.annotation.Nullable String subscriptionId, Map<String, String> headers) throws ApiException {
+    ApiResponse<GetEventDeliveriesPaged200Response> localVarResponse = getEventDeliveriesPagedWithHttpInfo(projectID, direction, endDate, endpointId, eventId, eventType, idempotencyKey, idempotencyValue, minTrials, nextPageCursor, perPage, prevPageCursor, query, sort, sourceId, startDate, status, subscriptionId, headers);
     return localVarResponse.getData();
   }
 
@@ -574,19 +598,22 @@ public class EventDeliveriesApi {
    * @param eventId Event ID to filter by (optional)
    * @param eventType EventType to filter by (optional)
    * @param idempotencyKey IdempotencyKey to filter by (optional)
+   * @param idempotencyValue Raw value of a source&#39;s single idempotency key location, e.g. a provider delivery ID. Matches deliveries of events ingested with it. Not combinable with idempotencyKey. (optional)
+   * @param minTrials Only return deliveries with at least this many attempts; 2 or more means retried. Requires idempotencyValue, eventId, or endpointId. (optional)
    * @param nextPageCursor A pagination cursor to fetch the next page of a list (optional)
    * @param perPage The number of items to return per page (optional)
    * @param prevPageCursor A pagination cursor to fetch the previous page of a list (optional)
    * @param query Matches delivery id, event id, event type prefix, and endpoint name. (optional)
    * @param sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
+   * @param sourceId Limits idempotencyValue matching to these source IDs. (optional)
    * @param startDate The start date (optional)
    * @param status A list of event delivery statuses to filter by (optional)
    * @param subscriptionId SubscriptionID to filter by (optional)
    * @return ApiResponse&lt;GetEventDeliveriesPaged200Response&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<GetEventDeliveriesPaged200Response> getEventDeliveriesPagedWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable String direction, @jakarta.annotation.Nullable String endDate, @jakarta.annotation.Nullable List<String> endpointId, @jakarta.annotation.Nullable String eventId, @jakarta.annotation.Nullable String eventType, @jakarta.annotation.Nullable String idempotencyKey, @jakarta.annotation.Nullable String nextPageCursor, @jakarta.annotation.Nullable Integer perPage, @jakarta.annotation.Nullable String prevPageCursor, @jakarta.annotation.Nullable String query, @jakarta.annotation.Nullable String sort, @jakarta.annotation.Nullable String startDate, @jakarta.annotation.Nullable List<String> status, @jakarta.annotation.Nullable String subscriptionId) throws ApiException {
-    return getEventDeliveriesPagedWithHttpInfo(projectID, direction, endDate, endpointId, eventId, eventType, idempotencyKey, nextPageCursor, perPage, prevPageCursor, query, sort, startDate, status, subscriptionId, null);
+  public ApiResponse<GetEventDeliveriesPaged200Response> getEventDeliveriesPagedWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable String direction, @jakarta.annotation.Nullable String endDate, @jakarta.annotation.Nullable List<String> endpointId, @jakarta.annotation.Nullable String eventId, @jakarta.annotation.Nullable String eventType, @jakarta.annotation.Nullable String idempotencyKey, @jakarta.annotation.Nullable String idempotencyValue, @jakarta.annotation.Nullable Integer minTrials, @jakarta.annotation.Nullable String nextPageCursor, @jakarta.annotation.Nullable Integer perPage, @jakarta.annotation.Nullable String prevPageCursor, @jakarta.annotation.Nullable String query, @jakarta.annotation.Nullable String sort, @jakarta.annotation.Nullable List<String> sourceId, @jakarta.annotation.Nullable String startDate, @jakarta.annotation.Nullable List<String> status, @jakarta.annotation.Nullable String subscriptionId) throws ApiException {
+    return getEventDeliveriesPagedWithHttpInfo(projectID, direction, endDate, endpointId, eventId, eventType, idempotencyKey, idempotencyValue, minTrials, nextPageCursor, perPage, prevPageCursor, query, sort, sourceId, startDate, status, subscriptionId, null);
   }
 
   /**
@@ -599,11 +626,14 @@ public class EventDeliveriesApi {
    * @param eventId Event ID to filter by (optional)
    * @param eventType EventType to filter by (optional)
    * @param idempotencyKey IdempotencyKey to filter by (optional)
+   * @param idempotencyValue Raw value of a source&#39;s single idempotency key location, e.g. a provider delivery ID. Matches deliveries of events ingested with it. Not combinable with idempotencyKey. (optional)
+   * @param minTrials Only return deliveries with at least this many attempts; 2 or more means retried. Requires idempotencyValue, eventId, or endpointId. (optional)
    * @param nextPageCursor A pagination cursor to fetch the next page of a list (optional)
    * @param perPage The number of items to return per page (optional)
    * @param prevPageCursor A pagination cursor to fetch the previous page of a list (optional)
    * @param query Matches delivery id, event id, event type prefix, and endpoint name. (optional)
    * @param sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
+   * @param sourceId Limits idempotencyValue matching to these source IDs. (optional)
    * @param startDate The start date (optional)
    * @param status A list of event delivery statuses to filter by (optional)
    * @param subscriptionId SubscriptionID to filter by (optional)
@@ -611,8 +641,8 @@ public class EventDeliveriesApi {
    * @return ApiResponse&lt;GetEventDeliveriesPaged200Response&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<GetEventDeliveriesPaged200Response> getEventDeliveriesPagedWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable String direction, @jakarta.annotation.Nullable String endDate, @jakarta.annotation.Nullable List<String> endpointId, @jakarta.annotation.Nullable String eventId, @jakarta.annotation.Nullable String eventType, @jakarta.annotation.Nullable String idempotencyKey, @jakarta.annotation.Nullable String nextPageCursor, @jakarta.annotation.Nullable Integer perPage, @jakarta.annotation.Nullable String prevPageCursor, @jakarta.annotation.Nullable String query, @jakarta.annotation.Nullable String sort, @jakarta.annotation.Nullable String startDate, @jakarta.annotation.Nullable List<String> status, @jakarta.annotation.Nullable String subscriptionId, Map<String, String> headers) throws ApiException {
-    HttpRequest.Builder localVarRequestBuilder = getEventDeliveriesPagedRequestBuilder(projectID, direction, endDate, endpointId, eventId, eventType, idempotencyKey, nextPageCursor, perPage, prevPageCursor, query, sort, startDate, status, subscriptionId, headers);
+  public ApiResponse<GetEventDeliveriesPaged200Response> getEventDeliveriesPagedWithHttpInfo(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable String direction, @jakarta.annotation.Nullable String endDate, @jakarta.annotation.Nullable List<String> endpointId, @jakarta.annotation.Nullable String eventId, @jakarta.annotation.Nullable String eventType, @jakarta.annotation.Nullable String idempotencyKey, @jakarta.annotation.Nullable String idempotencyValue, @jakarta.annotation.Nullable Integer minTrials, @jakarta.annotation.Nullable String nextPageCursor, @jakarta.annotation.Nullable Integer perPage, @jakarta.annotation.Nullable String prevPageCursor, @jakarta.annotation.Nullable String query, @jakarta.annotation.Nullable String sort, @jakarta.annotation.Nullable List<String> sourceId, @jakarta.annotation.Nullable String startDate, @jakarta.annotation.Nullable List<String> status, @jakarta.annotation.Nullable String subscriptionId, Map<String, String> headers) throws ApiException {
+    HttpRequest.Builder localVarRequestBuilder = getEventDeliveriesPagedRequestBuilder(projectID, direction, endDate, endpointId, eventId, eventType, idempotencyKey, idempotencyValue, minTrials, nextPageCursor, perPage, prevPageCursor, query, sort, sourceId, startDate, status, subscriptionId, headers);
     try {
       HttpResponse<InputStream> localVarResponse = memberVarHttpClient.send(
           localVarRequestBuilder.build(),
@@ -659,7 +689,7 @@ public class EventDeliveriesApi {
     }
   }
 
-  private HttpRequest.Builder getEventDeliveriesPagedRequestBuilder(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable String direction, @jakarta.annotation.Nullable String endDate, @jakarta.annotation.Nullable List<String> endpointId, @jakarta.annotation.Nullable String eventId, @jakarta.annotation.Nullable String eventType, @jakarta.annotation.Nullable String idempotencyKey, @jakarta.annotation.Nullable String nextPageCursor, @jakarta.annotation.Nullable Integer perPage, @jakarta.annotation.Nullable String prevPageCursor, @jakarta.annotation.Nullable String query, @jakarta.annotation.Nullable String sort, @jakarta.annotation.Nullable String startDate, @jakarta.annotation.Nullable List<String> status, @jakarta.annotation.Nullable String subscriptionId, Map<String, String> headers) throws ApiException {
+  private HttpRequest.Builder getEventDeliveriesPagedRequestBuilder(@jakarta.annotation.Nonnull String projectID, @jakarta.annotation.Nullable String direction, @jakarta.annotation.Nullable String endDate, @jakarta.annotation.Nullable List<String> endpointId, @jakarta.annotation.Nullable String eventId, @jakarta.annotation.Nullable String eventType, @jakarta.annotation.Nullable String idempotencyKey, @jakarta.annotation.Nullable String idempotencyValue, @jakarta.annotation.Nullable Integer minTrials, @jakarta.annotation.Nullable String nextPageCursor, @jakarta.annotation.Nullable Integer perPage, @jakarta.annotation.Nullable String prevPageCursor, @jakarta.annotation.Nullable String query, @jakarta.annotation.Nullable String sort, @jakarta.annotation.Nullable List<String> sourceId, @jakarta.annotation.Nullable String startDate, @jakarta.annotation.Nullable List<String> status, @jakarta.annotation.Nullable String subscriptionId, Map<String, String> headers) throws ApiException {
     // verify the required parameter 'projectID' is set
     if (projectID == null) {
       throw new ApiException(400, "Missing the required parameter 'projectID' when calling getEventDeliveriesPaged");
@@ -681,10 +711,14 @@ public class EventDeliveriesApi {
     localVarQueryParams.addAll(ApiClient.parameterToPairs("multi", "endpointId", endpointId));
     localVarQueryParameterBaseName = "eventId";
     localVarQueryParams.addAll(ApiClient.parameterToPairs("eventId", eventId));
-    localVarQueryParameterBaseName = "event_type";
-    localVarQueryParams.addAll(ApiClient.parameterToPairs("event_type", eventType));
+    localVarQueryParameterBaseName = "eventType";
+    localVarQueryParams.addAll(ApiClient.parameterToPairs("eventType", eventType));
     localVarQueryParameterBaseName = "idempotencyKey";
     localVarQueryParams.addAll(ApiClient.parameterToPairs("idempotencyKey", idempotencyKey));
+    localVarQueryParameterBaseName = "idempotencyValue";
+    localVarQueryParams.addAll(ApiClient.parameterToPairs("idempotencyValue", idempotencyValue));
+    localVarQueryParameterBaseName = "minTrials";
+    localVarQueryParams.addAll(ApiClient.parameterToPairs("minTrials", minTrials));
     localVarQueryParameterBaseName = "next_page_cursor";
     localVarQueryParams.addAll(ApiClient.parameterToPairs("next_page_cursor", nextPageCursor));
     localVarQueryParameterBaseName = "perPage";
@@ -695,6 +729,8 @@ public class EventDeliveriesApi {
     localVarQueryParams.addAll(ApiClient.parameterToPairs("query", query));
     localVarQueryParameterBaseName = "sort";
     localVarQueryParams.addAll(ApiClient.parameterToPairs("sort", sort));
+    localVarQueryParameterBaseName = "sourceId";
+    localVarQueryParams.addAll(ApiClient.parameterToPairs("multi", "sourceId", sourceId));
     localVarQueryParameterBaseName = "startDate";
     localVarQueryParams.addAll(ApiClient.parameterToPairs("startDate", startDate));
     localVarQueryParameterBaseName = "status";
