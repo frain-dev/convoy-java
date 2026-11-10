@@ -24,10 +24,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
-import com.getconvoy.models.DatastoreDeliveryAttempt;
-import java.util.ArrayList;
+import com.getconvoy.models.GetDeliveryAttempts200ResponseAllOfData;
 import java.util.Arrays;
-import java.util.List;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
@@ -52,7 +50,7 @@ public class GetDeliveryAttempts200Response {
 
   public static final String JSON_PROPERTY_DATA = "data";
   @jakarta.annotation.Nullable
-  private List<DatastoreDeliveryAttempt> data = new ArrayList<>();
+  private GetDeliveryAttempts200ResponseAllOfData data;
 
   public GetDeliveryAttempts200Response() { 
   }
@@ -105,16 +103,8 @@ public class GetDeliveryAttempts200Response {
   }
 
 
-  public GetDeliveryAttempts200Response data(@jakarta.annotation.Nullable List<DatastoreDeliveryAttempt> data) {
+  public GetDeliveryAttempts200Response data(@jakarta.annotation.Nullable GetDeliveryAttempts200ResponseAllOfData data) {
     this.data = data;
-    return this;
-  }
-
-  public GetDeliveryAttempts200Response addDataItem(DatastoreDeliveryAttempt dataItem) {
-    if (this.data == null) {
-      this.data = new ArrayList<>();
-    }
-    this.data.add(dataItem);
     return this;
   }
 
@@ -125,14 +115,14 @@ public class GetDeliveryAttempts200Response {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_DATA, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public List<DatastoreDeliveryAttempt> getData() {
+  public GetDeliveryAttempts200ResponseAllOfData getData() {
     return data;
   }
 
 
   @JsonProperty(value = JSON_PROPERTY_DATA, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setData(@jakarta.annotation.Nullable List<DatastoreDeliveryAttempt> data) {
+  public void setData(@jakarta.annotation.Nullable GetDeliveryAttempts200ResponseAllOfData data) {
     this.data = data;
   }
 
@@ -222,12 +212,7 @@ public class GetDeliveryAttempts200Response {
 
     // add `data` to the URL query string
     if (getData() != null) {
-      for (int i = 0; i < getData().size(); i++) {
-        if (getData().get(i) != null) {
-          joiner.add(getData().get(i).toUrlQueryString(String.format(java.util.Locale.ROOT, "%sdata%s%s", prefix, suffix,
-          "".equals(suffix) ? "" : String.format(java.util.Locale.ROOT, "%s%d%s", containerPrefix, i, containerSuffix))));
-        }
-      }
+      joiner.add(getData().toUrlQueryString(prefix + "data" + suffix));
     }
 
     return joiner.toString();

@@ -99,6 +99,16 @@ artifacts change. Locally:
 ./gradlew test
 ```
 
+Generation first names the delivery-attempt array alternative in a temporary
+copy of the spec and enables an alias model only for that collection. This works around the
+Java/native generator's inline-array `oneOf` bug while preserving both response
+shapes: `DeliveryAttemptList` for the default array, or
+`GetDeliveryAttempts200ResponseAllOfDataOneOf` for a page with `content` and
+`next_cursor`. `scripts/NormalizeSpec.java` uses Jackson from the verified
+generator JAR; no additional dependencies are required. It also derives a
+template override from that JAR so the collection retains `ArrayList`'s
+equality/hash behavior rather than the generator's POJO equality behavior.
+
 ## License
 
 [MIT](LICENSE)
