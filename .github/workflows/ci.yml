@@ -16,3 +16,27 @@ jobs:
           java-version: "17"
       - uses: gradle/actions/setup-gradle@v4
       - run: ./gradlew test
+
+  regeneration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Verify normalization, repeatable generation, and response contracts
+        run: |
+          set -euo pipefail
+          # Freeze one upstream spec for both runs, even if main changes meanwhile.
+          curl -fsSL https://raw.githubusercontent.com/frain-dev/convoy/main/docs/v3/openapi3.yaml \
+            -o "$RUNNER_TEMP/openapi3.yaml"
+          export SPEC_URL="file://$RUNNER_TEMP/openapi3.yaml"
+          export GENERATOR_JAR="$RUNNER_TEMP/openapi-generator.jar"
+          ./scripts/generate.sh
+          python3 scripts/test_normalize_spec.py "$GENERATOR_JAR"
+          cp -R src/main/java "$RUNNER_TEMP/generated-once"
+          ./scripts/generate.sh
+          diff -ru "$RUNNER_TEMP/generated-once" src/main/java
+          ./gradlew test

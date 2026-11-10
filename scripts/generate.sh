@@ -33,12 +33,19 @@ echo "${GENERATOR_SHA256}  ${GENERATOR_JAR}" | shasum -a 256 -c - >/dev/null || 
 
 curl -fsSL "$SPEC_URL" -o "$tmp/openapi3.yaml"
 
+# Name the delivery-attempt array alternative in our temporary input. The
+# native generator cannot compile inline array alternatives in oneOf, but
+# supports named collection models without changing either JSON wire shape.
+java -cp "$GENERATOR_JAR" scripts/NormalizeSpec.java \
+  "$tmp/openapi3.yaml" "$tmp/openapi3.json" "$tmp/templates"
+
 # hideGenerationTimestamp: @Generated annotations must not embed a wall-clock
 # date or every regeneration diffs all 200+ files and "no diff, no PR" breaks.
 java -jar "$GENERATOR_JAR" generate \
-  -i "$tmp/openapi3.yaml" \
+  -i "$tmp/openapi3.json" \
   -g java \
   --library native \
+  -t "$tmp/templates" \
   -o "$tmp/gen" \
   --additional-properties=groupId=io.github.frain-dev,artifactId=convoy,apiPackage=com.getconvoy.api,modelPackage=com.getconvoy.models,invokerPackage=com.getconvoy.client,useJakartaEe=true,hideGenerationTimestamp=true
 
